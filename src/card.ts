@@ -1180,10 +1180,10 @@ export class StatusCard extends LitElement {
         .actionHandler=${ah}
       >
         <div class="entity ${classMap(contentClasses)}">
-          <div class="entity-icon" style=${styleMap(iconStyles)}>
+          <div class="entity-icon">
             <ha-icon
               icon=${this.getCustomIcon(domain)}
-              style=${styleMap({})}
+                        style=${'color' in iconStyles && iconStyles.color ? `color: ${iconStyles.color}` : ""}
             ></ha-icon>
           </div>
           <div class="entity-info">
@@ -1249,8 +1249,10 @@ export class StatusCard extends LitElement {
         .actionHandler=${ah}
       >
         <div class="entity ${classMap(contentClasses)}">
-          <div class="entity-icon" style=${styleMap(iconStyles)}>
-            <ha-icon icon=${this.getCustomIcon(domain, deviceClass)}></ha-icon>
+          <div class="entity-icon">
+            <ha-icon icon=${this.getCustomIcon(domain, deviceClass)}
+              style=${iconStyles.color ? `color: ${iconStyles.color}` : ""}
+            ></ha-icon>
           </div>
           <div class="entity-info">
             ${!this.hide_content_name
@@ -1353,7 +1355,7 @@ export class StatusCard extends LitElement {
                         : html`<ha-icon
                             class="center"
                             icon=${entity.attributes.icon || "mdi:account"}
-                            style=${styleMap(iconStyles)}
+                            style=${iconStyles.color ? `color: ${iconStyles.color}` : ""}
                           ></ha-icon>`}
                     </div>
                     <div class="entity-info">
@@ -1430,7 +1432,7 @@ static get styles() {
     /* === CHIP (sl-tab::part(base)) SHADOW & PADDING FIXES === */
     sl-tab::part(base) {
       padding: 0 10px 0 6px !important;
-      border-radius: var(--ha-label-badge-border-radius, 50%) !important;
+      border-radius: 8px !important;
       box-sizing: border-box !important;
       margin: 4px !important;
       background-color: var(--white-color, white) !important;
@@ -1442,8 +1444,8 @@ static get styles() {
       display: flex !important;
       align-items: center !important;
       overflow: visible !important;
-      min-height: 32px;
-      height: 36px !important;
+      min-height: 28px;
+      height: 32px !important;
     }
     sl-tab:not([selected]) {
       filter: none !important;
@@ -1458,8 +1460,8 @@ static get styles() {
       margin: 0 !important;
       filter: none !important;
       opacity: 1 !important;
-      min-height: 32px;
-      height: 36px;
+      min-height: 28px;
+      height: 32px;
     }
 
     .entity-icon {
