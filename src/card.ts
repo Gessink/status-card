@@ -39,10 +39,6 @@ import { filterEntitiesByRuleset } from "./smart_groups";
 
 @customElement("status-card")
 export class StatusCard extends LitElement {
-  // Disable shadow DOM to allow global styles and variables to apply
-  createRenderRoot() {
-    return this;
-  }
   @property({ attribute: false }) public hass!: HomeAssistant;
   @property({ type: Object }) public _config!: LovelaceCardConfig;
 
@@ -1440,7 +1436,7 @@ static get styles() {
       box-sizing: border-box !important;
       margin: 4px !important;
       background-color: var(--ha-label-badge-background-color, var(--card-background-color, white)) !important;
-      box-shadow: var(--ha-label-badge-shadow, var(--material-shadow-elevation-2dp)) !important;
+      box-shadow: none !important;
       border: 1px solid var(--ha-label-badge-border-color, var(--divider-color, rgba(0,0,0,0.12))) !important;
       min-width: fit-content;
       filter: none !important;
@@ -1524,7 +1520,7 @@ static get styles() {
       font-weight: 500 !important;
       font-size: 13px !important;
       line-height: 1 !important;
-      color: var(--ha-label-badge-text-color, #000000) !important;
+      color: #000000 !important;
       margin: 0 !important;
     }
     sl-tab * {
