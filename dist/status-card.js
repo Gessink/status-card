@@ -6,7 +6,7 @@ const Le = "v3.0", Me = {
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const xt = globalThis, Kt = xt.ShadowRoot && (xt.ShadyCSS === void 0 || xt.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, Zt = Symbol(), ne = /* @__PURE__ */ new WeakMap();
+const xt = globalThis, Wt = xt.ShadowRoot && (xt.ShadyCSS === void 0 || xt.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, Zt = Symbol(), ne = /* @__PURE__ */ new WeakMap();
 let Ee = class {
   constructor(t, i, s) {
     if (this._$cssResult$ = !0, s !== Zt) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
@@ -15,7 +15,7 @@ let Ee = class {
   get styleSheet() {
     let t = this.o;
     const i = this.t;
-    if (Kt && t === void 0) {
+    if (Wt && t === void 0) {
       const s = i !== void 0 && i.length === 1;
       s && (t = ne.get(i)), t === void 0 && ((this.o = t = new CSSStyleSheet()).replaceSync(this.cssText), s && ne.set(i, t));
     }
@@ -33,12 +33,12 @@ const He = (e) => new Ee(typeof e == "string" ? e : e + "", void 0, Zt), gt = (e
   })(o) + e[n + 1]), e[0]);
   return new Ee(i, e, Zt);
 }, Ie = (e, t) => {
-  if (Kt) e.adoptedStyleSheets = t.map(((i) => i instanceof CSSStyleSheet ? i : i.styleSheet));
+  if (Wt) e.adoptedStyleSheets = t.map(((i) => i instanceof CSSStyleSheet ? i : i.styleSheet));
   else for (const i of t) {
     const s = document.createElement("style"), o = xt.litNonce;
     o !== void 0 && s.setAttribute("nonce", o), s.textContent = i.cssText, e.appendChild(s);
   }
-}, ae = Kt ? (e) => e : (e) => e instanceof CSSStyleSheet ? ((t) => {
+}, ae = Wt ? (e) => e : (e) => e instanceof CSSStyleSheet ? ((t) => {
   let i = "";
   for (const s of t.cssRules) i += s.cssText;
   return He(i);
@@ -294,7 +294,7 @@ function ze(e, t) {
   if (!Xt(e) || !e.hasOwnProperty("raw")) throw Error("invalid template strings array");
   return ce !== void 0 ? ce.createHTML(t) : t;
 }
-const We = (e, t) => {
+const Ke = (e, t) => {
   const i = e.length - 1, s = [];
   let o, n = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", a = vt;
   for (let l = 0; l < i; l++) {
@@ -311,7 +311,7 @@ class Ct {
     let o;
     this.parts = [];
     let n = 0, a = 0;
-    const l = t.length - 1, r = this.parts, [c, d] = We(t, i);
+    const l = t.length - 1, r = this.parts, [c, d] = Ke(t, i);
     if (this.el = Ct.createElement(c, s), rt.currentNode = this.el.content, i === 2 || i === 3) {
       const h = this.el.content.firstChild;
       h.replaceWith(...h.childNodes);
@@ -350,7 +350,7 @@ function _t(e, t, i = e, s) {
   const n = Et(t) ? void 0 : t._$litDirective$;
   return (o == null ? void 0 : o.constructor) !== n && ((l = o == null ? void 0 : o._$AO) == null || l.call(o, !1), n === void 0 ? o = void 0 : (o = new n(e), o._$AT(e, i, s)), s !== void 0 ? (i._$Co ?? (i._$Co = []))[s] = o : i._$Cl = o), o !== void 0 && (t = _t(e, o._$AS(e, t.values), o, s)), t;
 }
-let Ke = class {
+let We = class {
   constructor(t, i) {
     this._$AV = [], this._$AN = void 0, this._$AD = t, this._$AM = i;
   }
@@ -414,7 +414,7 @@ class yt {
     const { values: i, _$litType$: s } = t, o = typeof s == "number" ? this._$AC(t) : (s.el === void 0 && (s.el = Ct.createElement(ze(s.h, s.h[0]), this.options)), s);
     if (((n = this._$AH) == null ? void 0 : n._$AD) === o) this._$AH.p(i);
     else {
-      const a = new Ke(o, this), l = a.u(this.options);
+      const a = new We(o, this), l = a.u(this.options);
       a.p(i), this.T(l), this._$AH = a;
     }
   }
@@ -2004,7 +2004,7 @@ const F = (ct = class extends V {
     let c = [], d = !1;
     if (o !== void 0 && ((M = (D = n._config) == null ? void 0 : D.content) != null && M[o])) {
       const w = n._config.content[o], j = (B = n._config.rulesets) == null ? void 0 : B.find(
-        (K) => K.group_id === w
+        (W) => W.group_id === w
       );
       c = j ? Ot(n, j) : [];
     } else
@@ -2037,9 +2037,9 @@ const F = (ct = class extends V {
           ></ha-icon-button>
           <h3>
             ${(() => {
-      var K, U;
+      var W, U;
       const w = this.selectedGroup, j = this.card;
-      if (w !== void 0 && ((U = (K = j == null ? void 0 : j._config) == null ? void 0 : K.content) != null && U[w])) {
+      if (w !== void 0 && ((U = (W = j == null ? void 0 : j._config) == null ? void 0 : W.content) != null && U[w])) {
         const Oe = j._config.content[w];
         return this.hass.localize(
           "ui.panel.lovelace.editor.card.entities.name"
@@ -2116,10 +2116,10 @@ const F = (ct = class extends V {
       f,
       ([w]) => w,
       ([w, j]) => {
-        const K = r.get(w) ?? (w === "unassigned" ? "Unassigned" : w);
+        const W = r.get(w) ?? (w === "unassigned" ? "Unassigned" : w);
         return $`
                           <li class="entity-item">
-                            <h4>${K}:</h4>
+                            <h4>${W}:</h4>
                             <ul>
                               ${J(
           j,
@@ -2147,10 +2147,10 @@ const F = (ct = class extends V {
     )}
                 </div>
               ` : $`${f.map(([w, j]) => {
-      const K = r.get(w) ?? (w === "unassigned" ? "Unassigned" : w);
+      const W = r.get(w) ?? (w === "unassigned" ? "Unassigned" : w);
       return $`
                   <div class="cards-wrapper">
-                    <h4>${K}</h4>
+                    <h4>${W}</h4>
                     <div class="entity-cards">
                       ${J(
         j,
@@ -3213,8 +3213,7 @@ let T = class extends V {
       margin: 0 !important;
     }
     sl-tab-group {
-      /* FIX: Increased negative top margin to pull the entire group up for alignment */
-      margin: -10px 0 0 0 !important; 
+      margin: 0 !important;
       padding: 0 !important;
       --sl-tab-indicator-color: transparent !important;
       --sl-tab-indicator-width: 0 !important;
@@ -3233,30 +3232,26 @@ let T = class extends V {
       scrollbar-width: none;
       align-items: center !important;
       overflow: visible !important;
+      min-height: 40px;
     }
-    
+
     /* === CHIP (sl-tab::part(base)) SHADOW & PADDING FIXES === */
     sl-tab::part(base) {
-      /* Padding remains 4px top/bottom for correct height */
-      padding: 4px 10px 4px 6px !important; 
-      
-      border-radius: var(--ha-border-radius-pill) !important;
+      padding: 0 10px 0 6px !important;
+      border-radius: var(--ha-label-badge-border-radius, 50%) !important;
       box-sizing: border-box !important;
-      
-      margin: 4px !important; /* Spacing between chips */
-      
-      /* FIX: NEAR-ZERO SHADOW (Use a very subtle border for definition instead) */
+      margin: 4px !important;
       background-color: var(--white-color, white) !important;
-      box-shadow: none !important; /* Completely remove the shadow */
-      border: 1px solid var(--divider-color, rgba(0, 0, 0, 0.05)) !important; 
+      box-shadow: none !important;
+      border: 1px solid var(--divider-color, rgba(0, 0, 0, 0.05)) !important;
       min-width: fit-content;
-      
-      /* OVERRIDE FILTERS */
       filter: none !important;
       opacity: 1 !important;
       display: flex !important;
       align-items: center !important;
       overflow: visible !important;
+      min-height: 32px;
+      height: 36px !important;
     }
     sl-tab:not([selected]) {
       filter: none !important;
@@ -3271,6 +3266,8 @@ let T = class extends V {
       margin: 0 !important;
       filter: none !important;
       opacity: 1 !important;
+      min-height: 32px;
+      height: 36px;
     }
 
     .entity-icon {
@@ -3289,9 +3286,8 @@ let T = class extends V {
       opacity: 1 !important;
     }
     .entity-icon ha-icon {
-      /* Icon color uses domain color when ON, muted color when OFF (HA standard) */
       --mdc-icon-size: 18px !important;
-      color: var(--state-icon-color) !important;
+      /* color is set inline for per-domain color */
     }
     .entity-icon img {
       width: 100%;
@@ -3304,12 +3300,12 @@ let T = class extends V {
     .entity.horizontal .entity-info,
     .extra-entity.horizontal .entity-info {
       text-align: left;
-      margin: 0 !important; 
-      padding: 0 0 0 4px !important; 
+      margin: 0 !important;
+      padding: 0 0 0 4px !important;
     }
     .entity-info {
       text-align: left !important;
-      margin: 0 !important; 
+      margin: 0 !important;
       padding: 0 0 0 4px !important;
       display: flex;
       flex-direction: column;
@@ -3552,7 +3548,7 @@ jt([
 jt([
   E({ type: Array })
 ], te.prototype, "SelectOptions", 2);
-let Wt = class extends te {
+let Kt = class extends te {
   constructor() {
     super(...arguments), this.customizationChangedEvent = "config-changed";
   }
@@ -3562,16 +3558,16 @@ let Wt = class extends te {
 };
 jt([
   E({ attribute: !1 })
-], Wt.prototype, "customization", 2);
-Wt = jt([
+], Kt.prototype, "customization", 2);
+Kt = jt([
   Mt("status-items-editor")
-], Wt);
+], Kt);
 var Hi = Object.defineProperty, Ii = Object.getOwnPropertyDescriptor, st = (e, t, i, s) => {
   for (var o = s > 1 ? void 0 : s ? Ii(t, i) : t, n = e.length - 1, a; n >= 0; n--)
     (a = e[n]) && (o = (s ? a(t, i, o) : a(o)) || o);
   return s && o && Hi(t, i, o), o;
 };
-let W = class extends V {
+let K = class extends V {
   constructor() {
     super(...arguments), this.useSensorSchema = !1, this._schemadomain = A(() => {
       const e = [
@@ -3760,28 +3756,28 @@ let W = class extends V {
 };
 st([
   E({ attribute: !1 })
-], W.prototype, "config", 2);
+], K.prototype, "config", 2);
 st([
   E({ attribute: !1 })
-], W.prototype, "hass", 2);
+], K.prototype, "hass", 2);
 st([
   E({ attribute: !1 })
-], W.prototype, "lovelace", 2);
+], K.prototype, "lovelace", 2);
 st([
   E({ type: Boolean })
-], W.prototype, "useSensorSchema", 2);
+], K.prototype, "useSensorSchema", 2);
 st([
   E({ type: Number })
-], W.prototype, "index", 2);
+], K.prototype, "index", 2);
 st([
   x()
-], W.prototype, "getSchema", 2);
+], K.prototype, "getSchema", 2);
 st([
   x()
-], W.prototype, "_config", 2);
-W = st([
+], K.prototype, "_config", 2);
+K = st([
   Mt("status-item-editor")
-], W);
+], K);
 var Pi = Object.defineProperty, ji = Object.getOwnPropertyDescriptor, ht = (e, t, i, s) => {
   for (var o = s > 1 ? void 0 : s ? ji(t, i) : t, n = e.length - 1, a; n >= 0; n--)
     (a = e[n]) && (o = (s ? a(t, i, o) : a(o)) || o);
