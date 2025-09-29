@@ -3240,12 +3240,12 @@ let T = class extends V {
     /* === CHIP (sl-tab::part(base)) SHADOW & PADDING FIXES === */
     sl-tab::part(base) {
       padding: 0 10px 0 6px !important;
-      border-radius: 8px !important;
+      border-radius: var(--ha-label-badge-border-radius, 12px) !important;
       box-sizing: border-box !important;
       margin: 4px !important;
-      background-color: var(--white-color, white) !important;
+      background-color: var(--ha-label-badge-background-color, var(--card-background-color, white)) !important;
       box-shadow: none !important;
-      border: 1px solid var(--divider-color, rgba(0, 0, 0, 0.05)) !important;
+      border: 1px solid var(--ha-label-badge-border-color, var(--divider-color, rgba(0,0,0,0.12))) !important;
       min-width: fit-content;
       filter: none !important;
       opacity: 1 !important;
@@ -3289,7 +3289,7 @@ let T = class extends V {
     }
     .entity-icon ha-icon {
       --mdc-icon-size: 18px !important;
-      /* color is set inline for per-domain color */
+      vertical-align: middle;
     }
     .entity-icon img {
       width: 100%;
@@ -3318,9 +3318,9 @@ let T = class extends V {
     /* TEXT STYLING AND SIZE */
     .entity-name {
       font-weight: 500 !important;
-      font-size: 11px !important;
+      font-size: var(--ha-label-badge-title-font-size, 12px) !important;
       line-height: 1 !important;
-      color: #727272 !important;
+      color: var(--ha-label-badge-label-color, var(--primary-text-color)) !important;
       padding-bottom: 2px !important;
       margin: 0 !important;
     }
