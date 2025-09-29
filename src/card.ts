@@ -1405,8 +1405,7 @@ static get styles() {
       margin: 0 !important;
     }
     sl-tab-group {
-      /* FIX: Increased negative top margin to pull the entire group up for alignment */
-      margin: -10px 0 0 0 !important; 
+      margin: 0 !important;
       padding: 0 !important;
       --sl-tab-indicator-color: transparent !important;
       --sl-tab-indicator-width: 0 !important;
@@ -1425,30 +1424,26 @@ static get styles() {
       scrollbar-width: none;
       align-items: center !important;
       overflow: visible !important;
+      min-height: 40px;
     }
-    
+
     /* === CHIP (sl-tab::part(base)) SHADOW & PADDING FIXES === */
     sl-tab::part(base) {
-      /* Padding remains 4px top/bottom for correct height */
-      padding: 4px 10px 4px 6px !important; 
-      
-      border-radius: var(--ha-border-radius-pill) !important;
+      padding: 0 10px 0 6px !important;
+      border-radius: var(--ha-label-badge-border-radius, 50%) !important;
       box-sizing: border-box !important;
-      
-      margin: 4px !important; /* Spacing between chips */
-      
-      /* FIX: NEAR-ZERO SHADOW (Use a very subtle border for definition instead) */
+      margin: 4px !important;
       background-color: var(--white-color, white) !important;
-      box-shadow: none !important; /* Completely remove the shadow */
-      border: 1px solid var(--divider-color, rgba(0, 0, 0, 0.05)) !important; 
+      box-shadow: none !important;
+      border: 1px solid var(--divider-color, rgba(0, 0, 0, 0.05)) !important;
       min-width: fit-content;
-      
-      /* OVERRIDE FILTERS */
       filter: none !important;
       opacity: 1 !important;
       display: flex !important;
       align-items: center !important;
       overflow: visible !important;
+      min-height: 32px;
+      height: 36px !important;
     }
     sl-tab:not([selected]) {
       filter: none !important;
@@ -1463,6 +1458,8 @@ static get styles() {
       margin: 0 !important;
       filter: none !important;
       opacity: 1 !important;
+      min-height: 32px;
+      height: 36px;
     }
 
     .entity-icon {
@@ -1481,9 +1478,8 @@ static get styles() {
       opacity: 1 !important;
     }
     .entity-icon ha-icon {
-      /* Icon color uses domain color when ON, muted color when OFF (HA standard) */
       --mdc-icon-size: 18px !important;
-      color: var(--state-icon-color) !important;
+      /* color is set inline for per-domain color */
     }
     .entity-icon img {
       width: 100%;
@@ -1496,12 +1492,12 @@ static get styles() {
     .entity.horizontal .entity-info,
     .extra-entity.horizontal .entity-info {
       text-align: left;
-      margin: 0 !important; 
-      padding: 0 0 0 4px !important; 
+      margin: 0 !important;
+      padding: 0 0 0 4px !important;
     }
     .entity-info {
       text-align: left !important;
-      margin: 0 !important; 
+      margin: 0 !important;
       padding: 0 0 0 4px !important;
       display: flex;
       flex-direction: column;
