@@ -1399,6 +1399,38 @@ export class StatusCard extends LitElement {
 
 static get styles() {
   return css`
+    :host {
+      /* Forward important badge variables from parent/theme to shadow DOM */
+      --ha-label-badge-border-radius: var(--ha-label-badge-border-radius, 12px);
+      --ha-label-badge-background-color: var(--ha-label-badge-background-color, var(--card-background-color, white));
+      --ha-label-badge-border-color: var(--ha-label-badge-border-color, var(--divider-color, rgba(0,0,0,0.12)));
+      --ha-label-badge-label-color: var(--ha-label-badge-label-color, var(--primary-text-color));
+      --ha-label-badge-title-font-size: var(--ha-label-badge-title-font-size, 12px);
+      --ha-label-badge-text-color: var(--ha-label-badge-text-color, #000000);
+      --ha-label-badge-shadow: var(--ha-label-badge-shadow, var(--material-shadow-elevation-2dp));
+      --ha-label-badge-font-family: var(--ha-label-badge-font-family, inherit);
+
+      /* Forward common domain icon color variables */
+      --state-light-color: var(--state-light-color, #f7d959);
+      --state-switch-color: var(--state-switch-color, #66aaff);
+      --state-media_player-color: var(--state-media_player-color, #8bc34a);
+      --state-cover-color: var(--state-cover-color, #c7b8f0);
+      --state-fan-color: var(--state-fan-color, #00bcd4);
+      --state-climate-color: var(--state-climate-color, #ff9800);
+      --state-person-color: var(--state-person-color, #03a9f4);
+      --state-sensor-color: var(--state-sensor-color, #7b7b7b);
+      --state-binary_sensor-color: var(--state-binary_sensor-color, #f44336);
+      --state-lock-color: var(--state-lock-color, #43a047);
+      --state-vacuum-color: var(--state-vacuum-color, #009688);
+      --state-update-color: var(--state-update-color, #ffa000);
+      --state-alarm_control_panel-color: var(--state-alarm_control_panel-color, #e53935);
+      --state-water_heater-color: var(--state-water_heater-color, #ffb300);
+      --state-valve-color: var(--state-valve-color, #1976d2);
+      --state-siren-color: var(--state-siren-color, #e91e63);
+      --state-remote-color: var(--state-remote-color, #607d8b);
+      --state-lawn_mower-color: var(--state-lawn_mower-color, #4caf50);
+      --state-battery-color: var(--state-battery-color, #607d8b);
+    }
     ha-card {
       box-shadow: none !important;
       border: none !important;

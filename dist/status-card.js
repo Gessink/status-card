@@ -6,18 +6,18 @@ const Le = "v3.0", Me = {
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const xt = globalThis, Wt = xt.ShadowRoot && (xt.ShadyCSS === void 0 || xt.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, Zt = Symbol(), ne = /* @__PURE__ */ new WeakMap();
+const St = globalThis, Wt = St.ShadowRoot && (St.ShadyCSS === void 0 || St.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, Zt = Symbol(), ne = /* @__PURE__ */ new WeakMap();
 let Ee = class {
-  constructor(t, i, s) {
-    if (this._$cssResult$ = !0, s !== Zt) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
+  constructor(t, i, o) {
+    if (this._$cssResult$ = !0, o !== Zt) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
     this.cssText = t, this.t = i;
   }
   get styleSheet() {
     let t = this.o;
     const i = this.t;
     if (Wt && t === void 0) {
-      const s = i !== void 0 && i.length === 1;
-      s && (t = ne.get(i)), t === void 0 && ((this.o = t = new CSSStyleSheet()).replaceSync(this.cssText), s && ne.set(i, t));
+      const o = i !== void 0 && i.length === 1;
+      o && (t = ne.get(i)), t === void 0 && ((this.o = t = new CSSStyleSheet()).replaceSync(this.cssText), o && ne.set(i, t));
     }
     return t;
   }
@@ -26,21 +26,21 @@ let Ee = class {
   }
 };
 const He = (e) => new Ee(typeof e == "string" ? e : e + "", void 0, Zt), _t = (e, ...t) => {
-  const i = e.length === 1 ? e[0] : t.reduce(((s, o, n) => s + ((a) => {
+  const i = e.length === 1 ? e[0] : t.reduce(((o, s, n) => o + ((a) => {
     if (a._$cssResult$ === !0) return a.cssText;
     if (typeof a == "number") return a;
     throw Error("Value passed to 'css' function must be a 'css' function result: " + a + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
-  })(o) + e[n + 1]), e[0]);
+  })(s) + e[n + 1]), e[0]);
   return new Ee(i, e, Zt);
 }, Ie = (e, t) => {
   if (Wt) e.adoptedStyleSheets = t.map(((i) => i instanceof CSSStyleSheet ? i : i.styleSheet));
   else for (const i of t) {
-    const s = document.createElement("style"), o = xt.litNonce;
-    o !== void 0 && s.setAttribute("nonce", o), s.textContent = i.cssText, e.appendChild(s);
+    const o = document.createElement("style"), s = St.litNonce;
+    s !== void 0 && o.setAttribute("nonce", s), o.textContent = i.cssText, e.appendChild(o);
   }
 }, ae = Wt ? (e) => e : (e) => e instanceof CSSStyleSheet ? ((t) => {
   let i = "";
-  for (const s of t.cssRules) i += s.cssText;
+  for (const o of t.cssRules) i += o.cssText;
   return He(i);
 })(e) : e;
 /**
@@ -48,7 +48,7 @@ const He = (e) => new Ee(typeof e == "string" ? e : e + "", void 0, Zt), _t = (e
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const { is: Pe, defineProperty: je, getOwnPropertyDescriptor: Ne, getOwnPropertyNames: Re, getOwnPropertySymbols: Fe, getPrototypeOf: Be } = Object, Q = globalThis, re = Q.trustedTypes, Ue = re ? re.emptyScript : "", Rt = Q.reactiveElementPolyfillSupport, bt = (e, t) => e, kt = { toAttribute(e, t) {
+const { is: Pe, defineProperty: je, getOwnPropertyDescriptor: Ne, getOwnPropertyNames: Fe, getOwnPropertySymbols: Re, getPrototypeOf: Be } = Object, Q = globalThis, re = Q.trustedTypes, Ue = re ? re.emptyScript : "", Ft = Q.reactiveElementPolyfillSupport, bt = (e, t) => e, kt = { toAttribute(e, t) {
   switch (t) {
     case Boolean:
       e = e ? Ue : null;
@@ -87,19 +87,19 @@ let mt = class extends HTMLElement {
   }
   static createProperty(t, i = le) {
     if (i.state && (i.attribute = !1), this._$Ei(), this.prototype.hasOwnProperty(t) && ((i = Object.create(i)).wrapped = !0), this.elementProperties.set(t, i), !i.noAccessor) {
-      const s = Symbol(), o = this.getPropertyDescriptor(t, s, i);
-      o !== void 0 && je(this.prototype, t, o);
+      const o = Symbol(), s = this.getPropertyDescriptor(t, o, i);
+      s !== void 0 && je(this.prototype, t, s);
     }
   }
-  static getPropertyDescriptor(t, i, s) {
-    const { get: o, set: n } = Ne(this.prototype, t) ?? { get() {
+  static getPropertyDescriptor(t, i, o) {
+    const { get: s, set: n } = Ne(this.prototype, t) ?? { get() {
       return this[i];
     }, set(a) {
       this[i] = a;
     } };
-    return { get: o, set(a) {
-      const l = o == null ? void 0 : o.call(this);
-      n == null || n.call(this, a), this.requestUpdate(t, l, s);
+    return { get: s, set(a) {
+      const l = s == null ? void 0 : s.call(this);
+      n == null || n.call(this, a), this.requestUpdate(t, l, o);
     }, configurable: !0, enumerable: !0 };
   }
   static getPropertyOptions(t) {
@@ -113,32 +113,32 @@ let mt = class extends HTMLElement {
   static finalize() {
     if (this.hasOwnProperty(bt("finalized"))) return;
     if (this.finalized = !0, this._$Ei(), this.hasOwnProperty(bt("properties"))) {
-      const i = this.properties, s = [...Re(i), ...Fe(i)];
-      for (const o of s) this.createProperty(o, i[o]);
+      const i = this.properties, o = [...Fe(i), ...Re(i)];
+      for (const s of o) this.createProperty(s, i[s]);
     }
     const t = this[Symbol.metadata];
     if (t !== null) {
       const i = litPropertyMetadata.get(t);
-      if (i !== void 0) for (const [s, o] of i) this.elementProperties.set(s, o);
+      if (i !== void 0) for (const [o, s] of i) this.elementProperties.set(o, s);
     }
     this._$Eh = /* @__PURE__ */ new Map();
-    for (const [i, s] of this.elementProperties) {
-      const o = this._$Eu(i, s);
-      o !== void 0 && this._$Eh.set(o, i);
+    for (const [i, o] of this.elementProperties) {
+      const s = this._$Eu(i, o);
+      s !== void 0 && this._$Eh.set(s, i);
     }
     this.elementStyles = this.finalizeStyles(this.styles);
   }
   static finalizeStyles(t) {
     const i = [];
     if (Array.isArray(t)) {
-      const s = new Set(t.flat(1 / 0).reverse());
-      for (const o of s) i.unshift(ae(o));
+      const o = new Set(t.flat(1 / 0).reverse());
+      for (const s of o) i.unshift(ae(s));
     } else t !== void 0 && i.push(ae(t));
     return i;
   }
   static _$Eu(t, i) {
-    const s = i.attribute;
-    return s === !1 ? void 0 : typeof s == "string" ? s : typeof t == "string" ? t.toLowerCase() : void 0;
+    const o = i.attribute;
+    return o === !1 ? void 0 : typeof o == "string" ? o : typeof t == "string" ? t.toLowerCase() : void 0;
   }
   constructor() {
     super(), this._$Ep = void 0, this.isUpdatePending = !1, this.hasUpdated = !1, this._$Em = null, this._$Ev();
@@ -157,7 +157,7 @@ let mt = class extends HTMLElement {
   }
   _$E_() {
     const t = /* @__PURE__ */ new Map(), i = this.constructor.elementProperties;
-    for (const s of i.keys()) this.hasOwnProperty(s) && (t.set(s, this[s]), delete this[s]);
+    for (const o of i.keys()) this.hasOwnProperty(o) && (t.set(o, this[o]), delete this[o]);
     t.size > 0 && (this._$Ep = t);
   }
   createRenderRoot() {
@@ -167,8 +167,8 @@ let mt = class extends HTMLElement {
   connectedCallback() {
     var t;
     this.renderRoot ?? (this.renderRoot = this.createRenderRoot()), this.enableUpdating(!0), (t = this._$EO) == null || t.forEach(((i) => {
-      var s;
-      return (s = i.hostConnected) == null ? void 0 : s.call(i);
+      var o;
+      return (o = i.hostConnected) == null ? void 0 : o.call(i);
     }));
   }
   enableUpdating(t) {
@@ -176,42 +176,42 @@ let mt = class extends HTMLElement {
   disconnectedCallback() {
     var t;
     (t = this._$EO) == null || t.forEach(((i) => {
-      var s;
-      return (s = i.hostDisconnected) == null ? void 0 : s.call(i);
+      var o;
+      return (o = i.hostDisconnected) == null ? void 0 : o.call(i);
     }));
   }
-  attributeChangedCallback(t, i, s) {
-    this._$AK(t, s);
+  attributeChangedCallback(t, i, o) {
+    this._$AK(t, o);
   }
   _$ET(t, i) {
     var n;
-    const s = this.constructor.elementProperties.get(t), o = this.constructor._$Eu(t, s);
-    if (o !== void 0 && s.reflect === !0) {
-      const a = (((n = s.converter) == null ? void 0 : n.toAttribute) !== void 0 ? s.converter : kt).toAttribute(i, s.type);
-      this._$Em = t, a == null ? this.removeAttribute(o) : this.setAttribute(o, a), this._$Em = null;
+    const o = this.constructor.elementProperties.get(t), s = this.constructor._$Eu(t, o);
+    if (s !== void 0 && o.reflect === !0) {
+      const a = (((n = o.converter) == null ? void 0 : n.toAttribute) !== void 0 ? o.converter : kt).toAttribute(i, o.type);
+      this._$Em = t, a == null ? this.removeAttribute(s) : this.setAttribute(s, a), this._$Em = null;
     }
   }
   _$AK(t, i) {
     var n, a;
-    const s = this.constructor, o = s._$Eh.get(t);
-    if (o !== void 0 && this._$Em !== o) {
-      const l = s.getPropertyOptions(o), r = typeof l.converter == "function" ? { fromAttribute: l.converter } : ((n = l.converter) == null ? void 0 : n.fromAttribute) !== void 0 ? l.converter : kt;
-      this._$Em = o;
+    const o = this.constructor, s = o._$Eh.get(t);
+    if (s !== void 0 && this._$Em !== s) {
+      const l = o.getPropertyOptions(s), r = typeof l.converter == "function" ? { fromAttribute: l.converter } : ((n = l.converter) == null ? void 0 : n.fromAttribute) !== void 0 ? l.converter : kt;
+      this._$Em = s;
       const c = r.fromAttribute(i, l.type);
-      this[o] = c ?? ((a = this._$Ej) == null ? void 0 : a.get(o)) ?? c, this._$Em = null;
+      this[s] = c ?? ((a = this._$Ej) == null ? void 0 : a.get(s)) ?? c, this._$Em = null;
     }
   }
-  requestUpdate(t, i, s) {
-    var o;
+  requestUpdate(t, i, o) {
+    var s;
     if (t !== void 0) {
       const n = this.constructor, a = this[t];
-      if (s ?? (s = n.getPropertyOptions(t)), !((s.hasChanged ?? Yt)(a, i) || s.useDefault && s.reflect && a === ((o = this._$Ej) == null ? void 0 : o.get(t)) && !this.hasAttribute(n._$Eu(t, s)))) return;
-      this.C(t, i, s);
+      if (o ?? (o = n.getPropertyOptions(t)), !((o.hasChanged ?? Yt)(a, i) || o.useDefault && o.reflect && a === ((s = this._$Ej) == null ? void 0 : s.get(t)) && !this.hasAttribute(n._$Eu(t, o)))) return;
+      this.C(t, i, o);
     }
     this.isUpdatePending === !1 && (this._$ES = this._$EP());
   }
-  C(t, i, { useDefault: s, reflect: o, wrapped: n }, a) {
-    s && !(this._$Ej ?? (this._$Ej = /* @__PURE__ */ new Map())).has(t) && (this._$Ej.set(t, a ?? i ?? this[t]), n !== !0 || a !== void 0) || (this._$AL.has(t) || (this.hasUpdated || s || (i = void 0), this._$AL.set(t, i)), o === !0 && this._$Em !== t && (this._$Eq ?? (this._$Eq = /* @__PURE__ */ new Set())).add(t));
+  C(t, i, { useDefault: o, reflect: s, wrapped: n }, a) {
+    o && !(this._$Ej ?? (this._$Ej = /* @__PURE__ */ new Map())).has(t) && (this._$Ej.set(t, a ?? i ?? this[t]), n !== !0 || a !== void 0) || (this._$AL.has(t) || (this.hasUpdated || o || (i = void 0), this._$AL.set(t, i)), s === !0 && this._$Em !== t && (this._$Eq ?? (this._$Eq = /* @__PURE__ */ new Set())).add(t));
   }
   async _$EP() {
     this.isUpdatePending = !0;
@@ -227,15 +227,15 @@ let mt = class extends HTMLElement {
     return this.performUpdate();
   }
   performUpdate() {
-    var s;
+    var o;
     if (!this.isUpdatePending) return;
     if (!this.hasUpdated) {
       if (this.renderRoot ?? (this.renderRoot = this.createRenderRoot()), this._$Ep) {
         for (const [n, a] of this._$Ep) this[n] = a;
         this._$Ep = void 0;
       }
-      const o = this.constructor.elementProperties;
-      if (o.size > 0) for (const [n, a] of o) {
+      const s = this.constructor.elementProperties;
+      if (s.size > 0) for (const [n, a] of s) {
         const { wrapped: l } = a, r = this[n];
         l !== !0 || this._$AL.has(n) || r === void 0 || this.C(n, void 0, a, r);
       }
@@ -243,12 +243,12 @@ let mt = class extends HTMLElement {
     let t = !1;
     const i = this._$AL;
     try {
-      t = this.shouldUpdate(i), t ? (this.willUpdate(i), (s = this._$EO) == null || s.forEach(((o) => {
+      t = this.shouldUpdate(i), t ? (this.willUpdate(i), (o = this._$EO) == null || o.forEach(((s) => {
         var n;
-        return (n = o.hostUpdate) == null ? void 0 : n.call(o);
+        return (n = s.hostUpdate) == null ? void 0 : n.call(s);
       })), this.update(i)) : this._$EM();
-    } catch (o) {
-      throw t = !1, this._$EM(), o;
+    } catch (s) {
+      throw t = !1, this._$EM(), s;
     }
     t && this._$AE(i);
   }
@@ -256,9 +256,9 @@ let mt = class extends HTMLElement {
   }
   _$AE(t) {
     var i;
-    (i = this._$EO) == null || i.forEach(((s) => {
-      var o;
-      return (o = s.hostUpdated) == null ? void 0 : o.call(s);
+    (i = this._$EO) == null || i.forEach(((o) => {
+      var s;
+      return (s = o.hostUpdated) == null ? void 0 : s.call(o);
     })), this.hasUpdated || (this.hasUpdated = !0, this.firstUpdated(t)), this.updated(t);
   }
   _$EM() {
@@ -281,74 +281,74 @@ let mt = class extends HTMLElement {
   firstUpdated(t) {
   }
 };
-mt.elementStyles = [], mt.shadowRootOptions = { mode: "open" }, mt[bt("elementProperties")] = /* @__PURE__ */ new Map(), mt[bt("finalized")] = /* @__PURE__ */ new Map(), Rt == null || Rt({ ReactiveElement: mt }), (Q.reactiveElementVersions ?? (Q.reactiveElementVersions = [])).push("2.1.1");
+mt.elementStyles = [], mt.shadowRootOptions = { mode: "open" }, mt[bt("elementProperties")] = /* @__PURE__ */ new Map(), mt[bt("finalized")] = /* @__PURE__ */ new Map(), Ft == null || Ft({ ReactiveElement: mt }), (Q.reactiveElementVersions ?? (Q.reactiveElementVersions = [])).push("2.1.1");
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const $t = globalThis, Dt = $t.trustedTypes, ce = Dt ? Dt.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, Ce = "$lit$", Y = `lit$${Math.random().toFixed(9).slice(2)}$`, Se = "?" + Y, Ve = `<${Se}>`, ct = document, wt = () => ct.createComment(""), At = (e) => e === null || typeof e != "object" && typeof e != "function", Xt = Array.isArray, qe = (e) => Xt(e) || typeof (e == null ? void 0 : e[Symbol.iterator]) == "function", Ft = `[ 	
-\f\r]`, yt = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, de = /-->/g, he = />/g, st = RegExp(`>|${Ft}(?:([^\\s"'>=/]+)(${Ft}*=${Ft}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`, "g"), ue = /'/g, me = /"/g, xe = /^(?:script|style|textarea|title)$/i, Ge = (e) => (t, ...i) => ({ _$litType$: e, strings: t, values: i }), $ = Ge(1), q = Symbol.for("lit-noChange"), k = Symbol.for("lit-nothing"), pe = /* @__PURE__ */ new WeakMap(), at = ct.createTreeWalker(ct, 129);
+const $t = globalThis, Dt = $t.trustedTypes, ce = Dt ? Dt.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, Ce = "$lit$", Y = `lit$${Math.random().toFixed(9).slice(2)}$`, xe = "?" + Y, Ve = `<${xe}>`, ct = document, wt = () => ct.createComment(""), At = (e) => e === null || typeof e != "object" && typeof e != "function", Xt = Array.isArray, qe = (e) => Xt(e) || typeof (e == null ? void 0 : e[Symbol.iterator]) == "function", Rt = `[ 	
+\f\r]`, vt = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, de = /-->/g, he = />/g, ot = RegExp(`>|${Rt}(?:([^\\s"'>=/]+)(${Rt}*=${Rt}*(?:[^ 	
+\f\r"'\`<>=]|("|')|))|$)`, "g"), ue = /'/g, me = /"/g, Se = /^(?:script|style|textarea|title)$/i, Ge = (e) => (t, ...i) => ({ _$litType$: e, strings: t, values: i }), $ = Ge(1), q = Symbol.for("lit-noChange"), k = Symbol.for("lit-nothing"), pe = /* @__PURE__ */ new WeakMap(), at = ct.createTreeWalker(ct, 129);
 function ze(e, t) {
   if (!Xt(e) || !e.hasOwnProperty("raw")) throw Error("invalid template strings array");
   return ce !== void 0 ? ce.createHTML(t) : t;
 }
 const Ke = (e, t) => {
-  const i = e.length - 1, s = [];
-  let o, n = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", a = yt;
+  const i = e.length - 1, o = [];
+  let s, n = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", a = vt;
   for (let l = 0; l < i; l++) {
     const r = e[l];
     let c, d, h = -1, u = 0;
-    for (; u < r.length && (a.lastIndex = u, d = a.exec(r), d !== null); ) u = a.lastIndex, a === yt ? d[1] === "!--" ? a = de : d[1] !== void 0 ? a = he : d[2] !== void 0 ? (xe.test(d[2]) && (o = RegExp("</" + d[2], "g")), a = st) : d[3] !== void 0 && (a = st) : a === st ? d[0] === ">" ? (a = o ?? yt, h = -1) : d[1] === void 0 ? h = -2 : (h = a.lastIndex - d[2].length, c = d[1], a = d[3] === void 0 ? st : d[3] === '"' ? me : ue) : a === me || a === ue ? a = st : a === de || a === he ? a = yt : (a = st, o = void 0);
-    const f = a === st && e[l + 1].startsWith("/>") ? " " : "";
-    n += a === yt ? r + Ve : h >= 0 ? (s.push(c), r.slice(0, h) + Ce + r.slice(h) + Y + f) : r + Y + (h === -2 ? l : f);
+    for (; u < r.length && (a.lastIndex = u, d = a.exec(r), d !== null); ) u = a.lastIndex, a === vt ? d[1] === "!--" ? a = de : d[1] !== void 0 ? a = he : d[2] !== void 0 ? (Se.test(d[2]) && (s = RegExp("</" + d[2], "g")), a = ot) : d[3] !== void 0 && (a = ot) : a === ot ? d[0] === ">" ? (a = s ?? vt, h = -1) : d[1] === void 0 ? h = -2 : (h = a.lastIndex - d[2].length, c = d[1], a = d[3] === void 0 ? ot : d[3] === '"' ? me : ue) : a === me || a === ue ? a = ot : a === de || a === he ? a = vt : (a = ot, s = void 0);
+    const f = a === ot && e[l + 1].startsWith("/>") ? " " : "";
+    n += a === vt ? r + Ve : h >= 0 ? (o.push(c), r.slice(0, h) + Ce + r.slice(h) + Y + f) : r + Y + (h === -2 ? l : f);
   }
-  return [ze(e, n + (e[i] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), s];
+  return [ze(e, n + (e[i] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), o];
 };
 class Et {
-  constructor({ strings: t, _$litType$: i }, s) {
-    let o;
+  constructor({ strings: t, _$litType$: i }, o) {
+    let s;
     this.parts = [];
     let n = 0, a = 0;
     const l = t.length - 1, r = this.parts, [c, d] = Ke(t, i);
-    if (this.el = Et.createElement(c, s), at.currentNode = this.el.content, i === 2 || i === 3) {
+    if (this.el = Et.createElement(c, o), at.currentNode = this.el.content, i === 2 || i === 3) {
       const h = this.el.content.firstChild;
       h.replaceWith(...h.childNodes);
     }
-    for (; (o = at.nextNode()) !== null && r.length < l; ) {
-      if (o.nodeType === 1) {
-        if (o.hasAttributes()) for (const h of o.getAttributeNames()) if (h.endsWith(Ce)) {
-          const u = d[a++], f = o.getAttribute(h).split(Y), m = /([.?@])?(.*)/.exec(u);
-          r.push({ type: 1, index: n, name: m[2], strings: f, ctor: m[1] === "." ? Ze : m[1] === "?" ? Ye : m[1] === "@" ? Xe : Lt }), o.removeAttribute(h);
-        } else h.startsWith(Y) && (r.push({ type: 6, index: n }), o.removeAttribute(h));
-        if (xe.test(o.tagName)) {
-          const h = o.textContent.split(Y), u = h.length - 1;
+    for (; (s = at.nextNode()) !== null && r.length < l; ) {
+      if (s.nodeType === 1) {
+        if (s.hasAttributes()) for (const h of s.getAttributeNames()) if (h.endsWith(Ce)) {
+          const u = d[a++], f = s.getAttribute(h).split(Y), m = /([.?@])?(.*)/.exec(u);
+          r.push({ type: 1, index: n, name: m[2], strings: f, ctor: m[1] === "." ? Ze : m[1] === "?" ? Ye : m[1] === "@" ? Xe : Lt }), s.removeAttribute(h);
+        } else h.startsWith(Y) && (r.push({ type: 6, index: n }), s.removeAttribute(h));
+        if (Se.test(s.tagName)) {
+          const h = s.textContent.split(Y), u = h.length - 1;
           if (u > 0) {
-            o.textContent = Dt ? Dt.emptyScript : "";
-            for (let f = 0; f < u; f++) o.append(h[f], wt()), at.nextNode(), r.push({ type: 2, index: ++n });
-            o.append(h[u], wt());
+            s.textContent = Dt ? Dt.emptyScript : "";
+            for (let f = 0; f < u; f++) s.append(h[f], wt()), at.nextNode(), r.push({ type: 2, index: ++n });
+            s.append(h[u], wt());
           }
         }
-      } else if (o.nodeType === 8) if (o.data === Se) r.push({ type: 2, index: n });
+      } else if (s.nodeType === 8) if (s.data === xe) r.push({ type: 2, index: n });
       else {
         let h = -1;
-        for (; (h = o.data.indexOf(Y, h + 1)) !== -1; ) r.push({ type: 7, index: n }), h += Y.length - 1;
+        for (; (h = s.data.indexOf(Y, h + 1)) !== -1; ) r.push({ type: 7, index: n }), h += Y.length - 1;
       }
       n++;
     }
   }
   static createElement(t, i) {
-    const s = ct.createElement("template");
-    return s.innerHTML = t, s;
+    const o = ct.createElement("template");
+    return o.innerHTML = t, o;
   }
 }
-function ft(e, t, i = e, s) {
+function ft(e, t, i = e, o) {
   var a, l;
   if (t === q) return t;
-  let o = s !== void 0 ? (a = i._$Co) == null ? void 0 : a[s] : i._$Cl;
+  let s = o !== void 0 ? (a = i._$Co) == null ? void 0 : a[o] : i._$Cl;
   const n = At(t) ? void 0 : t._$litDirective$;
-  return (o == null ? void 0 : o.constructor) !== n && ((l = o == null ? void 0 : o._$AO) == null || l.call(o, !1), n === void 0 ? o = void 0 : (o = new n(e), o._$AT(e, i, s)), s !== void 0 ? (i._$Co ?? (i._$Co = []))[s] = o : i._$Cl = o), o !== void 0 && (t = ft(e, o._$AS(e, t.values), o, s)), t;
+  return (s == null ? void 0 : s.constructor) !== n && ((l = s == null ? void 0 : s._$AO) == null || l.call(s, !1), n === void 0 ? s = void 0 : (s = new n(e), s._$AT(e, i, o)), o !== void 0 ? (i._$Co ?? (i._$Co = []))[o] = s : i._$Cl = s), s !== void 0 && (t = ft(e, s._$AS(e, t.values), s, o)), t;
 }
 let We = class {
   constructor(t, i) {
@@ -361,21 +361,21 @@ let We = class {
     return this._$AM._$AU;
   }
   u(t) {
-    const { el: { content: i }, parts: s } = this._$AD, o = ((t == null ? void 0 : t.creationScope) ?? ct).importNode(i, !0);
-    at.currentNode = o;
-    let n = at.nextNode(), a = 0, l = 0, r = s[0];
+    const { el: { content: i }, parts: o } = this._$AD, s = ((t == null ? void 0 : t.creationScope) ?? ct).importNode(i, !0);
+    at.currentNode = s;
+    let n = at.nextNode(), a = 0, l = 0, r = o[0];
     for (; r !== void 0; ) {
       if (a === r.index) {
         let c;
-        r.type === 2 ? c = new gt(n, n.nextSibling, this, t) : r.type === 1 ? c = new r.ctor(n, r.name, r.strings, this, t) : r.type === 6 && (c = new Je(n, this, t)), this._$AV.push(c), r = s[++l];
+        r.type === 2 ? c = new gt(n, n.nextSibling, this, t) : r.type === 1 ? c = new r.ctor(n, r.name, r.strings, this, t) : r.type === 6 && (c = new Je(n, this, t)), this._$AV.push(c), r = o[++l];
       }
       a !== (r == null ? void 0 : r.index) && (n = at.nextNode(), a++);
     }
-    return at.currentNode = ct, o;
+    return at.currentNode = ct, s;
   }
   p(t) {
     let i = 0;
-    for (const s of this._$AV) s !== void 0 && (s.strings !== void 0 ? (s._$AI(t, s, i), i += s.strings.length - 2) : s._$AI(t[i])), i++;
+    for (const o of this._$AV) o !== void 0 && (o.strings !== void 0 ? (o._$AI(t, o, i), i += o.strings.length - 2) : o._$AI(t[i])), i++;
   }
 };
 class gt {
@@ -383,8 +383,8 @@ class gt {
     var t;
     return ((t = this._$AM) == null ? void 0 : t._$AU) ?? this._$Cv;
   }
-  constructor(t, i, s, o) {
-    this.type = 2, this._$AH = k, this._$AN = void 0, this._$AA = t, this._$AB = i, this._$AM = s, this.options = o, this._$Cv = (o == null ? void 0 : o.isConnected) ?? !0;
+  constructor(t, i, o, s) {
+    this.type = 2, this._$AH = k, this._$AN = void 0, this._$AA = t, this._$AB = i, this._$AM = o, this.options = s, this._$Cv = (s == null ? void 0 : s.isConnected) ?? !0;
   }
   get parentNode() {
     let t = this._$AA.parentNode;
@@ -411,10 +411,10 @@ class gt {
   }
   $(t) {
     var n;
-    const { values: i, _$litType$: s } = t, o = typeof s == "number" ? this._$AC(t) : (s.el === void 0 && (s.el = Et.createElement(ze(s.h, s.h[0]), this.options)), s);
-    if (((n = this._$AH) == null ? void 0 : n._$AD) === o) this._$AH.p(i);
+    const { values: i, _$litType$: o } = t, s = typeof o == "number" ? this._$AC(t) : (o.el === void 0 && (o.el = Et.createElement(ze(o.h, o.h[0]), this.options)), o);
+    if (((n = this._$AH) == null ? void 0 : n._$AD) === s) this._$AH.p(i);
     else {
-      const a = new We(o, this), l = a.u(this.options);
+      const a = new We(s, this), l = a.u(this.options);
       a.p(i), this.T(l), this._$AH = a;
     }
   }
@@ -425,15 +425,15 @@ class gt {
   k(t) {
     Xt(this._$AH) || (this._$AH = [], this._$AR());
     const i = this._$AH;
-    let s, o = 0;
-    for (const n of t) o === i.length ? i.push(s = new gt(this.O(wt()), this.O(wt()), this, this.options)) : s = i[o], s._$AI(n), o++;
-    o < i.length && (this._$AR(s && s._$AB.nextSibling, o), i.length = o);
+    let o, s = 0;
+    for (const n of t) s === i.length ? i.push(o = new gt(this.O(wt()), this.O(wt()), this, this.options)) : o = i[s], o._$AI(n), s++;
+    s < i.length && (this._$AR(o && o._$AB.nextSibling, s), i.length = s);
   }
   _$AR(t = this._$AA.nextSibling, i) {
-    var s;
-    for ((s = this._$AP) == null ? void 0 : s.call(this, !1, !0, i); t !== this._$AB; ) {
-      const o = t.nextSibling;
-      t.remove(), t = o;
+    var o;
+    for ((o = this._$AP) == null ? void 0 : o.call(this, !1, !0, i); t !== this._$AB; ) {
+      const s = t.nextSibling;
+      t.remove(), t = s;
     }
   }
   setConnected(t) {
@@ -448,19 +448,19 @@ class Lt {
   get _$AU() {
     return this._$AM._$AU;
   }
-  constructor(t, i, s, o, n) {
-    this.type = 1, this._$AH = k, this._$AN = void 0, this.element = t, this.name = i, this._$AM = o, this.options = n, s.length > 2 || s[0] !== "" || s[1] !== "" ? (this._$AH = Array(s.length - 1).fill(new String()), this.strings = s) : this._$AH = k;
+  constructor(t, i, o, s, n) {
+    this.type = 1, this._$AH = k, this._$AN = void 0, this.element = t, this.name = i, this._$AM = s, this.options = n, o.length > 2 || o[0] !== "" || o[1] !== "" ? (this._$AH = Array(o.length - 1).fill(new String()), this.strings = o) : this._$AH = k;
   }
-  _$AI(t, i = this, s, o) {
+  _$AI(t, i = this, o, s) {
     const n = this.strings;
     let a = !1;
     if (n === void 0) t = ft(this, t, i, 0), a = !At(t) || t !== this._$AH && t !== q, a && (this._$AH = t);
     else {
       const l = t;
       let r, c;
-      for (t = n[0], r = 0; r < n.length - 1; r++) c = ft(this, l[s + r], i, r), c === q && (c = this._$AH[r]), a || (a = !At(c) || c !== this._$AH[r]), c === k ? t = k : t !== k && (t += (c ?? "") + n[r + 1]), this._$AH[r] = c;
+      for (t = n[0], r = 0; r < n.length - 1; r++) c = ft(this, l[o + r], i, r), c === q && (c = this._$AH[r]), a || (a = !At(c) || c !== this._$AH[r]), c === k ? t = k : t !== k && (t += (c ?? "") + n[r + 1]), this._$AH[r] = c;
     }
-    a && !o && this.j(t);
+    a && !s && this.j(t);
   }
   j(t) {
     t === k ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, t ?? "");
@@ -483,13 +483,13 @@ class Ye extends Lt {
   }
 }
 class Xe extends Lt {
-  constructor(t, i, s, o, n) {
-    super(t, i, s, o, n), this.type = 5;
+  constructor(t, i, o, s, n) {
+    super(t, i, o, s, n), this.type = 5;
   }
   _$AI(t, i = this) {
     if ((t = ft(this, t, i, 0) ?? k) === q) return;
-    const s = this._$AH, o = t === k && s !== k || t.capture !== s.capture || t.once !== s.once || t.passive !== s.passive, n = t !== k && (s === k || o);
-    o && this.element.removeEventListener(this.name, this, s), n && this.element.addEventListener(this.name, this, t), this._$AH = t;
+    const o = this._$AH, s = t === k && o !== k || t.capture !== o.capture || t.once !== o.once || t.passive !== o.passive, n = t !== k && (o === k || s);
+    s && this.element.removeEventListener(this.name, this, o), n && this.element.addEventListener(this.name, this, t), this._$AH = t;
   }
   handleEvent(t) {
     var i;
@@ -497,8 +497,8 @@ class Xe extends Lt {
   }
 }
 class Je {
-  constructor(t, i, s) {
-    this.element = t, this.type = 6, this._$AN = void 0, this._$AM = i, this.options = s;
+  constructor(t, i, o) {
+    this.element = t, this.type = 6, this._$AN = void 0, this._$AM = i, this.options = o;
   }
   get _$AU() {
     return this._$AM._$AU;
@@ -510,13 +510,13 @@ class Je {
 const Qe = { I: gt }, Bt = $t.litHtmlPolyfillSupport;
 Bt == null || Bt(Et, gt), ($t.litHtmlVersions ?? ($t.litHtmlVersions = [])).push("3.3.1");
 const ti = (e, t, i) => {
-  const s = (i == null ? void 0 : i.renderBefore) ?? t;
-  let o = s._$litPart$;
-  if (o === void 0) {
+  const o = (i == null ? void 0 : i.renderBefore) ?? t;
+  let s = o._$litPart$;
+  if (s === void 0) {
     const n = (i == null ? void 0 : i.renderBefore) ?? null;
-    s._$litPart$ = o = new gt(t.insertBefore(wt(), n), n, void 0, i ?? {});
+    o._$litPart$ = s = new gt(t.insertBefore(wt(), n), n, void 0, i ?? {});
   }
-  return o._$AI(e), o;
+  return s._$AI(e), s;
 };
 /**
  * @license
@@ -570,9 +570,9 @@ const Mt = (e) => (t, i) => {
  * SPDX-License-Identifier: BSD-3-Clause
  */
 const ei = { attribute: !0, type: String, converter: kt, reflect: !1, hasChanged: Yt }, ii = (e = ei, t, i) => {
-  const { kind: s, metadata: o } = i;
-  let n = globalThis.litPropertyMetadata.get(o);
-  if (n === void 0 && globalThis.litPropertyMetadata.set(o, n = /* @__PURE__ */ new Map()), s === "setter" && ((e = Object.create(e)).wrapped = !0), n.set(i.name, e), s === "accessor") {
+  const { kind: o, metadata: s } = i;
+  let n = globalThis.litPropertyMetadata.get(s);
+  if (n === void 0 && globalThis.litPropertyMetadata.set(s, n = /* @__PURE__ */ new Map()), o === "setter" && ((e = Object.create(e)).wrapped = !0), n.set(i.name, e), o === "accessor") {
     const { name: a } = i;
     return { set(l) {
       const r = t.get.call(this);
@@ -581,19 +581,19 @@ const ei = { attribute: !0, type: String, converter: kt, reflect: !1, hasChanged
       return l !== void 0 && this.C(a, void 0, e, l), l;
     } };
   }
-  if (s === "setter") {
+  if (o === "setter") {
     const { name: a } = i;
     return function(l) {
       const r = this[a];
       t.call(this, l), this.requestUpdate(a, r, e);
     };
   }
-  throw Error("Unsupported decorator location: " + s);
+  throw Error("Unsupported decorator location: " + o);
 };
 function E(e) {
-  return (t, i) => typeof i == "object" ? ii(e, t, i) : ((s, o, n) => {
-    const a = o.hasOwnProperty(n);
-    return o.constructor.createProperty(n, s), a ? Object.getOwnPropertyDescriptor(o, n) : void 0;
+  return (t, i) => typeof i == "object" ? ii(e, t, i) : ((o, s, n) => {
+    const a = s.hasOwnProperty(n);
+    return s.constructor.createProperty(n, o), a ? Object.getOwnPropertyDescriptor(s, n) : void 0;
   })(e, t, i);
 }
 /**
@@ -601,7 +601,7 @@ function E(e) {
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-function x(e) {
+function S(e) {
   return E({ ...e, state: !0, attribute: !1 });
 }
 /**
@@ -616,8 +616,8 @@ let It = class {
   get _$AU() {
     return this._$AM._$AU;
   }
-  _$AT(t, i, s) {
-    this._$Ct = t, this._$AM = i, this._$Ci = s;
+  _$AT(t, i, o) {
+    this._$Ct = t, this._$AM = i, this._$Ci = o;
   }
   _$AS(t, i) {
     return this.update(t, i);
@@ -631,28 +631,28 @@ let It = class {
  * Copyright 2020 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const { I: si } = Qe, fe = () => document.createComment(""), vt = (e, t, i) => {
+const { I: oi } = Qe, fe = () => document.createComment(""), yt = (e, t, i) => {
   var n;
-  const s = e._$AA.parentNode, o = t === void 0 ? e._$AB : t._$AA;
+  const o = e._$AA.parentNode, s = t === void 0 ? e._$AB : t._$AA;
   if (i === void 0) {
-    const a = s.insertBefore(fe(), o), l = s.insertBefore(fe(), o);
-    i = new si(a, l, e, e.options);
+    const a = o.insertBefore(fe(), s), l = o.insertBefore(fe(), s);
+    i = new oi(a, l, e, e.options);
   } else {
     const a = i._$AB.nextSibling, l = i._$AM, r = l !== e;
     if (r) {
       let c;
       (n = i._$AQ) == null || n.call(i, e), i._$AM = e, i._$AP !== void 0 && (c = e._$AU) !== l._$AU && i._$AP(c);
     }
-    if (a !== o || r) {
+    if (a !== s || r) {
       let c = i._$AA;
       for (; c !== a; ) {
         const d = c.nextSibling;
-        s.insertBefore(c, o), c = d;
+        o.insertBefore(c, s), c = d;
       }
     }
   }
   return i;
-}, ot = (e, t, i = e) => (e._$AI(t, i), e), oi = {}, ni = (e, t = oi) => e._$AH = t, ai = (e) => e._$AH, Vt = (e) => {
+}, st = (e, t, i = e) => (e._$AI(t, i), e), si = {}, ni = (e, t = si) => e._$AH = t, ai = (e) => e._$AH, Vt = (e) => {
   e._$AR(), e._$AA.remove();
 };
 /**
@@ -661,50 +661,50 @@ const { I: si } = Qe, fe = () => document.createComment(""), vt = (e, t, i) => {
  * SPDX-License-Identifier: BSD-3-Clause
  */
 const _e = (e, t, i) => {
-  const s = /* @__PURE__ */ new Map();
-  for (let o = t; o <= i; o++) s.set(e[o], o);
-  return s;
+  const o = /* @__PURE__ */ new Map();
+  for (let s = t; s <= i; s++) o.set(e[s], s);
+  return o;
 }, X = Ht(class extends It {
   constructor(e) {
     if (super(e), e.type !== Jt.CHILD) throw Error("repeat() can only be used in text expressions");
   }
   dt(e, t, i) {
-    let s;
-    i === void 0 ? i = t : t !== void 0 && (s = t);
-    const o = [], n = [];
+    let o;
+    i === void 0 ? i = t : t !== void 0 && (o = t);
+    const s = [], n = [];
     let a = 0;
-    for (const l of e) o[a] = s ? s(l, a) : a, n[a] = i(l, a), a++;
-    return { values: n, keys: o };
+    for (const l of e) s[a] = o ? o(l, a) : a, n[a] = i(l, a), a++;
+    return { values: n, keys: s };
   }
   render(e, t, i) {
     return this.dt(e, t, i).values;
   }
-  update(e, [t, i, s]) {
-    const o = ai(e), { values: n, keys: a } = this.dt(t, i, s);
-    if (!Array.isArray(o)) return this.ut = a, n;
+  update(e, [t, i, o]) {
+    const s = ai(e), { values: n, keys: a } = this.dt(t, i, o);
+    if (!Array.isArray(s)) return this.ut = a, n;
     const l = this.ut ?? (this.ut = []), r = [];
-    let c, d, h = 0, u = o.length - 1, f = 0, m = n.length - 1;
-    for (; h <= u && f <= m; ) if (o[h] === null) h++;
-    else if (o[u] === null) u--;
-    else if (l[h] === a[f]) r[f] = ot(o[h], n[f]), h++, f++;
-    else if (l[u] === a[m]) r[m] = ot(o[u], n[m]), u--, m--;
-    else if (l[h] === a[m]) r[m] = ot(o[h], n[m]), vt(e, r[m + 1], o[h]), h++, m--;
-    else if (l[u] === a[f]) r[f] = ot(o[u], n[f]), vt(e, o[h], o[u]), u--, f++;
+    let c, d, h = 0, u = s.length - 1, f = 0, m = n.length - 1;
+    for (; h <= u && f <= m; ) if (s[h] === null) h++;
+    else if (s[u] === null) u--;
+    else if (l[h] === a[f]) r[f] = st(s[h], n[f]), h++, f++;
+    else if (l[u] === a[m]) r[m] = st(s[u], n[m]), u--, m--;
+    else if (l[h] === a[m]) r[m] = st(s[h], n[m]), yt(e, r[m + 1], s[h]), h++, m--;
+    else if (l[u] === a[f]) r[f] = st(s[u], n[f]), yt(e, s[h], s[u]), u--, f++;
     else if (c === void 0 && (c = _e(a, f, m), d = _e(l, h, u)), c.has(l[h])) if (c.has(l[u])) {
-      const b = d.get(a[f]), p = b !== void 0 ? o[b] : null;
+      const b = d.get(a[f]), p = b !== void 0 ? s[b] : null;
       if (p === null) {
-        const _ = vt(e, o[h]);
-        ot(_, n[f]), r[f] = _;
-      } else r[f] = ot(p, n[f]), vt(e, o[h], p), o[b] = null;
+        const _ = yt(e, s[h]);
+        st(_, n[f]), r[f] = _;
+      } else r[f] = st(p, n[f]), yt(e, s[h], p), s[b] = null;
       f++;
-    } else Vt(o[u]), u--;
-    else Vt(o[h]), h++;
+    } else Vt(s[u]), u--;
+    else Vt(s[h]), h++;
     for (; f <= m; ) {
-      const b = vt(e, r[m + 1]);
-      ot(b, n[f]), r[f++] = b;
+      const b = yt(e, r[m + 1]);
+      st(b, n[f]), r[f++] = b;
     }
     for (; h <= u; ) {
-      const b = o[h++];
+      const b = s[h++];
       b !== null && Vt(b);
     }
     return this.ut = a, ni(e, r), q;
@@ -724,17 +724,17 @@ const ht = Ht(class extends It {
     return " " + Object.keys(e).filter(((t) => e[t])).join(" ") + " ";
   }
   update(e, [t]) {
-    var s, o;
+    var o, s;
     if (this.st === void 0) {
       this.st = /* @__PURE__ */ new Set(), e.strings !== void 0 && (this.nt = new Set(e.strings.join(" ").split(/\s/).filter(((n) => n !== ""))));
-      for (const n in t) t[n] && !((s = this.nt) != null && s.has(n)) && this.st.add(n);
+      for (const n in t) t[n] && !((o = this.nt) != null && o.has(n)) && this.st.add(n);
       return this.render(t);
     }
     const i = e.element.classList;
     for (const n of this.st) n in t || (i.remove(n), this.st.delete(n));
     for (const n in t) {
       const a = !!t[n];
-      a === this.st.has(n) || (o = this.nt) != null && o.has(n) || (a ? (i.add(n), this.st.add(n)) : (i.remove(n), this.st.delete(n)));
+      a === this.st.has(n) || (s = this.nt) != null && s.has(n) || (a ? (i.add(n), this.st.add(n)) : (i.remove(n), this.st.delete(n)));
     }
     return q;
   }
@@ -751,20 +751,20 @@ const ke = "important", ri = " !" + ke, Ct = Ht(class extends It {
   }
   render(e) {
     return Object.keys(e).reduce(((t, i) => {
-      const s = e[i];
-      return s == null ? t : t + `${i = i.includes("-") ? i : i.replace(/(?:^(webkit|moz|ms|o)|)(?=[A-Z])/g, "-$&").toLowerCase()}:${s};`;
+      const o = e[i];
+      return o == null ? t : t + `${i = i.includes("-") ? i : i.replace(/(?:^(webkit|moz|ms|o)|)(?=[A-Z])/g, "-$&").toLowerCase()}:${o};`;
     }), "");
   }
   update(e, [t]) {
     const { style: i } = e.element;
     if (this.ft === void 0) return this.ft = new Set(Object.keys(t)), this.render(t);
-    for (const s of this.ft) t[s] == null && (this.ft.delete(s), s.includes("-") ? i.removeProperty(s) : i[s] = null);
-    for (const s in t) {
-      const o = t[s];
-      if (o != null) {
-        this.ft.add(s);
-        const n = typeof o == "string" && o.endsWith(ri);
-        s.includes("-") || n ? i.setProperty(s, n ? o.slice(0, -11) : o, n ? ke : "") : i[s] = o;
+    for (const o of this.ft) t[o] == null && (this.ft.delete(o), o.includes("-") ? i.removeProperty(o) : i[o] = null);
+    for (const o in t) {
+      const s = t[o];
+      if (s != null) {
+        this.ft.add(o);
+        const n = typeof s == "string" && s.endsWith(ri);
+        o.includes("-") || n ? i.setProperty(o, n ? s.slice(0, -11) : s, n ? ke : "") : i[o] = s;
       }
     }
     return q;
@@ -787,23 +787,23 @@ function ci(e, t) {
 function A(e, t) {
   t === void 0 && (t = ci);
   var i = null;
-  function s() {
-    for (var o = [], n = 0; n < arguments.length; n++)
-      o[n] = arguments[n];
-    if (i && i.lastThis === this && t(o, i.lastArgs))
+  function o() {
+    for (var s = [], n = 0; n < arguments.length; n++)
+      s[n] = arguments[n];
+    if (i && i.lastThis === this && t(s, i.lastArgs))
       return i.lastResult;
-    var a = e.apply(this, o);
+    var a = e.apply(this, s);
     return i = {
       lastResult: a,
-      lastArgs: o,
+      lastArgs: s,
       lastThis: this
     }, a;
   }
-  return s.clear = function() {
+  return o.clear = function() {
     i = null;
-  }, s;
+  }, o;
 }
-var di = "M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z", Qt = "M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z", hi = "M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z", ye = "M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z", ve = "M11.83,9L15,12.16C15,12.11 15,12.05 15,12A3,3 0 0,0 12,9C11.94,9 11.89,9 11.83,9M7.53,9.8L9.08,11.35C9.03,11.56 9,11.77 9,12A3,3 0 0,0 12,15C12.22,15 12.44,14.97 12.65,14.92L14.2,16.47C13.53,16.8 12.79,17 12,17A5,5 0 0,1 7,12C7,11.21 7.2,10.47 7.53,9.8M2,4.27L4.28,6.55L4.73,7C3.08,8.3 1.78,10 1,12C2.73,16.39 7,19.5 12,19.5C13.55,19.5 15.03,19.2 16.38,18.66L16.81,19.08L19.73,22L21,20.73L3.27,3M12,7A5,5 0 0,1 17,12C17,12.64 16.87,13.26 16.64,13.82L19.57,16.75C21.07,15.5 22.27,13.86 23,12C21.27,7.61 17,4.5 12,4.5C10.6,4.5 9.26,4.75 8,5.2L10.17,7.35C10.74,7.13 11.35,7 12,7Z", ui = "M17 14V17H14V19H17V22H19V19H22V17H19V14M20 11V12.3C19.4 12.1 18.7 12 18 12C16.8 12 15.6 12.4 14.7 13H7V11H20M12.1 17H7V15H12.8C12.5 15.6 12.2 16.3 12.1 17M7 7H20V9H7V7M5 19H7V21H3V3H7V5H5V19Z", mi = "M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z", pi = "M21,9L17,5V8H10V10H17V13M7,11L3,15L7,19V16H14V14H7V11Z", be = "M10 19.11L12.11 17H7V15H14V15.12L16.12 13H7V11H17V12.12L18.24 10.89C18.72 10.41 19.35 10.14 20.04 10.14C20.37 10.14 20.7 10.21 21 10.33V5C21 3.89 20.1 3 19 3H5C3.89 3 3 3.89 3 5V19C3 20.11 3.9 21 5 21H10V19.11M7 7H17V9H7V7M21.7 14.35L20.7 15.35L18.65 13.3L19.65 12.3C19.86 12.09 20.21 12.09 20.42 12.3L21.7 13.58C21.91 13.79 21.91 14.14 21.7 14.35M12 19.94L18.06 13.88L20.11 15.93L14.06 22H12V19.94Z", fi = "M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z";
+var di = "M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z", Qt = "M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z", hi = "M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z", ve = "M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z", ye = "M11.83,9L15,12.16C15,12.11 15,12.05 15,12A3,3 0 0,0 12,9C11.94,9 11.89,9 11.83,9M7.53,9.8L9.08,11.35C9.03,11.56 9,11.77 9,12A3,3 0 0,0 12,15C12.22,15 12.44,14.97 12.65,14.92L14.2,16.47C13.53,16.8 12.79,17 12,17A5,5 0 0,1 7,12C7,11.21 7.2,10.47 7.53,9.8M2,4.27L4.28,6.55L4.73,7C3.08,8.3 1.78,10 1,12C2.73,16.39 7,19.5 12,19.5C13.55,19.5 15.03,19.2 16.38,18.66L16.81,19.08L19.73,22L21,20.73L3.27,3M12,7A5,5 0 0,1 17,12C17,12.64 16.87,13.26 16.64,13.82L19.57,16.75C21.07,15.5 22.27,13.86 23,12C21.27,7.61 17,4.5 12,4.5C10.6,4.5 9.26,4.75 8,5.2L10.17,7.35C10.74,7.13 11.35,7 12,7Z", ui = "M17 14V17H14V19H17V22H19V19H22V17H19V14M20 11V12.3C19.4 12.1 18.7 12 18 12C16.8 12 15.6 12.4 14.7 13H7V11H20M12.1 17H7V15H12.8C12.5 15.6 12.2 16.3 12.1 17M7 7H20V9H7V7M5 19H7V21H3V3H7V5H5V19Z", mi = "M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z", pi = "M21,9L17,5V8H10V10H17V13M7,11L3,15L7,19V16H14V14H7V11Z", be = "M10 19.11L12.11 17H7V15H14V15.12L16.12 13H7V11H17V12.12L18.24 10.89C18.72 10.41 19.35 10.14 20.04 10.14C20.37 10.14 20.7 10.21 21 10.33V5C21 3.89 20.1 3 19 3H5C3.89 3 3 3.89 3 5V19C3 20.11 3.9 21 5 21H10V19.11M7 7H17V9H7V7M21.7 14.35L20.7 15.35L18.65 13.3L19.65 12.3C19.86 12.09 20.21 12.09 20.42 12.3L21.7 13.58C21.91 13.79 21.91 14.14 21.7 14.35M12 19.94L18.06 13.88L20.11 15.93L14.06 22H12V19.94Z", fi = "M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z";
 const Gt = [
   "closed",
   "locked",
@@ -816,7 +816,7 @@ const Gt = [
   "not_home",
   "disarmed",
   "0"
-], _i = (e, t, i, s, o) => {
+], _i = (e, t, i, o, s) => {
   var h, u, f, m, b;
   const n = i || (t == null ? void 0 : t.theme), a = (t == null ? void 0 : t.darkMode) || !1;
   e.__themes || (e.__themes = { cacheKey: null, keys: /* @__PURE__ */ new Set() });
@@ -859,21 +859,21 @@ const Gt = [
   for (const [p, _] of Object.entries(r))
     e.style.setProperty(`--${p}`, String(_));
   e.__themes.cacheKey = l || null, e.__themes.keys = d;
-}, O = (e, t, i, s) => {
-  s = s || {}, i = i ?? {};
-  const o = new Event(t, {
-    bubbles: s.bubbles === void 0 ? !0 : s.bubbles,
-    cancelable: !!s.cancelable,
-    composed: s.composed === void 0 ? !0 : s.composed
+}, O = (e, t, i, o) => {
+  o = o || {}, i = i ?? {};
+  const s = new Event(t, {
+    bubbles: o.bubbles === void 0 ? !0 : o.bubbles,
+    cancelable: !!o.cancelable,
+    composed: o.composed === void 0 ? !0 : o.composed
   });
-  return o.detail = i, e.dispatchEvent(o), o;
+  return s.detail = i, e.dispatchEvent(s), s;
 }, N = (e) => e.substr(0, e.indexOf("."));
 A(
   (e) => new Intl.Collator(e)
 );
 const gi = A(
   (e) => new Intl.Collator(e, { sensitivity: "accent" })
-), yi = (e, t) => e < t ? -1 : e > t ? 1 : 0, De = (e, t, i = void 0) => Intl != null && Intl.Collator ? gi(i).compare(e, t) : yi(e.toLowerCase(), t.toLowerCase());
+), vi = (e, t) => e < t ? -1 : e > t ? 1 : 0, De = (e, t, i = void 0) => Intl != null && Intl.Collator ? gi(i).compare(e, t) : vi(e.toLowerCase(), t.toLowerCase());
 A(
   (e) => {
     const t = {};
@@ -896,11 +896,11 @@ const zt = (e, t) => {
   if (e && t && typeof e == "object" && typeof t == "object") {
     if (e.constructor !== t.constructor)
       return !1;
-    let i, s;
+    let i, o;
     if (Array.isArray(e)) {
-      if (s = e.length, s !== t.length)
+      if (o = e.length, o !== t.length)
         return !1;
-      for (i = s; i-- !== 0; )
+      for (i = o; i-- !== 0; )
         if (!zt(e[i], t[i]))
           return !1;
       return !0;
@@ -925,9 +925,9 @@ const zt = (e, t) => {
       return !0;
     }
     if (ArrayBuffer.isView(e) && ArrayBuffer.isView(t)) {
-      if (s = e.length, s !== t.length)
+      if (o = e.length, o !== t.length)
         return !1;
-      for (i = s; i-- !== 0; )
+      for (i = o; i-- !== 0; )
         if (e[i] !== t[i])
           return !1;
       return !0;
@@ -938,14 +938,14 @@ const zt = (e, t) => {
       return e.valueOf() === t.valueOf();
     if (e.toString !== Object.prototype.toString)
       return e.toString() === t.toString();
-    const o = Object.keys(e);
-    if (s = o.length, s !== Object.keys(t).length)
+    const s = Object.keys(e);
+    if (o = s.length, o !== Object.keys(t).length)
       return !1;
-    for (i = s; i-- !== 0; )
-      if (!Object.prototype.hasOwnProperty.call(t, o[i]))
+    for (i = o; i-- !== 0; )
+      if (!Object.prototype.hasOwnProperty.call(t, s[i]))
         return !1;
-    for (i = s; i-- !== 0; ) {
-      const n = o[i];
+    for (i = o; i-- !== 0; ) {
+      const n = s[i];
       if (!zt(e[n], t[n]))
         return !1;
     }
@@ -953,7 +953,7 @@ const zt = (e, t) => {
   }
   return e !== e && t !== t;
 };
-class vi extends HTMLElement {
+class yi extends HTMLElement {
   constructor() {
     super(...arguments), this.holdTime = 500, this.held = !1, this.cancelled = !1;
   }
@@ -980,19 +980,19 @@ class vi extends HTMLElement {
     t.actionHandler && zt(i, t.actionHandler.options) || (t.actionHandler && (t.removeEventListener("touchstart", t.actionHandler.start), t.removeEventListener("touchend", t.actionHandler.end), t.removeEventListener("touchcancel", t.actionHandler.end), t.removeEventListener("mousedown", t.actionHandler.start), t.removeEventListener("click", t.actionHandler.end), t.removeEventListener(
       "keydown",
       t.actionHandler.handleKeyDown
-    )), t.actionHandler = { options: i }, !i.disabled && (t.actionHandler.start = (s) => {
-      this.cancelled = !1, s.touches ? (s.touches[0].clientX, s.touches[0].clientY) : (s.clientX, s.clientY), i.hasHold && (this.held = !1, this.timer = window.setTimeout(() => {
+    )), t.actionHandler = { options: i }, !i.disabled && (t.actionHandler.start = (o) => {
+      this.cancelled = !1, o.touches ? (o.touches[0].clientX, o.touches[0].clientY) : (o.clientX, o.clientY), i.hasHold && (this.held = !1, this.timer = window.setTimeout(() => {
         this.held = !0;
       }, this.holdTime));
-    }, t.actionHandler.end = (s) => {
-      if (s.currentTarget !== s.target || s.type === "touchcancel" || s.type === "touchend" && this.cancelled)
+    }, t.actionHandler.end = (o) => {
+      if (o.currentTarget !== o.target || o.type === "touchcancel" || o.type === "touchend" && this.cancelled)
         return;
-      const o = s.target;
-      s.cancelable && s.preventDefault(), i.hasHold && (clearTimeout(this.timer), this.timer = void 0), i.hasHold && this.held ? O(o, "action", { action: "hold" }) : i.hasDoubleClick ? s.type === "click" && s.detail < 2 || !this.dblClickTimeout ? this.dblClickTimeout = window.setTimeout(() => {
-        this.dblClickTimeout = void 0, O(o, "action", { action: "tap" });
-      }, 250) : (clearTimeout(this.dblClickTimeout), this.dblClickTimeout = void 0, O(o, "action", { action: "double_tap" })) : O(o, "action", { action: "tap" });
-    }, t.actionHandler.handleKeyDown = (s) => {
-      ["Enter", " "].includes(s.key) && s.currentTarget.actionHandler.end(s);
+      const s = o.target;
+      o.cancelable && o.preventDefault(), i.hasHold && (clearTimeout(this.timer), this.timer = void 0), i.hasHold && this.held ? O(s, "action", { action: "hold" }) : i.hasDoubleClick ? o.type === "click" && o.detail < 2 || !this.dblClickTimeout ? this.dblClickTimeout = window.setTimeout(() => {
+        this.dblClickTimeout = void 0, O(s, "action", { action: "tap" });
+      }, 250) : (clearTimeout(this.dblClickTimeout), this.dblClickTimeout = void 0, O(s, "action", { action: "double_tap" })) : O(s, "action", { action: "tap" });
+    }, t.actionHandler.handleKeyDown = (o) => {
+      ["Enter", " "].includes(o.key) && o.currentTarget.actionHandler.end(o);
     }, t.addEventListener("touchstart", t.actionHandler.start, {
       passive: !0
     }), t.addEventListener("touchend", t.actionHandler.end), t.addEventListener("touchcancel", t.actionHandler.end), t.addEventListener("mousedown", t.actionHandler.start, {
@@ -1000,7 +1000,7 @@ class vi extends HTMLElement {
     }), t.addEventListener("click", t.actionHandler.end), t.addEventListener("keydown", t.actionHandler.handleKeyDown)));
   }
 }
-customElements.define("action-handler-status-card", vi);
+customElements.define("action-handler-status-card", yi);
 const bi = () => {
   const e = document.body;
   if (e.querySelector("action-handler-status-card"))
@@ -1012,7 +1012,7 @@ const bi = () => {
 }, $i = (e, t) => {
   const i = bi();
   i && i.bind(e, t);
-}, St = Ht(
+}, xt = Ht(
   class extends It {
     update(e, [t]) {
       return $i(e.element, t), q;
@@ -1021,8 +1021,8 @@ const bi = () => {
     render(e) {
     }
   }
-), wi = async (e, t, i, s) => {
-  O(e, "hass-action", { config: i, action: s });
+), wi = async (e, t, i, o) => {
+  O(e, "hass-action", { config: i, action: o });
 };
 function ut(e) {
   return e !== void 0 && e.action !== "none";
@@ -1236,27 +1236,27 @@ const $e = {
   ],
   switch: ["switch", "outlet"]
 };
-function Te(e, t, i, s, o, n) {
-  const a = o.area && o.area.length ? o.area : null, l = o.floor && o.floor.length ? o.floor : null, r = o.label && o.label.length ? o.label : null, c = o.hiddenAreas || [], d = o.hiddenLabels || [], h = o.hiddenEntities || [], u = new Set(c), f = new Set(d), m = new Set(h), b = new Map(t.map((v) => [v.id, v])), p = new Map(
-    i.map((v) => [v.area_id, v.floor_id])
-  ), _ = e.filter((v) => {
+function Te(e, t, i, o, s, n) {
+  const a = s.area && s.area.length ? s.area : null, l = s.floor && s.floor.length ? s.floor : null, r = s.label && s.label.length ? s.label : null, c = s.hiddenAreas || [], d = s.hiddenLabels || [], h = s.hiddenEntities || [], u = new Set(c), f = new Set(d), m = new Set(h), b = new Map(t.map((y) => [y.id, y])), p = new Map(
+    i.map((y) => [y.area_id, y.floor_id])
+  ), _ = e.filter((y) => {
     var z, D, M;
-    const g = v.entity_id.split(".")[0];
+    const g = y.entity_id.split(".")[0];
     if (!n.includes(g)) return !1;
     if (g === "update")
-      return !v.hidden_by && !v.disabled_by;
-    const y = v.device_id ? b.get(v.device_id) : void 0;
-    if (!(v.area_id != null || y && y.area_id != null) || r && !((((z = v.labels) == null ? void 0 : z.some((G) => r.includes(G))) ?? !1) || (((D = y == null ? void 0 : y.labels) == null ? void 0 : D.some((G) => r.includes(G))) ?? !1)) || a && !(v.area_id !== void 0 && v.area_id !== null && a.includes(v.area_id) || y && y.area_id !== void 0 && y.area_id !== null && a.includes(y.area_id)))
+      return !y.hidden_by && !y.disabled_by;
+    const v = y.device_id ? b.get(y.device_id) : void 0;
+    if (!(y.area_id != null || v && v.area_id != null) || r && !((((z = y.labels) == null ? void 0 : z.some((G) => r.includes(G))) ?? !1) || (((D = v == null ? void 0 : v.labels) == null ? void 0 : D.some((G) => r.includes(G))) ?? !1)) || a && !(y.area_id !== void 0 && y.area_id !== null && a.includes(y.area_id) || v && v.area_id !== void 0 && v.area_id !== null && a.includes(v.area_id)))
       return !1;
     if (l) {
-      const B = v.area_id ? p.get(v.area_id) : void 0, G = y != null && y.area_id ? p.get(y.area_id) : void 0;
+      const B = y.area_id ? p.get(y.area_id) : void 0, G = v != null && v.area_id ? p.get(v.area_id) : void 0;
       if (!(B && l.includes(B) || G && l.includes(G))) return !1;
     }
-    return u.size && (v.area_id && u.has(v.area_id) || y && y.area_id && u.has(y.area_id)) || (M = v.labels) != null && M.some((B) => f.has(B)) || m.has(v.entity_id) ? !1 : !v.hidden_by && !v.disabled_by;
-  }).map((v) => v.entity_id), C = {};
-  for (const v of _) {
-    const g = v.split(".")[0], y = s[v];
-    y && (C[g] || (C[g] = [])).push(y);
+    return u.size && (y.area_id && u.has(y.area_id) || v && v.area_id && u.has(v.area_id)) || (M = y.labels) != null && M.some((B) => f.has(B)) || m.has(y.entity_id) ? !1 : !y.hidden_by && !y.disabled_by;
+  }).map((y) => y.entity_id), C = {};
+  for (const y of _) {
+    const g = y.split(".")[0], v = o[y];
+    v && (C[g] || (C[g] = [])).push(v);
   }
   return C;
 }
@@ -1267,13 +1267,13 @@ function I(e, t) {
   return t ? `${nt(e)} - ${t}` : e;
 }
 function we(e, t) {
-  var i, s;
-  return ((s = (i = e == null ? void 0 : e[t]) == null ? void 0 : i.attributes) == null ? void 0 : s.friendly_name) || t;
+  var i, o;
+  return ((o = (i = e == null ? void 0 : e[t]) == null ? void 0 : i.attributes) == null ? void 0 : o.friendly_name) || t;
 }
 function Tt(e, t) {
-  return (i, s) => De(
+  return (i, o) => De(
     we(e, i),
-    we(e, s),
+    we(e, o),
     t
   );
 }
@@ -1281,8 +1281,8 @@ function Z(e, t) {
   if (e === t) return !0;
   if (!Array.isArray(e) || !Array.isArray(t) || e.length !== t.length) return !1;
   const i = new Set(t);
-  for (const s of e)
-    if (!i.has(s)) return !1;
+  for (const o of e)
+    if (!i.has(o)) return !1;
   return !0;
 }
 function P(e, t, i) {
@@ -1290,17 +1290,17 @@ function P(e, t, i) {
     `component.${i}.entity_component._.state.${t}`
   ) || t;
 }
-function Pt(e, t, i, s) {
+function Pt(e, t, i, o) {
   if (/^key_\d+$/.test(t.name))
     return e.localize("ui.components.related-filter-menu.filter") || "Filter";
   switch (t.name) {
     case "header":
-      return i && s ? i === "switch" && s === "switch" ? `${e.localize(
+      return i && o ? i === "switch" && o === "switch" ? `${e.localize(
         "ui.panel.lovelace.editor.card.entities.name"
       )} in ${e.localize("component.switch.entity_component._.name")}` : `${e.localize(
         "ui.panel.lovelace.editor.card.entities.name"
       )} in ${e.localize(
-        `ui.dialogs.entity_registry.editor.device_classes.${i}.${s}`
+        `ui.dialogs.entity_registry.editor.device_classes.${i}.${o}`
       )}` : i ? `${e.localize(
         "ui.panel.lovelace.editor.card.entities.name"
       )} in ${e.localize(`component.${i}.entity_component._.name`)}` : e.localize("ui.panel.lovelace.editor.card.entities.name");
@@ -1401,10 +1401,10 @@ function Pt(e, t, i, s) {
     default:
       if (pt.includes(t.name))
         return e.localize(`component.${t.name}.entity_component._.name`) || t.name;
-      for (const [o, n] of Object.entries(Ai))
+      for (const [s, n] of Object.entries(Ai))
         if (n.includes(t.name))
           return e.localize(
-            `ui.dialogs.entity_registry.editor.device_classes.${o}.${t.name}`
+            `ui.dialogs.entity_registry.editor.device_classes.${s}.${t.name}`
           ) || t.name;
       return e.localize(
         `ui.panel.lovelace.editor.card.area.${t.name}`
@@ -1415,10 +1415,10 @@ const Ei = A(
   (e = []) => new Map(e.map((t) => [t.entity_id, t]))
 ), Ci = A(
   (e = []) => new Map(e.map((t) => [t.id, t]))
-), Si = A(
-  (e = []) => new Map(e.map((t) => [t.area_id, t]))
 ), xi = A(
-  (e, t, i, s, o, n, a) => {
+  (e = []) => new Map(e.map((t) => [t.area_id, t]))
+), Si = A(
+  (e, t, i, o, s, n, a) => {
     let l = [];
     Array.isArray(t.filters) ? l = t.filters : [
       "area",
@@ -1443,11 +1443,11 @@ const Ei = A(
     ].forEach((h) => {
       t[h] !== void 0 && l.push({ key: h, value: t[h] });
     });
-    const r = Ei(i), c = Ci(s), d = Si(o);
+    const r = Ei(i), c = Ci(o), d = xi(s);
     return Object.values(a).filter((h) => n.includes(h.entity_id) ? !1 : l.length ? l.every(
       (u) => zi(e, h, u, {
-        areas: o,
-        devices: s,
+        areas: s,
+        devices: o,
         entities: i,
         entityMap: r,
         deviceMap: c,
@@ -1457,7 +1457,7 @@ const Ei = A(
   }
 );
 function Ot(e, t) {
-  return xi(
+  return Si(
     e,
     t,
     e.entities || [],
@@ -1471,8 +1471,8 @@ function qt(e, t) {
   if (!e) return !1;
   const i = t.match(/^([<>]=?)?\s*(\d+)$/);
   if (!i) return !1;
-  const [, s, o] = i, n = parseInt(o, 10), a = /* @__PURE__ */ new Date(), l = new Date(e), r = (a.getTime() - l.getTime()) / 6e4;
-  switch (s) {
+  const [, o, s] = i, n = parseInt(s, 10), a = /* @__PURE__ */ new Date(), l = new Date(e), r = (a.getTime() - l.getTime()) / 6e4;
+  switch (o) {
     case ">":
       return r > n;
     case ">=":
@@ -1485,16 +1485,16 @@ function qt(e, t) {
       return Math.round(r) === n;
   }
 }
-function S(e, t) {
+function x(e, t) {
   if (Array.isArray(t))
-    return t.some((i) => S(e, i));
+    return t.some((i) => x(e, i));
   if (typeof t == "string" && t.startsWith("!"))
-    return !S(e, t.slice(1));
+    return !x(e, t.slice(1));
   if (typeof t == "string" && /^([<>]=?)\s*(-?\d+(\.\d+)?)([mhd])$/.test(t)) {
-    const [, i, s, , o] = t.match(/^([<>]=?)\s*(-?\d+(\.\d+)?)([mhd])$/) || [], n = parseFloat(s), a = Date.now(), l = new Date(e).getTime();
+    const [, i, o, , s] = t.match(/^([<>]=?)\s*(-?\d+(\.\d+)?)([mhd])$/) || [], n = parseFloat(o), a = Date.now(), l = new Date(e).getTime();
     if (isNaN(l)) return !1;
     let r = (a - l) / 6e4;
-    switch (o === "h" && (r /= 60), o === "d" && (r /= 1440), i) {
+    switch (s === "h" && (r /= 60), s === "d" && (r /= 1440), i) {
       case ">":
         return r > n;
       case ">=":
@@ -1506,20 +1506,20 @@ function S(e, t) {
     }
   }
   if (typeof t == "string" && /^([<>]=?)\s*(-?\d+(\.\d+)?)$/.test(t)) {
-    const [, i, s] = t.match(/^([<>]=?)\s*(-?\d+(\.\d+)?)$/) || [], o = parseFloat(s), n = parseFloat(e);
+    const [, i, o] = t.match(/^([<>]=?)\s*(-?\d+(\.\d+)?)$/) || [], s = parseFloat(o), n = parseFloat(e);
     switch (i) {
       case ">":
-        return n > o;
+        return n > s;
       case ">=":
-        return n >= o;
+        return n >= s;
       case "<":
-        return n < o;
+        return n < s;
       case "<=":
-        return n <= o;
+        return n <= s;
     }
   }
   if (typeof t == "string" && t.includes("*")) {
-    const i = "^" + t.split("*").map((o) => o.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join(".*") + "$";
+    const i = "^" + t.split("*").map((s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join(".*") + "$";
     return new RegExp(i, "i").test(String(e));
   }
   if (typeof t == "string" && t.length > 2 && t.startsWith("/") && t.endsWith("/"))
@@ -1530,27 +1530,27 @@ function S(e, t) {
     }
   return e === t;
 }
-function zi(e, t, i, s) {
+function zi(e, t, i, o) {
   var n, a, l, r, c, d, h, u, f;
-  const o = ((n = s.entityMap) == null ? void 0 : n.get(t.entity_id)) || ((a = s.entities) == null ? void 0 : a.find((m) => m.entity_id === t.entity_id));
+  const s = ((n = o.entityMap) == null ? void 0 : n.get(t.entity_id)) || ((a = o.entities) == null ? void 0 : a.find((m) => m.entity_id === t.entity_id));
   switch (i.key) {
     case "area": {
-      let m = o == null ? void 0 : o.area_id;
-      if (!m && (o != null && o.device_id)) {
-        const b = (s.deviceMap && (o != null && o.device_id) ? s.deviceMap.get(o.device_id) : void 0) || ((l = s.devices) == null ? void 0 : l.find((p) => p.id === o.device_id));
+      let m = s == null ? void 0 : s.area_id;
+      if (!m && (s != null && s.device_id)) {
+        const b = (o.deviceMap && (s != null && s.device_id) ? o.deviceMap.get(s.device_id) : void 0) || ((l = o.devices) == null ? void 0 : l.find((p) => p.id === s.device_id));
         m = b == null ? void 0 : b.area_id;
       }
-      return S(m, i.value);
+      return x(m, i.value);
     }
     case "domain":
-      return S(N(t.entity_id), i.value);
+      return x(N(t.entity_id), i.value);
     case "entity_id":
-      return S(t.entity_id, i.value);
+      return x(t.entity_id, i.value);
     case "state":
-      return S(t.state, i.value);
+      return x(t.state, i.value);
     case "name": {
       const m = t.attributes.friendly_name ?? "";
-      return S(m, i.value);
+      return x(m, i.value);
     }
     case "attributes":
       return !i.value || typeof i.value != "object" ? !1 : Object.entries(i.value).every(([m, b]) => {
@@ -1558,62 +1558,62 @@ function zi(e, t, i, s) {
         let _ = t.attributes;
         for (const C of p)
           if (_ = _ == null ? void 0 : _[C], _ === void 0) break;
-        return _ === void 0 ? !1 : S(_, b);
+        return _ === void 0 ? !1 : x(_, b);
       });
     case "device":
-      return S(o == null ? void 0 : o.device_id, i.value);
+      return x(s == null ? void 0 : s.device_id, i.value);
     case "integration":
-      return o ? S(o.platform, i.value) || S(o.config_entry_id, i.value) : !1;
+      return s ? x(s.platform, i.value) || x(s.config_entry_id, i.value) : !1;
     case "entity_category":
-      return S(o == null ? void 0 : o.entity_category, i.value);
+      return x(s == null ? void 0 : s.entity_category, i.value);
     case "label": {
-      const m = s.labels, b = (p) => {
-        if (S(p, i.value)) return !0;
+      const m = o.labels, b = (p) => {
+        if (x(p, i.value)) return !0;
         if (m) {
           const _ = m.find((C) => C.label_id === p);
-          if (_ && S(_.name, i.value)) return !0;
+          if (_ && x(_.name, i.value)) return !0;
         }
         return !1;
       };
-      if (o != null && o.labels && o.labels.some(b)) return !0;
-      if (o != null && o.device_id) {
-        const p = (s.deviceMap && (o != null && o.device_id) ? s.deviceMap.get(o.device_id) : void 0) || ((r = s.devices) == null ? void 0 : r.find((_) => _.id === o.device_id));
+      if (s != null && s.labels && s.labels.some(b)) return !0;
+      if (s != null && s.device_id) {
+        const p = (o.deviceMap && (s != null && s.device_id) ? o.deviceMap.get(s.device_id) : void 0) || ((r = o.devices) == null ? void 0 : r.find((_) => _.id === s.device_id));
         if (p != null && p.labels && p.labels.some(b)) return !0;
       }
       return !1;
     }
     case "floor": {
-      let m = o == null ? void 0 : o.area_id;
-      if (!m && (o != null && o.device_id)) {
-        const p = (s.deviceMap && (o != null && o.device_id) ? s.deviceMap.get(o.device_id) : void 0) || ((c = s.devices) == null ? void 0 : c.find((_) => _.id === o.device_id));
+      let m = s == null ? void 0 : s.area_id;
+      if (!m && (s != null && s.device_id)) {
+        const p = (o.deviceMap && (s != null && s.device_id) ? o.deviceMap.get(s.device_id) : void 0) || ((c = o.devices) == null ? void 0 : c.find((_) => _.id === s.device_id));
         m = p == null ? void 0 : p.area_id;
       }
       if (!m) return !1;
-      const b = (s.areaMap ? s.areaMap.get(m) : void 0) || ((d = s.areas) == null ? void 0 : d.find((p) => p.area_id === m));
-      return S(b == null ? void 0 : b.floor_id, i.value);
+      const b = (o.areaMap ? o.areaMap.get(m) : void 0) || ((d = o.areas) == null ? void 0 : d.find((p) => p.area_id === m));
+      return x(b == null ? void 0 : b.floor_id, i.value);
     }
     case "hidden_by":
-      return S(o == null ? void 0 : o.hidden_by, i.value);
+      return x(s == null ? void 0 : s.hidden_by, i.value);
     case "device_manufacturer": {
-      if (o != null && o.device_id) {
-        const m = (s.deviceMap && (o != null && o.device_id) ? s.deviceMap.get(o.device_id) : void 0) || ((h = s.devices) == null ? void 0 : h.find((b) => b.id === o.device_id));
-        return S(m == null ? void 0 : m.manufacturer, i.value);
+      if (s != null && s.device_id) {
+        const m = (o.deviceMap && (s != null && s.device_id) ? o.deviceMap.get(s.device_id) : void 0) || ((h = o.devices) == null ? void 0 : h.find((b) => b.id === s.device_id));
+        return x(m == null ? void 0 : m.manufacturer, i.value);
       }
       return !1;
     }
     case "device_model": {
-      if (o != null && o.device_id) {
-        const m = (s.deviceMap && (o != null && o.device_id) ? s.deviceMap.get(o.device_id) : void 0) || ((u = s.devices) == null ? void 0 : u.find((b) => b.id === o.device_id));
-        return S(m == null ? void 0 : m.model, i.value);
+      if (s != null && s.device_id) {
+        const m = (o.deviceMap && (s != null && s.device_id) ? o.deviceMap.get(s.device_id) : void 0) || ((u = o.devices) == null ? void 0 : u.find((b) => b.id === s.device_id));
+        return x(m == null ? void 0 : m.model, i.value);
       }
       return !1;
     }
     case "last_changed":
-      return typeof i.value == "string" && /^[<>]=?\s*\d+$/.test(i.value) ? qt(t.last_changed, i.value) : S(t.last_changed, i.value);
+      return typeof i.value == "string" && /^[<>]=?\s*\d+$/.test(i.value) ? qt(t.last_changed, i.value) : x(t.last_changed, i.value);
     case "last_updated":
-      return typeof i.value == "string" && /^[<>]=?\s*\d+$/.test(i.value) ? qt(t.last_updated, i.value) : S(t.last_updated, i.value);
+      return typeof i.value == "string" && /^[<>]=?\s*\d+$/.test(i.value) ? qt(t.last_updated, i.value) : x(t.last_updated, i.value);
     case "last_triggered":
-      return typeof i.value == "string" && /^[<>]=?\s*\d+$/.test(i.value) ? qt(t.attributes.last_triggered, i.value) : S(t.attributes.last_triggered, i.value);
+      return typeof i.value == "string" && /^[<>]=?\s*\d+$/.test(i.value) ? qt(t.attributes.last_triggered, i.value) : x(t.attributes.last_triggered, i.value);
     case "group": {
       const m = e.hass.states[i.value];
       return !m || !Array.isArray((f = m.attributes) == null ? void 0 : f.entity_id) ? !1 : m.attributes.entity_id.includes(t.entity_id);
@@ -1622,12 +1622,12 @@ function zi(e, t, i, s) {
       return !0;
   }
 }
-var ki = Object.defineProperty, H = (e, t, i, s) => {
-  for (var o = void 0, n = e.length - 1, a; n >= 0; n--)
-    (a = e[n]) && (o = a(t, i, o) || o);
-  return o && ki(t, i, o), o;
+var ki = Object.defineProperty, H = (e, t, i, o) => {
+  for (var s = void 0, n = e.length - 1, a; n >= 0; n--)
+    (a = e[n]) && (s = a(t, i, s) || s);
+  return s && ki(t, i, s), s;
 }, lt;
-const R = (lt = class extends V {
+const F = (lt = class extends V {
   constructor() {
     super(...arguments), this._swipeStartY = null, this._swipeStartTime = null, this._swipeThreshold = 120, this._swipeTimeLimit = 800, this.open = !1, this.title = "", this.content = "", this.entities = [], this._showAll = !1, this._cardEls = /* @__PURE__ */ new Map(), this._lastEntityIds = [], this._onClosed = (t) => {
       this.open = !1, this._cardEls.clear(), this.dispatchEvent(
@@ -1649,17 +1649,17 @@ const R = (lt = class extends V {
       t.touches && t.touches.length === 1 && (this._swipeStartY = t.touches[0].clientY, this._swipeStartTime = Date.now());
     }, this._onTouchEnd = (t) => {
       if (this._swipeStartY !== null && this._swipeStartTime !== null && t.changedTouches && t.changedTouches.length === 1) {
-        const s = t.changedTouches[0].clientY - this._swipeStartY, o = Date.now() - this._swipeStartTime;
-        s > this._swipeThreshold && o < this._swipeTimeLimit && this._onClosed(t);
+        const o = t.changedTouches[0].clientY - this._swipeStartY, s = Date.now() - this._swipeStartTime;
+        o > this._swipeThreshold && s < this._swipeTimeLimit && this._onClosed(t);
       }
       this._swipeStartY = null, this._swipeStartTime = null;
     }, this.computeLabel = A(
-      (t, i, s) => Pt(this.hass, t, i, s)
+      (t, i, o) => Pt(this.hass, t, i, o)
     ), this._popupCardConfigCache = /* @__PURE__ */ new Map(), this._cardElementCache = /* @__PURE__ */ new Map(), this._sortEntitiesMemo = A(
-      (t, i, s, o) => {
+      (t, i, o, s) => {
         const n = t.slice();
         if (i === "state") {
-          const l = Tt(o, s);
+          const l = Tt(s, o);
           return n.sort((r, c) => {
             const d = this._isActive(r) ? 0 : 1, h = this._isActive(c) ? 0 : 1;
             if (d !== h) return d - h;
@@ -1667,23 +1667,23 @@ const R = (lt = class extends V {
             return p !== 0 ? p : l(r.entity_id, c.entity_id);
           });
         }
-        const a = Tt(o, s);
+        const a = Tt(s, o);
         return n.sort((l, r) => a(l.entity_id, r.entity_id));
       }
     ), this.groupAndSortEntities = A(
-      (t, i, s) => {
-        const o = /* @__PURE__ */ new Map();
+      (t, i, o) => {
+        const s = /* @__PURE__ */ new Map();
         for (const a of t) {
           const l = this.getAreaForEntity(a);
-          o.has(l) || o.set(l, []), o.get(l).push(a);
+          s.has(l) || s.set(l, []), s.get(l).push(a);
         }
-        return Array.from(o.entries()).sort(
+        return Array.from(s.entries()).sort(
           ([a], [l]) => {
             var d, h;
             const r = ((d = i.get(a)) == null ? void 0 : d.toLowerCase()) ?? (a === "unassigned" ? "unassigned" : a), c = ((h = i.get(l)) == null ? void 0 : h.toLowerCase()) ?? (l === "unassigned" ? "unassigned" : l);
             return r.localeCompare(c);
           }
-        ).map(([a, l]) => [a, s(l)]);
+        ).map(([a, l]) => [a, o(l)]);
       }
     ), this.DOMAIN_FEATURES = {
       alarm_control_panel: {
@@ -1842,10 +1842,10 @@ const R = (lt = class extends V {
       entity: t.entity
     };
   }
-  async _createCardElement(t, i, s = !1) {
-    var o, n, a;
+  async _createCardElement(t, i, o = !1) {
+    var s, n, a;
     try {
-      const l = await ((o = window == null ? void 0 : window.loadCardHelpers) == null ? void 0 : o.call(window));
+      const l = await ((s = window == null ? void 0 : window.loadCardHelpers) == null ? void 0 : s.call(window));
       if (l != null && l.createCardElement) {
         const r = l.createCardElement(i);
         return r.hass = t, (n = r.setAttribute) == null || n.call(r, "data-hui-card", ""), r;
@@ -1859,7 +1859,7 @@ const R = (lt = class extends V {
       const d = document.createElement(c);
       return typeof d.setConfig == "function" && d.setConfig(i), d.hass = t, (a = d.setAttribute) == null || a.call(d, "data-hui-card", ""), d;
     } catch {
-      if (!s)
+      if (!o)
         return this._createCardElement(
           t,
           this._toTileConfig(i),
@@ -1871,11 +1871,11 @@ const R = (lt = class extends V {
   }
   _getPopupCardConfig(t) {
     var b, p, _, C;
-    const i = this.card, s = N(t.entity_id), o = this.selectedDomain || s, n = this.selectedDomain ? this.selectedDeviceClass : (C = (_ = (p = (b = this.hass) == null ? void 0 : b.states) == null ? void 0 : p[t.entity_id]) == null ? void 0 : _.attributes) == null ? void 0 : C.device_class, a = I(o, n), l = typeof (i == null ? void 0 : i.getCustomizationForType) == "function" ? i.getCustomizationForType(a) : void 0, r = l == null ? void 0 : l.popup_card, c = r && typeof r.type == "string" && r.type || "tile", d = c === "tile" ? this.DOMAIN_FEATURES[s] ?? {} : {};
+    const i = this.card, o = N(t.entity_id), s = this.selectedDomain || o, n = this.selectedDomain ? this.selectedDeviceClass : (C = (_ = (p = (b = this.hass) == null ? void 0 : b.states) == null ? void 0 : p[t.entity_id]) == null ? void 0 : _.attributes) == null ? void 0 : C.device_class, a = I(s, n), l = typeof (i == null ? void 0 : i.getCustomizationForType) == "function" ? i.getCustomizationForType(a) : void 0, r = l == null ? void 0 : l.popup_card, c = r && typeof r.type == "string" && r.type || "tile", d = c === "tile" ? this.DOMAIN_FEATURES[o] ?? {} : {};
     let h = {};
     if (r && typeof r == "object") {
-      const { type: v, entity: g, ...y } = r;
-      h = y;
+      const { type: y, entity: g, ...v } = r;
+      h = v;
     } else
       h = {};
     const u = {
@@ -1893,8 +1893,8 @@ const R = (lt = class extends V {
     if (!this.open)
       return t.has("open");
     if (t.size === 1 && t.has("hass")) {
-      const i = this._getCurrentEntities().map((n) => n.entity_id).sort(), s = (this._lastEntityIds || []).slice().sort(), o = i.length === s.length && i.every((n, a) => n === s[a]);
-      return this._updateCardsHass(), !o;
+      const i = this._getCurrentEntities().map((n) => n.entity_id).sort(), o = (this._lastEntityIds || []).slice().sort(), s = i.length === o.length && i.every((n, a) => n === o[a]);
+      return this._updateCardsHass(), !s;
     }
     return !0;
   }
@@ -1908,28 +1908,28 @@ const R = (lt = class extends V {
     });
   }
   _getOrCreateCard(t) {
-    const i = t.entity_id, s = this._getPopupCardConfig(t), o = this._configHash(s), n = this._cardElementCache.get(i);
-    if (n && n.hash === o)
+    const i = t.entity_id, o = this._getPopupCardConfig(t), s = this._configHash(o), n = this._cardElementCache.get(i);
+    if (n && n.hash === s)
       return n.el.hass = this.hass, n.el;
     const a = document.createElement("div");
-    return a.classList.add("card-placeholder"), a.setAttribute("data-hui-card", ""), this._cardEls.set(i, a), this._createCardElement(this.hass, s).then((l) => {
+    return a.classList.add("card-placeholder"), a.setAttribute("data-hui-card", ""), this._cardEls.set(i, a), this._createCardElement(this.hass, o).then((l) => {
       try {
-        this._cardEls.get(i) === a && (a.replaceWith(l), this._cardEls.set(i, l), this._cardElementCache.set(i, { hash: o, el: l })), l.hass = this.hass;
+        this._cardEls.get(i) === a && (a.replaceWith(l), this._cardEls.set(i, l), this._cardElementCache.set(i, { hash: s, el: l })), l.hass = this.hass;
       } catch {
       }
-    }), this._cardElementCache.set(i, { hash: o, el: a }), a;
+    }), this._cardElementCache.set(i, { hash: s, el: a }), a;
   }
   _getCurrentEntities() {
     var a, l, r;
-    const t = this.card, i = this.selectedDomain, s = this.selectedDeviceClass, o = this.selectedGroup;
+    const t = this.card, i = this.selectedDomain, o = this.selectedDeviceClass, s = this.selectedGroup;
     let n = [];
-    if (o !== void 0 && ((l = (a = t._config) == null ? void 0 : a.content) != null && l[o])) {
-      const c = t._config.content[o], d = (r = t._config.rulesets) == null ? void 0 : r.find(
+    if (s !== void 0 && ((l = (a = t._config) == null ? void 0 : a.content) != null && l[s])) {
+      const c = t._config.content[s], d = (r = t._config.rulesets) == null ? void 0 : r.find(
         (h) => h.group_id === c
       );
       n = d ? Ot(t, d) : [];
     } else
-      i ? n = ((typeof (t == null ? void 0 : t._shouldShowTotalEntities) == "function" ? t._shouldShowTotalEntities(i, s) : !1) ? !0 : this._showAll) ? t._totalEntities(i, s) : t._isOn(i, s) : n = Array.isArray(this.entities) ? this.entities : [];
+      i ? n = ((typeof (t == null ? void 0 : t._shouldShowTotalEntities) == "function" ? t._shouldShowTotalEntities(i, o) : !1) ? !0 : this._showAll) ? t._totalEntities(i, o) : t._isOn(i, o) : n = Array.isArray(this.entities) ? this.entities : [];
     return n;
   }
   toggleAllOrOn() {
@@ -1962,15 +1962,15 @@ const R = (lt = class extends V {
     t.stopPropagation();
   }
   getAreaForEntity(t) {
-    var s, o;
-    const i = (s = this.card.entities) == null ? void 0 : s.find(
+    var o, s;
+    const i = (o = this.card.entities) == null ? void 0 : o.find(
       (n) => n.entity_id === t.entity_id
     );
     if (i) {
       if (i.area_id)
         return i.area_id;
       if (i.device_id) {
-        const n = (o = this.card.devices) == null ? void 0 : o.find(
+        const n = (s = this.card.devices) == null ? void 0 : s.find(
           (a) => a.id === i.device_id
         );
         if (n && n.area_id)
@@ -1986,8 +1986,8 @@ const R = (lt = class extends V {
     return JSON.stringify(t);
   }
   sortEntitiesForPopup(t) {
-    var s, o, n, a, l;
-    const i = ((o = (s = this.card) == null ? void 0 : s._config) == null ? void 0 : o.popup_sort) || "name";
+    var o, s, n, a, l;
+    const i = ((s = (o = this.card) == null ? void 0 : o._config) == null ? void 0 : s.popup_sort) || "name";
     return this._sortEntitiesMemo(
       t,
       i,
@@ -1996,19 +1996,19 @@ const R = (lt = class extends V {
     );
   }
   render() {
-    var g, y, F, z, D, M, B, G, Nt, ie, se, oe;
+    var g, v, R, z, D, M, B, G, Nt, ie, oe, se;
     if (!this.open) return $``;
-    const t = (g = this.card) != null && g.list_mode ? 1 : ((F = (y = this.card) == null ? void 0 : y._config) == null ? void 0 : F.columns) || 4, i = this.selectedDomain, s = this.selectedDeviceClass, o = this.selectedGroup, n = this.card, l = (typeof (n == null ? void 0 : n._shouldShowTotalEntities) == "function" ? n._shouldShowTotalEntities(i, s) : !1) ? !0 : this._showAll, r = new Map(
+    const t = (g = this.card) != null && g.list_mode ? 1 : ((R = (v = this.card) == null ? void 0 : v._config) == null ? void 0 : R.columns) || 4, i = this.selectedDomain, o = this.selectedDeviceClass, s = this.selectedGroup, n = this.card, l = (typeof (n == null ? void 0 : n._shouldShowTotalEntities) == "function" ? n._shouldShowTotalEntities(i, o) : !1) ? !0 : this._showAll, r = new Map(
       (z = n.areas) == null ? void 0 : z.map((w) => [w.area_id, w.name])
     );
     let c = [], d = !1;
-    if (o !== void 0 && ((M = (D = n._config) == null ? void 0 : D.content) != null && M[o])) {
-      const w = n._config.content[o], j = (B = n._config.rulesets) == null ? void 0 : B.find(
+    if (s !== void 0 && ((M = (D = n._config) == null ? void 0 : D.content) != null && M[s])) {
+      const w = n._config.content[s], j = (B = n._config.rulesets) == null ? void 0 : B.find(
         (W) => W.group_id === w
       );
       c = j ? Ot(n, j) : [];
     } else
-      i ? c = l ? n._totalEntities(i, s) : n._isOn(i, s) : c = Array.isArray(this.entities) ? this.entities : [], d = !0;
+      i ? c = l ? n._totalEntities(i, o) : n._isOn(i, o) : c = Array.isArray(this.entities) ? this.entities : [], d = !0;
     const h = this.sortEntitiesForPopup(c), u = new Set(c.map((w) => w.entity_id));
     Array.from(this._cardEls.keys()).forEach((w) => {
       u.has(w) || this._cardEls.delete(w);
@@ -2017,7 +2017,7 @@ const R = (lt = class extends V {
       c,
       r,
       this.sortEntitiesForPopup.bind(this)
-    ), m = ((G = n == null ? void 0 : n._config) == null ? void 0 : G.ungroupAreas) === !0 || ((Nt = n == null ? void 0 : n._config) == null ? void 0 : Nt.ungroup_areas) === !0 || ((ie = n == null ? void 0 : n._config) == null ? void 0 : ie.area_grouping) !== void 0 && ((se = n == null ? void 0 : n._config) == null ? void 0 : se.area_grouping) === !1, b = f.length ? Math.max(...f.map(([, w]) => w.length)) : 0, p = m ? Math.min(t, Math.max(1, c.length)) : Math.min(t, Math.max(1, b)), _ = I(i, s), C = typeof (n == null ? void 0 : n.getCustomizationForType) == "function" ? n.getCustomizationForType(_) : void 0, v = (C == null ? void 0 : C.invert) === !0;
+    ), m = ((G = n == null ? void 0 : n._config) == null ? void 0 : G.ungroupAreas) === !0 || ((Nt = n == null ? void 0 : n._config) == null ? void 0 : Nt.ungroup_areas) === !0 || ((ie = n == null ? void 0 : n._config) == null ? void 0 : ie.area_grouping) !== void 0 && ((oe = n == null ? void 0 : n._config) == null ? void 0 : oe.area_grouping) === !1, b = f.length ? Math.max(...f.map(([, w]) => w.length)) : 0, p = m ? Math.min(t, Math.max(1, c.length)) : Math.min(t, Math.max(1, b)), _ = I(i, o), C = typeof (n == null ? void 0 : n.getCustomizationForType) == "function" ? n.getCustomizationForType(_) : void 0, y = (C == null ? void 0 : C.invert) === !0;
     return $`
       <ha-dialog
         .open=${this.open}
@@ -2076,7 +2076,7 @@ const R = (lt = class extends V {
                     @click=${this.handleAskToggleDomain}
                     @closed=${this._stopPropagation}
                   >
-                    ${v ? this.hass.localize("ui.card.common.turn_on") : this.hass.localize("ui.card.common.turn_off")}
+                    ${y ? this.hass.localize("ui.card.common.turn_on") : this.hass.localize("ui.card.common.turn_off")}
                     <ha-svg-icon
                       slot="graphic"
                       .path=${fi}
@@ -2102,7 +2102,7 @@ const R = (lt = class extends V {
               ` : ""}
         </div>
         <div class="dialog-content scrollable">
-          ${(oe = this.card) != null && oe.list_mode ? m ? $`
+          ${(se = this.card) != null && se.list_mode ? m ? $`
                   <ul class="entity-list">
                     ${X(
       h,
@@ -2296,35 +2296,35 @@ const R = (lt = class extends V {
   `, lt);
 H([
   E({ type: Boolean })
-], R.prototype, "open");
+], F.prototype, "open");
 H([
   E({ type: String })
-], R.prototype, "title");
+], F.prototype, "title");
 H([
   E({ type: String })
-], R.prototype, "selectedDomain");
+], F.prototype, "selectedDomain");
 H([
   E({ type: String })
-], R.prototype, "selectedDeviceClass");
+], F.prototype, "selectedDeviceClass");
 H([
   E({ type: String })
-], R.prototype, "content");
+], F.prototype, "content");
 H([
   E({ type: Array })
-], R.prototype, "entities");
+], F.prototype, "entities");
 H([
   E({ attribute: !1 })
-], R.prototype, "hass");
+], F.prototype, "hass");
 H([
   E({ attribute: !1 })
-], R.prototype, "card");
+], F.prototype, "card");
 H([
-  x()
-], R.prototype, "_showAll");
+  S()
+], F.prototype, "_showAll");
 H([
-  x()
-], R.prototype, "selectedGroup");
-let Di = R;
+  S()
+], F.prototype, "selectedGroup");
+let Di = F;
 customElements.define("status-card-popup", Di);
 const ee = class ee extends V {
   constructor() {
@@ -2347,7 +2347,7 @@ const ee = class ee extends V {
   render() {
     var a, l;
     if (!this.open || !this.hass || !this.card) return $``;
-    const t = this.selectedDomain || "", i = this.selectedDeviceClass, s = I(t, i), o = (l = (a = this.card) == null ? void 0 : a.getCustomizationForType) == null ? void 0 : l.call(a, s), n = (o == null ? void 0 : o.invert) === !0;
+    const t = this.selectedDomain || "", i = this.selectedDeviceClass, o = I(t, i), s = (l = (a = this.card) == null ? void 0 : a.getCustomizationForType) == null ? void 0 : l.call(a, o), n = (s == null ? void 0 : s.invert) === !0;
     return $`
       <ha-dialog
         .open=${this.open}
@@ -2401,18 +2401,18 @@ customElements.define(
   "status-card-popup-confirmation",
   tt
 );
-var Ti = Object.defineProperty, Oi = Object.getOwnPropertyDescriptor, L = (e, t, i, s) => {
-  for (var o = s > 1 ? void 0 : s ? Oi(t, i) : t, n = e.length - 1, a; n >= 0; n--)
-    (a = e[n]) && (o = (s ? a(t, i, o) : a(o)) || o);
-  return s && o && Ti(t, i, o), o;
+var Ti = Object.defineProperty, Oi = Object.getOwnPropertyDescriptor, L = (e, t, i, o) => {
+  for (var s = o > 1 ? void 0 : o ? Oi(t, i) : t, n = e.length - 1, a; n >= 0; n--)
+    (a = e[n]) && (s = (o ? a(t, i, s) : a(s)) || s);
+  return o && s && Ti(t, i, s), s;
 };
 let T = class extends V {
   constructor() {
     super(...arguments), this.areas = [], this.devices = [], this.entities = [], this.entitiesByDomain = {}, this.selectedDomain = null, this.selectedDeviceClass = null, this.hiddenEntities = [], this.hiddenLabels = [], this.hiddenAreas = [], this.hide_person = !1, this.hide_content_name = !0, this.list_mode = !1, this.selectedGroup = null, this._baseEntitiesMemo = A(
-      (e, t, i) => e.filter((s) => {
-        const o = s.state;
-        if (o === "unavailable" || o === "unknown") return !1;
-        const n = s.attributes.device_class;
+      (e, t, i) => e.filter((o) => {
+        const s = o.state;
+        if (s === "unavailable" || s === "unknown") return !1;
+        const n = o.attributes.device_class;
         return t === "switch" ? i === "outlet" ? n === "outlet" : i === "switch" ? n === "switch" || n === void 0 : !0 : !i || n === i;
       })
     ), this.computeLabel = A(
@@ -2423,37 +2423,37 @@ let T = class extends V {
         i.type && t.set(i.type.toLowerCase(), i);
       }), t;
     }), this._getPersonItemsMemo = A(
-      (e, t, i, s, o) => s ? [] : e.filter(
+      (e, t, i, o, s) => o ? [] : e.filter(
         (n) => {
           var a;
           return n.entity_id.startsWith("person.") && !t.includes(n.entity_id) && !((a = n.labels) != null && a.some((l) => i.includes(l))) && !n.hidden_by && !n.disabled_by;
         }
-      ).reverse().map((n) => o[n.entity_id]).filter((n) => !!n)
+      ).reverse().map((n) => s[n.entity_id]).filter((n) => !!n)
     ), this._computeExtraItems = A(
       (e, t) => {
         const i = e.content || [];
-        return e.extra_entities ? e.extra_entities.reduce((s, o) => {
+        return e.extra_entities ? e.extra_entities.reduce((o, s) => {
           var m;
-          if (!i.includes(o)) return s;
-          const n = t[o];
-          if (!n) return s;
+          if (!i.includes(s)) return o;
+          const n = t[s];
+          if (!n) return o;
           const a = (m = e.customization) == null ? void 0 : m.find(
-            (b) => b.type === o
+            (b) => b.type === s
           );
           if (a && a.state !== void 0 && a.invert_state !== void 0) {
             const b = a.invert_state === "true", p = n.state === a.state;
-            if (!b && !p || b && p) return s;
+            if (!b && !p || b && p) return o;
           }
-          const l = i.indexOf(o), r = l >= 0 ? l : 0, c = this.getCustomIcon(o, void 0, n), d = this.getCustomName(o, void 0, n) ?? n.attributes.friendly_name ?? o, h = this.getCustomColor(o, void 0), u = this.getCustomCSS(
-            o,
+          const l = i.indexOf(s), r = l >= 0 ? l : 0, c = this.getCustomIcon(s, void 0, n), d = this.getCustomName(s, void 0, n) ?? n.attributes.friendly_name ?? s, h = this.getCustomColor(s, void 0), u = this.getCustomCSS(
+            s,
             void 0
           ), f = this.getBackgroundColor(
-            o,
+            s,
             void 0
           );
-          return s.push({
+          return o.push({
             type: "extra",
-            panel: o,
+            panel: s,
             entity: n,
             order: r,
             icon: c,
@@ -2461,20 +2461,20 @@ let T = class extends V {
             color: h,
             icon_css: u,
             background_color: f
-          }), s;
-        }, []).sort((s, o) => s.order - o.order) : [];
+          }), o;
+        }, []).sort((o, s) => o.order - s.order) : [];
       }
     ), this._computeGroupItems = A(
-      (e, t) => e.map((i, s) => {
-        const o = t.find((a) => a.group_id === i);
-        if (!(!o || !Object.keys(o).some(
-          (a) => a !== "group_id" && a !== "group_icon" && o[a] !== void 0 && o[a] !== ""
+      (e, t) => e.map((i, o) => {
+        const s = t.find((a) => a.group_id === i);
+        if (!(!s || !Object.keys(s).some(
+          (a) => a !== "group_id" && a !== "group_icon" && s[a] !== void 0 && s[a] !== ""
         )))
           return {
             type: "group",
             group_id: i,
-            order: s,
-            ruleset: o
+            order: o,
+            ruleset: s
           };
       }).filter(
         (i) => !!i
@@ -2486,23 +2486,19 @@ let T = class extends V {
     ), this._computeDeviceClassItems = A(
       (e) => e.map((t, i) => {
         if (!t.includes(" - ")) return null;
-        const [s, o] = t.split(" - ");
+        const [o, s] = t.split(" - ");
         return {
           type: "deviceClass",
-          domain: s.trim().toLowerCase().replace(/\s+/g, "_"),
-          deviceClass: o.trim().toLowerCase(),
+          domain: o.trim().toLowerCase().replace(/\s+/g, "_"),
+          deviceClass: s.trim().toLowerCase(),
           order: i
         };
       }).filter((t) => t !== null)
     ), this._computeSortedEntities = A(
-      (e, t, i, s) => [...e, ...t, ...i, ...s].sort(
-        (o, n) => o.order - n.order
+      (e, t, i, o) => [...e, ...t, ...i, ...o].sort(
+        (s, n) => s.order - n.order
       )
     );
-  }
-  // Disable shadow DOM to allow global styles and variables to apply
-  createRenderRoot() {
-    return this;
   }
   firstUpdated(e) {
     this._loadData();
@@ -2518,7 +2514,7 @@ let T = class extends V {
   async _loadData() {
     var e, t, i;
     try {
-      const [s, o, n] = await Promise.all([
+      const [o, s, n] = await Promise.all([
         ((e = this.hass) == null ? void 0 : e.callWS({
           type: "config/area_registry/list"
         })) ?? [],
@@ -2529,9 +2525,9 @@ let T = class extends V {
           type: "config/entity_registry/list"
         })) ?? []
       ]);
-      this.areas = s, this.devices = o, this.entities = n, this._processEntities();
-    } catch (s) {
-      console.error("Error loading data:", s);
+      this.areas = o, this.devices = s, this.entities = n, this._processEntities();
+    } catch (o) {
+      console.error("Error loading data:", o);
     }
   }
   _processEntities() {
@@ -2543,13 +2539,13 @@ let T = class extends V {
     );
     e !== this.entitiesByDomain && (this.entitiesByDomain = e);
   }
-  _entitiesByDomain(e, t, i, s) {
-    const o = this._config.area || null, n = this._config.floor || null, a = this._config.label || null, l = this.hiddenAreas, r = this.hiddenLabels, c = this.hiddenEntities, d = [
+  _entitiesByDomain(e, t, i, o) {
+    const s = this._config.area || null, n = this._config.floor || null, a = this._config.label || null, l = this.hiddenAreas, r = this.hiddenLabels, c = this.hiddenEntities, d = [
       e,
       t,
       i,
-      s,
       o,
+      s,
       n,
       a,
       l,
@@ -2562,8 +2558,8 @@ let T = class extends V {
       e,
       t,
       i,
-      s,
-      { area: o, floor: n, label: a, hiddenAreas: l, hiddenLabels: r, hiddenEntities: c },
+      o,
+      { area: s, floor: n, label: a, hiddenAreas: l, hiddenLabels: r, hiddenEntities: c },
       pt
     );
     return this._lastEntitiesByDomainInput = d, this._lastEntitiesByDomainResult = h, h;
@@ -2572,7 +2568,7 @@ let T = class extends V {
     if (e.length !== t.length) return !1;
     for (let i = 0; i < e.length; i++)
       if (Array.isArray(e[i]) && Array.isArray(t[i])) {
-        if (e[i] !== t[i] && (e[i].length !== t[i].length || e[i].some((s, o) => s !== t[i][o])))
+        if (e[i] !== t[i] && (e[i].length !== t[i].length || e[i].some((o, s) => o !== t[i][s])))
           return !1;
       } else if (e[i] !== t[i])
         return !1;
@@ -2592,34 +2588,34 @@ let T = class extends V {
   }
   _shouldShowTotalEntities(e, t) {
     if (this._config.show_total_entities) return !0;
-    const i = I(e, t), s = this.getCustomizationForType(i);
-    return (s == null ? void 0 : s.show_total_entities) === !0;
+    const i = I(e, t), o = this.getCustomizationForType(i);
+    return (o == null ? void 0 : o.show_total_entities) === !0;
   }
   _shouldShowTotalNumbers(e, t) {
     if (this._config.show_total_number) return !0;
-    const i = I(e, t), s = this.getCustomizationForType(i);
-    return (s == null ? void 0 : s.show_total_number) === !0;
+    const i = I(e, t), o = this.getCustomizationForType(i);
+    return (o == null ? void 0 : o.show_total_number) === !0;
   }
   _isOn(e, t) {
     var n;
-    const i = this._baseEntities(e, t), s = I(e, t), o = ((n = this.getCustomizationForType(s)) == null ? void 0 : n.invert) === !0;
+    const i = this._baseEntities(e, t), o = I(e, t), s = ((n = this.getCustomizationForType(o)) == null ? void 0 : n.invert) === !0;
     return i.filter((a) => {
       if (e === "climate") {
         const r = a.attributes.hvac_action;
         if (r !== void 0) {
           const c = !["idle", "off"].includes(r);
-          return o ? !c : c;
+          return s ? !c : c;
         }
       }
       if (e === "humidifier") {
         const r = a.attributes.action;
         if (r !== void 0) {
           const c = !["idle", "off"].includes(r);
-          return o ? !c : c;
+          return s ? !c : c;
         }
       }
       let l = !Gt.includes(a.state);
-      return o ? !l : l;
+      return s ? !l : l;
     });
   }
   setConfig(e) {
@@ -2641,9 +2637,9 @@ let T = class extends V {
     );
   }
   _openDomainPopup(e) {
-    var o, n, a;
+    var s, n, a;
     let t = "Details";
-    typeof e == "string" ? t = this.getCustomName(e) || this.computeLabel({ name: e }) : typeof e == "number" && ((o = this._config.content) != null && o[e]) && (t = this._config.content[e]);
+    typeof e == "string" ? t = this.getCustomName(e) || this.computeLabel({ name: e }) : typeof e == "number" && ((s = this._config.content) != null && s[e]) && (t = this._config.content[e]);
     let i = [];
     if (typeof e == "number") {
       const l = (n = this._config.content) == null ? void 0 : n[e], r = (a = this._config.rulesets) == null ? void 0 : a.find(
@@ -2669,19 +2665,19 @@ let T = class extends V {
     if (super.updated(e), !this._config || !this.hass) return;
     const t = e.get("hass"), i = e.get("_config");
     if (e.has("selectedDomain") && this.selectedDomain) {
-      const s = this.selectedDomain;
-      if (s.includes(".")) {
-        const o = s, n = this.hass.states[o];
+      const o = this.selectedDomain;
+      if (o.includes(".")) {
+        const s = o, n = this.hass.states[s];
         n && this.showMoreInfo(n);
       } else
-        this._openDomainPopup(s);
+        this._openDomainPopup(o);
       setTimeout(() => {
         this.selectedDomain = null;
       }, 0);
     }
     if (e.has("selectedGroup") && this.selectedGroup !== null) {
-      const s = this.selectedGroup;
-      this._openDomainPopup(s), setTimeout(() => {
+      const o = this.selectedGroup;
+      this._openDomainPopup(o), setTimeout(() => {
         this.selectedGroup = null;
       }, 0);
     }
@@ -2702,7 +2698,7 @@ let T = class extends V {
   getStatusProperty(e, t, i) {
     if (this._shouldShowTotalEntities(e, t) && !this._shouldShowTotalNumbers(e, t))
       return "";
-    const s = [
+    const o = [
       "window",
       "door",
       "lock",
@@ -2714,7 +2710,7 @@ let T = class extends V {
       "gate",
       "shade",
       "shutter"
-    ], o = I(e, t), n = this.getCustomizationForType(o), a = (n == null ? void 0 : n.invert) === !0;
+    ], s = I(e, t), n = this.getCustomizationForType(s), a = (n == null ? void 0 : n.invert) === !0;
     switch (e) {
       case "device_tracker": {
         const l = P(
@@ -2740,7 +2736,7 @@ let T = class extends V {
       case "person":
         return i === "home" ? P(this.hass, "home", "person") : i === "not_home" ? P(this.hass, "not_home", "person") : i ?? "unknown";
       default: {
-        if (t && s.includes(t)) {
+        if (t && o.includes(t)) {
           const c = P(this.hass, "open", "cover"), d = P(
             this.hass,
             "closed",
@@ -2765,16 +2761,16 @@ let T = class extends V {
     return e ? this._customizationIndex(this._config.customization).get(e.toLowerCase()) : void 0;
   }
   getCustomIcon(e, t, i) {
-    const s = this.getCustomizationForType(
+    const o = this.getCustomizationForType(
       I(e, t)
     );
-    if ((s == null ? void 0 : s.show_entity_picture) === !0 && i && i.attributes && i.attributes.entity_picture)
+    if ((o == null ? void 0 : o.show_entity_picture) === !0 && i && i.attributes && i.attributes.entity_picture)
       return i.attributes.entity_picture;
-    if (s && s.icon)
-      return s.icon;
+    if (o && o.icon)
+      return o.icon;
     if (i && i.attributes && i.attributes.icon)
       return i.attributes.icon;
-    const n = (s == null ? void 0 : s.invert) === !0 ? "off" : "on";
+    const n = (o == null ? void 0 : o.invert) === !0 ? "off" : "on";
     let a = e;
     if (!t && e.includes(".") && (a = e.split(".")[0]), J && J[a]) {
       const l = J[a];
@@ -2793,17 +2789,17 @@ let T = class extends V {
     return "";
   }
   getBackgroundColor(e, t) {
-    var o;
+    var s;
     const i = this.getCustomizationForType(
       I(e, t)
-    ), s = (n) => n.length === 4 ? `rgba(${n[0]},${n[1]},${n[2]},${n[3]})` : `rgb(${n[0]},${n[1]},${n[2]})`;
+    ), o = (n) => n.length === 4 ? `rgba(${n[0]},${n[1]},${n[2]},${n[3]})` : `rgb(${n[0]},${n[1]},${n[2]})`;
     if (i && Array.isArray(i.background_color)) {
       const n = i.background_color;
-      if (n.length >= 3) return s(n);
+      if (n.length >= 3) return o(n);
     }
-    if (Array.isArray((o = this._config) == null ? void 0 : o.background_color)) {
+    if (Array.isArray((s = this._config) == null ? void 0 : s.background_color)) {
       const n = this._config.background_color;
-      if (n.length >= 3) return s(n);
+      if (n.length >= 3) return o(n);
     }
     return "rgba(var(--rgb-primary-text-color), 0.15)";
   }
@@ -2819,11 +2815,11 @@ let T = class extends V {
       return $e[e];
   }
   getCustomName(e, t, i) {
-    const s = this.getCustomizationForType(
+    const o = this.getCustomizationForType(
       I(e, t)
     );
-    if (s && s.name)
-      return s.name;
+    if (o && o.name)
+      return o.name;
     if (i && i.attributes.friendly_name)
       return i.attributes.friendly_name;
   }
@@ -2853,28 +2849,28 @@ let T = class extends V {
       "remote"
     ].includes(e)) {
       this.hass.callService(e, "toggle", {
-        entity_id: i.map((s) => s.entity_id)
+        entity_id: i.map((o) => o.entity_id)
       });
       return;
     }
-    for (const s of i) {
-      let o = !Gt.includes(s.state);
-      e === "media_player" ? this.hass.callService(e, o ? "media_pause" : "media_play", {
-        entity_id: s.entity_id
-      }) : e === "lock" ? this.hass.callService(e, o ? "lock" : "unlock", {
-        entity_id: s.entity_id
-      }) : e === "vacuum" ? this.hass.callService(e, o ? "stop" : "start", {
-        entity_id: s.entity_id
+    for (const o of i) {
+      let s = !Gt.includes(o.state);
+      e === "media_player" ? this.hass.callService(e, s ? "media_pause" : "media_play", {
+        entity_id: o.entity_id
+      }) : e === "lock" ? this.hass.callService(e, s ? "lock" : "unlock", {
+        entity_id: o.entity_id
+      }) : e === "vacuum" ? this.hass.callService(e, s ? "stop" : "start", {
+        entity_id: o.entity_id
       }) : e === "alarm_control_panel" ? this.hass.callService(
         e,
-        o ? "alarm_arm_away" : "alarm_disarm",
-        { entity_id: s.entity_id }
-      ) : e === "lawn_mower" ? this.hass.callService(e, o ? "pause" : "start_mowing", {
-        entity_id: s.entity_id
-      }) : e === "water_heater" ? this.hass.callService(e, o ? "turn_off" : "turn_on", {
-        entity_id: s.entity_id
-      }) : e === "update" && this.hass.callService(e, o ? "skip" : "install", {
-        entity_id: s.entity_id
+        s ? "alarm_arm_away" : "alarm_disarm",
+        { entity_id: o.entity_id }
+      ) : e === "lawn_mower" ? this.hass.callService(e, s ? "pause" : "start_mowing", {
+        entity_id: o.entity_id
+      }) : e === "water_heater" ? this.hass.callService(e, s ? "turn_off" : "turn_on", {
+        entity_id: o.entity_id
+      }) : e === "update" && this.hass.callService(e, s ? "skip" : "install", {
+        entity_id: o.entity_id
       });
     }
   }
@@ -2882,12 +2878,12 @@ let T = class extends V {
     return (i) => {
       var c, d, h;
       i.stopPropagation();
-      const s = this.getCustomizationForType(
+      const o = this.getCustomizationForType(
         I(e, t)
       );
-      let o, n;
-      i.detail.action === "tap" ? (o = s == null ? void 0 : s.tap_action, n = (c = this._config) == null ? void 0 : c.tap_action) : i.detail.action === "hold" ? (o = s == null ? void 0 : s.hold_action, n = (d = this._config) == null ? void 0 : d.hold_action) : i.detail.action === "double_tap" && (o = s == null ? void 0 : s.double_tap_action, n = (h = this._config) == null ? void 0 : h.double_tap_action);
-      const a = o !== void 0 ? o : n, l = typeof a == "string" && a === "more-info" || typeof a == "object" && (a == null ? void 0 : a.action) === "more-info", r = typeof a == "string" && a === "toggle" || typeof a == "object" && (a == null ? void 0 : a.action) === "toggle";
+      let s, n;
+      i.detail.action === "tap" ? (s = o == null ? void 0 : o.tap_action, n = (c = this._config) == null ? void 0 : c.tap_action) : i.detail.action === "hold" ? (s = o == null ? void 0 : o.hold_action, n = (d = this._config) == null ? void 0 : d.hold_action) : i.detail.action === "double_tap" && (s = o == null ? void 0 : o.double_tap_action, n = (h = this._config) == null ? void 0 : h.double_tap_action);
+      const a = s !== void 0 ? s : n, l = typeof a == "string" && a === "more-info" || typeof a == "object" && (a == null ? void 0 : a.action) === "more-info", r = typeof a == "string" && a === "toggle" || typeof a == "object" && (a == null ? void 0 : a.action) === "toggle";
       if (e.includes(".")) {
         const u = e, f = this.hass.states[u], m = N(u);
         if (r) {
@@ -2911,9 +2907,9 @@ let T = class extends V {
         this,
         this.hass,
         {
-          tap_action: (s == null ? void 0 : s.tap_action) || this._config.tap_action,
-          hold_action: (s == null ? void 0 : s.hold_action) || this._config.hold_action,
-          double_tap_action: (s == null ? void 0 : s.double_tap_action) || this._config.double_tap_action
+          tap_action: (o == null ? void 0 : o.tap_action) || this._config.tap_action,
+          hold_action: (o == null ? void 0 : o.hold_action) || this._config.hold_action,
+          double_tap_action: (o == null ? void 0 : o.double_tap_action) || this._config.double_tap_action
         },
         i.detail.action
       );
@@ -2944,15 +2940,15 @@ let T = class extends V {
     return this._computeDeviceClassItems(this._config.content || []);
   }
   _getIconStyles(e, t = {}) {
-    const { color: i, background_color: s, square: o, isNotHome: n } = t, a = {
-      "border-radius": o ? "20%" : "50%",
-      "background-color": s,
+    const { color: i, background_color: o, square: s, isNotHome: n } = t, a = {
+      "border-radius": s ? "20%" : "50%",
+      "background-color": o,
       color: i ? `var(--${i}-color)` : void 0
     };
     return e === "person" && n && (a.filter = "grayscale(100%)"), a;
   }
   renderExtraTab(e) {
-    const { panel: t, icon: i, name: s, color: o, icon_css: n, background_color: a } = e, l = this.hass.states[t], r = this.getCustomizationForType(t), c = this._handleDomainAction(t), d = St({
+    const { panel: t, icon: i, name: o, color: s, icon_css: n, background_color: a } = e, l = this.hass.states[t], r = this.getCustomizationForType(t), c = this._handleDomainAction(t), d = xt({
       hasHold: ut(
         (r == null ? void 0 : r.hold_action) ?? this._config.hold_action
       ),
@@ -2962,7 +2958,7 @@ let T = class extends V {
     }), h = {
       horizontal: this._config.content_layout === "horizontal"
     }, u = this._getIconStyles("extra", {
-      color: o,
+      color: s,
       background_color: a,
       square: this._config.square
     }), f = (r == null ? void 0 : r.state_content) ?? void 0;
@@ -2972,7 +2968,7 @@ let T = class extends V {
           <div class="entity-icon" style=${Ct(u)}>
             ${i.startsWith("/") || i.startsWith("http") ? $`<img
                   src=${i}
-                  alt=${s}
+                  alt=${o}
                   style="border-radius:${this._config.square ? "20%" : "50%"};object-fit:cover;"
                 />` : $`<ha-state-icon
                   .hass=${this.hass}
@@ -2984,13 +2980,13 @@ let T = class extends V {
                 ></ha-state-icon>`}
           </div>
           <div class="entity-info">
-            ${this.hide_content_name ? "" : $`<div class="entity-name">${s}</div>`}
+            ${this.hide_content_name ? "" : $`<div class="entity-name">${o}</div>`}
             <div class="entity-state">
               <state-display
                 .stateObj=${l}
                 .hass=${this.hass}
                 .content=${f}
-                .name=${s}
+                .name=${o}
               ></state-display>
             </div>
           </div>
@@ -3001,9 +2997,9 @@ let T = class extends V {
   renderGroupTab(e, t) {
     const i = Ot(this, e);
     if (!i.length) return $``;
-    const s = e.group_id || `${this.hass.localize("component.group.entity_component._.name")} ${t + 1}`, o = e.group_icon || "mdi:format-list-group", n = this.getCustomColor(s), a = this.getBackgroundColor(s), l = () => {
+    const o = e.group_id || `${this.hass.localize("component.group.entity_component._.name")} ${t + 1}`, s = e.group_icon || "mdi:format-list-group", n = this.getCustomColor(o), a = this.getBackgroundColor(o), l = () => {
       this.selectedGroup = t;
-    }, r = St({
+    }, r = xt({
       hasHold: !1,
       hasDoubleClick: !1
     }), c = {
@@ -3022,10 +3018,10 @@ let T = class extends V {
       >
         <div class="entity ${ht(c)}">
           <div class="entity-icon" style=${Ct(d)}>
-            <ha-icon icon=${o}></ha-icon>
+            <ha-icon icon=${s}></ha-icon>
           </div>
           <div class="entity-info">
-            ${this.hide_content_name ? "" : $`<div class="entity-name">${s}</div>`}
+            ${this.hide_content_name ? "" : $`<div class="entity-name">${o}</div>`}
             <div class="entity-state">
               ${i.length}
               ${e.group_status ? ` ${e.group_status}` : ""}
@@ -3036,9 +3032,9 @@ let T = class extends V {
     `;
   }
   renderDomainTab(e) {
-    const { domain: t } = e, i = this._isOn(t), s = this._totalEntities(t);
-    if (!(this._shouldShowTotalEntities(t) ? s : i).length) return $``;
-    const a = this.getCustomColor(t), l = this.getCustomizationForType(t), r = this._handleDomainAction(t), c = St({
+    const { domain: t } = e, i = this._isOn(t), o = this._totalEntities(t);
+    if (!(this._shouldShowTotalEntities(t) ? o : i).length) return $``;
+    const a = this.getCustomColor(t), l = this.getCustomizationForType(t), r = this._handleDomainAction(t), c = xt({
       hasHold: ut(
         (l == null ? void 0 : l.hold_action) ?? this._config.hold_action
       ),
@@ -3071,9 +3067,9 @@ let T = class extends V {
                   ${this.getCustomName(t) || this.computeLabel({ name: t })}
                 </div>`}
             <div class="entity-state">
-              ${this._shouldShowTotalNumbers(t) ? `${i.length}/${s.length} ${this.getStatusProperty(
+              ${this._shouldShowTotalNumbers(t) ? `${i.length}/${o.length} ${this.getStatusProperty(
       t
-    )}` : this._shouldShowTotalEntities(t) ? `${s.length}` : `${i.length} ${this.getStatusProperty(t)}`}
+    )}` : this._shouldShowTotalEntities(t) ? `${o.length}` : `${i.length} ${this.getStatusProperty(t)}`}
             </div>
           </div>
         </div>
@@ -3081,11 +3077,11 @@ let T = class extends V {
     `;
   }
   renderDeviceClassTab(e) {
-    const { domain: t, deviceClass: i } = e, s = this._isOn(t, i), o = this._totalEntities(t, i);
-    if (!(this._shouldShowTotalEntities(t, i) ? o : s).length) return $``;
+    const { domain: t, deviceClass: i } = e, o = this._isOn(t, i), s = this._totalEntities(t, i);
+    if (!(this._shouldShowTotalEntities(t, i) ? s : o).length) return $``;
     const l = this.getCustomColor(t, i), r = this.getCustomizationForType(
       I(t, i)
-    ), c = this._handleDomainAction(t, i), d = St({
+    ), c = this._handleDomainAction(t, i), d = xt({
       hasHold: ut(
         (r == null ? void 0 : r.hold_action) ?? this._config.hold_action
       ),
@@ -3117,10 +3113,10 @@ let T = class extends V {
                   ${this.getCustomName(t, i) || this.computeLabel({ name: i })}
                 </div>`}
             <div class="entity-state">
-              ${this._shouldShowTotalNumbers(t, i) ? `${s.length}/${o.length} ${this.getStatusProperty(
+              ${this._shouldShowTotalNumbers(t, i) ? `${o.length}/${s.length} ${this.getStatusProperty(
       t,
       i
-    )}` : this._shouldShowTotalEntities(t, i) ? `${o.length}` : `${s.length} ${this.getStatusProperty(
+    )}` : this._shouldShowTotalEntities(t, i) ? `${s.length}` : `${o.length} ${this.getStatusProperty(
       t,
       i
     )}`}
@@ -3143,11 +3139,11 @@ let T = class extends V {
     }
   }
   render() {
-    const e = this.getExtraItems(), t = this.getGroupItems(), i = this.getDomainItems(), s = this.getDeviceClassItems(), o = this._computeSortedEntities(
+    const e = this.getExtraItems(), t = this.getGroupItems(), i = this.getDomainItems(), o = this.getDeviceClassItems(), s = this._computeSortedEntities(
       e,
       t,
       i,
-      s
+      o
     ), n = {
       "no-scroll": !!this._config.no_scroll
     }, a = this.getPersonItems();
@@ -3201,7 +3197,7 @@ let T = class extends V {
       }
     )}
           ${X(
-      o,
+      s,
       (l) => l.type === "extra" ? l.panel : l.type === "domain" ? l.domain : l.type === "deviceClass" ? `${l.domain}-${l.deviceClass}` : l.type === "group" ? `group-${l.group_id}` : "",
       (l) => this.renderTab(l)
     )}
@@ -3211,6 +3207,38 @@ let T = class extends V {
   }
   static get styles() {
     return _t`
+    :host {
+      /* Forward important badge variables from parent/theme to shadow DOM */
+      --ha-label-badge-border-radius: var(--ha-label-badge-border-radius, 12px);
+      --ha-label-badge-background-color: var(--ha-label-badge-background-color, var(--card-background-color, white));
+      --ha-label-badge-border-color: var(--ha-label-badge-border-color, var(--divider-color, rgba(0,0,0,0.12)));
+      --ha-label-badge-label-color: var(--ha-label-badge-label-color, var(--primary-text-color));
+      --ha-label-badge-title-font-size: var(--ha-label-badge-title-font-size, 12px);
+      --ha-label-badge-text-color: var(--ha-label-badge-text-color, #000000);
+      --ha-label-badge-shadow: var(--ha-label-badge-shadow, var(--material-shadow-elevation-2dp));
+      --ha-label-badge-font-family: var(--ha-label-badge-font-family, inherit);
+
+      /* Forward common domain icon color variables */
+      --state-light-color: var(--state-light-color, #f7d959);
+      --state-switch-color: var(--state-switch-color, #66aaff);
+      --state-media_player-color: var(--state-media_player-color, #8bc34a);
+      --state-cover-color: var(--state-cover-color, #c7b8f0);
+      --state-fan-color: var(--state-fan-color, #00bcd4);
+      --state-climate-color: var(--state-climate-color, #ff9800);
+      --state-person-color: var(--state-person-color, #03a9f4);
+      --state-sensor-color: var(--state-sensor-color, #7b7b7b);
+      --state-binary_sensor-color: var(--state-binary_sensor-color, #f44336);
+      --state-lock-color: var(--state-lock-color, #43a047);
+      --state-vacuum-color: var(--state-vacuum-color, #009688);
+      --state-update-color: var(--state-update-color, #ffa000);
+      --state-alarm_control_panel-color: var(--state-alarm_control_panel-color, #e53935);
+      --state-water_heater-color: var(--state-water_heater-color, #ffb300);
+      --state-valve-color: var(--state-valve-color, #1976d2);
+      --state-siren-color: var(--state-siren-color, #e91e63);
+      --state-remote-color: var(--state-remote-color, #607d8b);
+      --state-lawn_mower-color: var(--state-lawn_mower-color, #4caf50);
+      --state-battery-color: var(--state-battery-color, #607d8b);
+    }
     ha-card {
       box-shadow: none !important;
       border: none !important;
@@ -3248,7 +3276,7 @@ let T = class extends V {
       box-sizing: border-box !important;
       margin: 4px !important;
       background-color: var(--ha-label-badge-background-color, var(--card-background-color, white)) !important;
-      box-shadow: var(--ha-label-badge-shadow, var(--material-shadow-elevation-2dp)) !important;
+      box-shadow: none !important;
       border: 1px solid var(--ha-label-badge-border-color, var(--divider-color, rgba(0,0,0,0.12))) !important;
       min-width: fit-content;
       filter: none !important;
@@ -3332,7 +3360,7 @@ let T = class extends V {
       font-weight: 500 !important;
       font-size: 13px !important;
       line-height: 1 !important;
-      color: var(--ha-label-badge-text-color, #000000) !important;
+      color: #000000 !important;
       margin: 0 !important;
     }
     sl-tab * {
@@ -3360,51 +3388,51 @@ L([
   E({ type: Object })
 ], T.prototype, "_config", 2);
 L([
-  x()
+  S()
 ], T.prototype, "areas", 2);
 L([
-  x()
+  S()
 ], T.prototype, "devices", 2);
 L([
-  x()
+  S()
 ], T.prototype, "entities", 2);
 L([
-  x()
+  S()
 ], T.prototype, "entitiesByDomain", 2);
 L([
-  x()
+  S()
 ], T.prototype, "selectedDomain", 2);
 L([
-  x()
+  S()
 ], T.prototype, "selectedDeviceClass", 2);
 L([
-  x()
+  S()
 ], T.prototype, "hiddenEntities", 2);
 L([
-  x()
+  S()
 ], T.prototype, "hiddenLabels", 2);
 L([
-  x()
+  S()
 ], T.prototype, "hiddenAreas", 2);
 L([
-  x()
+  S()
 ], T.prototype, "hide_person", 2);
 L([
-  x()
+  S()
 ], T.prototype, "hide_content_name", 2);
 L([
-  x()
+  S()
 ], T.prototype, "list_mode", 2);
 L([
-  x()
+  S()
 ], T.prototype, "selectedGroup", 2);
 T = L([
   Mt("status-card")
 ], T);
-var Li = Object.defineProperty, Mi = Object.getOwnPropertyDescriptor, jt = (e, t, i, s) => {
-  for (var o = s > 1 ? void 0 : s ? Mi(t, i) : t, n = e.length - 1, a; n >= 0; n--)
-    (a = e[n]) && (o = (s ? a(t, i, o) : a(o)) || o);
-  return s && o && Li(t, i, o), o;
+var Li = Object.defineProperty, Mi = Object.getOwnPropertyDescriptor, jt = (e, t, i, o) => {
+  for (var s = o > 1 ? void 0 : o ? Mi(t, i) : t, n = e.length - 1, a; n >= 0; n--)
+    (a = e[n]) && (s = (o ? a(t, i, s) : a(s)) || s);
+  return o && s && Li(t, i, s), s;
 };
 class te extends V {
   constructor() {
@@ -3417,16 +3445,16 @@ class te extends V {
     if (!this.hass)
       return k;
     const t = new Set(
-      (this.customizationkey || []).map((s) => s.type)
+      (this.customizationkey || []).map((o) => o.type)
     ), i = this.SelectOptions.filter(
-      (s) => !t.has(s.value)
+      (o) => !t.has(o.value)
     );
     return $`
       <div class="customization">
         ${this.customizationkey && X(
       this.customizationkey,
-      (s) => this._getKey(s),
-      (s, o) => {
+      (o) => this._getKey(o),
+      (o, s) => {
         var n;
         return $`
             <div class="customize-item">
@@ -3440,26 +3468,26 @@ class te extends V {
                 class="select-customization"
                 naturalMenuWidth
                 fixedMenuPosition
-                .value=${s.type}
+                .value=${o.type}
                 @closed=${(a) => a.stopPropagation()}
                 @value-changed=${this._valueChanged}
               >
-                <mwc-list-item .value=${s.type} selected disabled>
-                  ${((n = this.SelectOptions.find((a) => a.value === s.type)) == null ? void 0 : n.label) || s.type}
+                <mwc-list-item .value=${o.type} selected disabled>
+                  ${((n = this.SelectOptions.find((a) => a.value === o.type)) == null ? void 0 : n.label) || o.type}
                 </mwc-list-item>
               </ha-select>
               <ha-icon-button
                 .label=${this.hass.localize("ui.common.remove")}
                 .path=${Qt}
                 class="remove-icon"
-                .index=${o}
+                .index=${s}
                 @click=${this._removeRow}
               ></ha-icon-button>
               <ha-icon-button
                 .label=${this.hass.localize("ui.common.edit")}
                 .path=${mi}
                 class="edit-icon"
-                .index=${o}
+                .index=${s}
                 @click=${this._editRow}
               ></ha-icon-button>
             </div>
@@ -3478,12 +3506,12 @@ class te extends V {
             class="add-customization"
             naturalMenuWidth
             fixedMenuPosition
-            @closed=${(s) => s.stopPropagation()}
+            @closed=${(o) => o.stopPropagation()}
             @click=${this._addRow}
           >
             ${i.map(
-      (s) => $`<mwc-list-item .value=${s.value}
-                  >${s.label}</mwc-list-item
+      (o) => $`<mwc-list-item .value=${o.value}
+                  >${o.label}</mwc-list-item
                 >`
     )}
           </ha-select>
@@ -3494,15 +3522,15 @@ class te extends V {
   _valueChanged(t) {
     if (!this.customizationkey || !this.hass)
       return;
-    const i = t.detail.value, s = t.target.index, o = this.customizationkey.concat();
-    o[s] = { ...o[s], type: i || "" }, O(this, "config-changed", o);
+    const i = t.detail.value, o = t.target.index, s = this.customizationkey.concat();
+    s[o] = { ...s[o], type: i || "" }, O(this, "config-changed", s);
   }
   _removeRow(t) {
     t.stopPropagation();
     const i = t.currentTarget.index;
     if (i != null) {
-      const s = this.customizationkey.concat();
-      s.splice(i, 1), O(this, "config-changed", s);
+      const o = this.customizationkey.concat();
+      o.splice(i, 1), O(this, "config-changed", o);
     }
   }
   _editRow(t) {
@@ -3518,10 +3546,10 @@ class te extends V {
     );
     if (!i || !i.value)
       return;
-    const o = { type: i.value };
+    const s = { type: i.value };
     O(this, "config-changed", [
       ...this.customizationkey,
-      o
+      s
     ]), i.value = "";
   }
   static get styles() {
@@ -3568,10 +3596,10 @@ jt([
 Kt = jt([
   Mt("status-items-editor")
 ], Kt);
-var Hi = Object.defineProperty, Ii = Object.getOwnPropertyDescriptor, it = (e, t, i, s) => {
-  for (var o = s > 1 ? void 0 : s ? Ii(t, i) : t, n = e.length - 1, a; n >= 0; n--)
-    (a = e[n]) && (o = (s ? a(t, i, o) : a(o)) || o);
-  return s && o && Hi(t, i, o), o;
+var Hi = Object.defineProperty, Ii = Object.getOwnPropertyDescriptor, it = (e, t, i, o) => {
+  for (var s = o > 1 ? void 0 : o ? Ii(t, i) : t, n = e.length - 1, a; n >= 0; n--)
+    (a = e[n]) && (s = (o ? a(t, i, s) : a(s)) || s);
+  return o && s && Hi(t, i, s), s;
 };
 let K = class extends V {
   constructor() {
@@ -3675,12 +3703,12 @@ let K = class extends V {
     });
   }
   render() {
-    var i, s;
+    var i, o;
     if (!this.hass || !this.config)
       return $``;
     (i = this._config) != null && i.invert_state || (this._config = {
       ...this._config,
-      type: ((s = this._config) == null ? void 0 : s.type) ?? this.config.type ?? "",
+      type: ((o = this._config) == null ? void 0 : o.type) ?? this.config.type ?? "",
       invert_state: this.config.invert_state || "false",
       icon_color: this.config.icon_color || void 0,
       tap_action: this.config.tap_action || void 0,
@@ -3704,7 +3732,7 @@ let K = class extends V {
         .hass=${this.hass}
         .data=${t}
         .schema=${e}
-        .computeLabel=${(o) => Pt(this.hass, o)}
+        .computeLabel=${(s) => Pt(this.hass, s)}
         @value-changed=${this._valueChangedSchema}
       ></ha-form>
     `;
@@ -3776,18 +3804,18 @@ it([
   E({ type: Number })
 ], K.prototype, "index", 2);
 it([
-  x()
+  S()
 ], K.prototype, "getSchema", 2);
 it([
-  x()
+  S()
 ], K.prototype, "_config", 2);
 K = it([
   Mt("status-item-editor")
 ], K);
-var Pi = Object.defineProperty, ji = Object.getOwnPropertyDescriptor, dt = (e, t, i, s) => {
-  for (var o = s > 1 ? void 0 : s ? ji(t, i) : t, n = e.length - 1, a; n >= 0; n--)
-    (a = e[n]) && (o = (s ? a(t, i, o) : a(o)) || o);
-  return s && o && Pi(t, i, o), o;
+var Pi = Object.defineProperty, ji = Object.getOwnPropertyDescriptor, dt = (e, t, i, o) => {
+  for (var s = o > 1 ? void 0 : o ? ji(t, i) : t, n = e.length - 1, a; n >= 0; n--)
+    (a = e[n]) && (s = (o ? a(t, i, s) : a(s)) || s);
+  return o && s && Pi(t, i, s), s;
 };
 let et = class extends V {
   constructor() {
@@ -3805,8 +3833,8 @@ let et = class extends V {
       floor: [],
       label: []
     }, this._schema = A(
-      (e, t, i, s) => {
-        const o = this.computeLabel({ name: "area" }), n = this.computeLabel({ name: "floor" }), a = this.computeLabel({ name: "name" }), l = this.computeLabel({ name: "state" }), r = [
+      (e, t, i, o) => {
+        const s = this.computeLabel({ name: "area" }), n = this.computeLabel({ name: "floor" }), a = this.computeLabel({ name: "name" }), l = this.computeLabel({ name: "state" }), r = [
           "more-info",
           "toggle",
           "navigate",
@@ -3904,7 +3932,7 @@ let et = class extends V {
                     selector: {
                       select: {
                         options: [
-                          { value: "area", label: o },
+                          { value: "area", label: s },
                           { value: "floor", label: n }
                         ]
                       }
@@ -3921,11 +3949,11 @@ let et = class extends V {
                 { name: "multiple_areas", selector: { boolean: {} } },
                 { name: "area", selector: { area: { multiple: !0 } } }
               ] : [],
-              ...e === "floor" && s === !1 ? [
+              ...e === "floor" && o === !1 ? [
                 { name: "multiple_floors", selector: { boolean: {} } },
                 { name: "floor", selector: { floor: {} } }
               ] : [],
-              ...e === "floor" && s === !0 ? [
+              ...e === "floor" && o === !0 ? [
                 { name: "multiple_floors", selector: { boolean: {} } },
                 { name: "floor", selector: { floor: { multiple: !0 } } }
               ] : [],
@@ -3978,7 +4006,7 @@ let et = class extends V {
         }
       }
     ]), this._entitiesSchema = A((e) => {
-      const t = this.computeLabel({ name: "area" }), i = this.computeLabel({ name: "label" }), s = this.computeLabel({ name: "entity" });
+      const t = this.computeLabel({ name: "area" }), i = this.computeLabel({ name: "label" }), o = this.computeLabel({ name: "entity" });
       return [
         {
           name: "extra_entities",
@@ -3993,7 +4021,7 @@ let et = class extends V {
               selector: {
                 select: {
                   options: [
-                    { value: "entity", label: s },
+                    { value: "entity", label: o },
                     { value: "label", label: i },
                     { value: "area", label: t }
                   ]
@@ -4042,8 +4070,8 @@ let et = class extends V {
     }, this._removeRuleset = (e) => {
       this.rulesets = this.rulesets.filter((t, i) => i !== e), this._updateConfigFromRulesets();
     }, this._toggleEntityHidden = (e) => {
-      var s;
-      const t = new Set(((s = this._config) == null ? void 0 : s.hidden_entities) ?? []);
+      var o;
+      const t = new Set(((o = this._config) == null ? void 0 : o.hidden_entities) ?? []);
       t.has(e) ? t.delete(e) : t.add(e);
       const i = Array.from(t);
       this._config = {
@@ -4078,7 +4106,7 @@ let et = class extends V {
         ])).get(this._config.hide_filter);
         _ && (this._config = { ...this._config, hide_filter: _ }, t = !0);
       }
-      const i = e.get("_config"), s = (i == null ? void 0 : i.extra_entities) ?? [], o = this._config.extra_entities ?? [], n = (i == null ? void 0 : i.content) ?? [], a = this._config.content ?? [], l = Array.isArray(this._config.area) ? [...this._config.area] : this._config.area ? [this._config.area] : [], r = Array.isArray(this._config.floor) ? [...this._config.floor] : this._config.floor ? [this._config.floor] : [], c = Array.isArray(this._config.label) ? [...this._config.label] : [];
+      const i = e.get("_config"), o = (i == null ? void 0 : i.extra_entities) ?? [], s = this._config.extra_entities ?? [], n = (i == null ? void 0 : i.content) ?? [], a = this._config.content ?? [], l = Array.isArray(this._config.area) ? [...this._config.area] : this._config.area ? [this._config.area] : [], r = Array.isArray(this._config.floor) ? [...this._config.floor] : this._config.floor ? [this._config.floor] : [], c = Array.isArray(this._config.label) ? [...this._config.label] : [];
       this._filterInitialized || (this._lastFilter = {
         area: l,
         floor: r,
@@ -4087,15 +4115,15 @@ let et = class extends V {
       const d = this._lastFilter.area, h = this._lastFilter.floor, u = this._lastFilter.label, f = !Z(u, c), m = !Z(h, r);
       if (!Z(d, l) || m || f) {
         const p = this.possibleToggleDomains, _ = [];
-        for (const v of Object.keys(J)) {
-          const g = J[v];
-          for (const y of Object.keys(g))
-            y !== "on" && y !== "off" && _.push(`${nt(v)} - ${y}`);
-          _.push(nt(v));
+        for (const y of Object.keys(J)) {
+          const g = J[y];
+          for (const v of Object.keys(g))
+            v !== "on" && v !== "off" && _.push(`${nt(y)} - ${v}`);
+          _.push(nt(y));
         }
-        const C = p.sort((v, g) => {
-          const y = _.indexOf(v), F = _.indexOf(g);
-          return (y === -1 ? _.length : y) - (F === -1 ? _.length : F);
+        const C = p.sort((y, g) => {
+          const v = _.indexOf(y), R = _.indexOf(g);
+          return (v === -1 ? _.length : v) - (R === -1 ? _.length : R);
         });
         this._config = {
           ...this._config,
@@ -4109,43 +4137,43 @@ let et = class extends V {
       if (this._config.rulesets && Array.isArray(this._config.rulesets)) {
         const p = this._config.rulesets.filter(
           (g) => Object.keys(g).some(
-            (y) => y !== "group_id" && y !== "group_icon" && y !== "group_status" && g[y] !== void 0 && g[y] !== ""
+            (v) => v !== "group_id" && v !== "group_icon" && v !== "group_status" && g[v] !== void 0 && g[v] !== ""
           )
         ).map((g) => g.group_id).filter((g) => g && g.length > 1);
         let _ = Array.isArray(this._config.content) ? [...this._config.content] : [];
         _ = _.filter((g) => !p.includes(g));
         const C = this._config.extra_entities ?? [];
-        let v = 0;
+        let y = 0;
         for (let g = 0; g < _.length; g++) {
           if (!C.includes(_[g])) {
-            v = g;
+            y = g;
             break;
           }
-          v = g + 1;
+          y = g + 1;
         }
         _ = [
-          ..._.slice(0, v),
+          ..._.slice(0, y),
           ...p.filter((g) => !_.includes(g)),
-          ..._.slice(v)
+          ..._.slice(y)
         ], Z(_, this._config.content ?? []) || (this._config = {
           ...this._config,
           content: _
         }, t = !0);
       }
-      if (!Z(s, o)) {
+      if (!Z(o, s)) {
         let p = [...a];
-        o.forEach((_) => {
+        s.forEach((_) => {
           p.includes(_) || p.unshift(_);
         }), p = p.filter(
-          (_) => !_.includes(".") || o.includes(_)
+          (_) => !_.includes(".") || s.includes(_)
         ), Z(p, a) || (this._config = {
           ...this._config,
           content: p
         }, t = !0);
       }
       if (!Z(n, a)) {
-        let p = [...o];
-        p = p.filter((_) => a.includes(_)), Z(p, o) || (this._config = {
+        let p = [...s];
+        p = p.filter((_) => a.includes(_)), Z(p, s) || (this._config = {
           ...this._config,
           extra_entities: p
         }, t = !0);
@@ -4168,8 +4196,8 @@ let et = class extends V {
         selector: { text: {} }
       },
       ...e.rules.map((t, i) => {
-        const s = e.rules.map((n, a) => a !== i ? n.key : null).filter((n) => n), o = this.ruleKeySelector.options.filter(
-          ([n]) => !s.includes(n) || n === t.key
+        const o = e.rules.map((n, a) => a !== i ? n.key : null).filter((n) => n), s = this.ruleKeySelector.options.filter(
+          ([n]) => !o.includes(n) || n === t.key
         );
         return {
           type: "grid",
@@ -4177,7 +4205,7 @@ let et = class extends V {
             {
               type: "select",
               name: `key_${i}`,
-              options: o
+              options: s
             },
             {
               name: `value_${i}`,
@@ -4217,14 +4245,14 @@ let et = class extends V {
   _parseTypePair(e) {
     const t = e.match(/^(.+?)\s*-\s*(.+)$/);
     if (!t) return null;
-    const i = t[1].toLowerCase().replace(/\s+/g, "_"), s = t[2].toLowerCase();
-    return { domain: i, deviceClass: s };
+    const i = t[1].toLowerCase().replace(/\s+/g, "_"), o = t[2].toLowerCase();
+    return { domain: i, deviceClass: o };
   }
   _labelForTypePair(e) {
-    var i, s, o;
+    var i, o, s;
     if (e.includes(".")) {
-      const n = (s = (i = this.hass) == null ? void 0 : i.states) == null ? void 0 : s[e];
-      return ((o = n == null ? void 0 : n.attributes) == null ? void 0 : o.friendly_name) || e;
+      const n = (o = (i = this.hass) == null ? void 0 : i.states) == null ? void 0 : o[e];
+      return ((s = n == null ? void 0 : n.attributes) == null ? void 0 : s.friendly_name) || e;
     }
     const t = this._parseTypePair(e);
     if (t) {
@@ -4244,12 +4272,12 @@ let et = class extends V {
   }
   _classesForArea(e, t, i) {
     var c;
-    const s = ((c = this._config) == null ? void 0 : c.extra_entities) || [];
-    let o = Object.values(this.hass.entities).filter(
+    const o = ((c = this._config) == null ? void 0 : c.extra_entities) || [];
+    let s = Object.values(this.hass.entities).filter(
       (d) => !d.hidden && pt.includes(N(d.entity_id))
     );
     if (e && e.length > 0)
-      o = o.filter(
+      s = s.filter(
         (d) => {
           var h;
           return e.includes(d.area_id) || d.device_id && e.includes((h = this.hass.devices[d.device_id]) == null ? void 0 : h.area_id);
@@ -4259,7 +4287,7 @@ let et = class extends V {
       const d = Object.values(this.hass.areas).filter(
         (h) => h.floor_id !== void 0 && t.includes(h.floor_id)
       ).map((h) => h.area_id);
-      o = o.filter(
+      s = s.filter(
         (h) => {
           var u;
           return h.area_id !== void 0 && d.includes(h.area_id) || h.device_id && ((u = this.hass.devices[h.device_id]) == null ? void 0 : u.area_id) !== void 0 && d.includes(
@@ -4268,7 +4296,7 @@ let et = class extends V {
         }
       );
     }
-    i && i.length > 0 && (o = o.filter(
+    i && i.length > 0 && (s = s.filter(
       (d) => {
         var h, u;
         return ((h = d.labels) == null ? void 0 : h.some((f) => i.includes(f))) || d.device_id && Array.isArray((u = this.hass.devices[d.device_id]) == null ? void 0 : u.labels) && this.hass.devices[d.device_id].labels.some(
@@ -4284,9 +4312,9 @@ let et = class extends V {
       n.push(nt(d));
     }
     const a = new Set(
-      o.map((d) => N(d.entity_id)).filter((d) => d !== "binary_sensor" && d !== "cover" && d !== "switch").map((d) => nt(d))
+      s.map((d) => N(d.entity_id)).filter((d) => d !== "binary_sensor" && d !== "cover" && d !== "switch").map((d) => nt(d))
     ), l = /* @__PURE__ */ new Set();
-    o.filter(
+    s.filter(
       (d) => ["binary_sensor", "cover", "switch"].includes(
         N(d.entity_id)
       )
@@ -4296,7 +4324,7 @@ let et = class extends V {
       u && l.add(`${nt(h)} - ${u}`);
     });
     const r = [...l];
-    return [...a, ...r, ...s].sort(
+    return [...a, ...r, ...o].sort(
       (d, h) => {
         const u = n.indexOf(d), f = n.indexOf(h);
         return (u === -1 ? n.length : u) - (f === -1 ? n.length : f);
@@ -4305,12 +4333,12 @@ let et = class extends V {
   }
   _buildOptions(e, t, i) {
     var l;
-    const s = [.../* @__PURE__ */ new Set([...t, ...i])], o = ((l = this.hass) == null ? void 0 : l.states) || {}, n = /* @__PURE__ */ new Map(), a = s.map((r) => {
+    const o = [.../* @__PURE__ */ new Set([...t, ...i])], s = ((l = this.hass) == null ? void 0 : l.states) || {}, n = /* @__PURE__ */ new Map(), a = o.map((r) => {
       var d, h;
       if (n.has(r))
         return { value: r, label: n.get(r) };
       let c;
-      return r.includes(".") ? c = ((h = (d = o[r]) == null ? void 0 : d.attributes) == null ? void 0 : h.friendly_name) || r : r === "scene" ? c = "Scene" : c = this._labelForTypePair(r), n.set(r, c), { value: r, label: c };
+      return r.includes(".") ? c = ((h = (d = s[r]) == null ? void 0 : d.attributes) == null ? void 0 : h.friendly_name) || r : r === "scene" ? c = "Scene" : c = this._labelForTypePair(r), n.set(r, c), { value: r, label: c };
     });
     return a.sort((r, c) => {
       const d = r.value.includes("."), h = c.value.includes(".");
@@ -4324,11 +4352,11 @@ let et = class extends V {
   _itemChanged(e, t, i) {
     if (e.stopPropagation(), !this._config || !this.hass)
       return;
-    const s = t == null ? void 0 : t.index;
-    if (s != null) {
-      const o = [...this._config.customization ?? []];
-      o[s] = e.detail, O(this, "config-changed", {
-        config: { ...this._config, customization: o }
+    const o = t == null ? void 0 : t.index;
+    if (o != null) {
+      const s = [...this._config.customization ?? []];
+      s[o] = e.detail, O(this, "config-changed", {
+        config: { ...this._config, customization: s }
       });
     }
   }
@@ -4339,9 +4367,9 @@ let et = class extends V {
     this[`_subElementEditor${t}`] = { index: i };
   }
   _edit_itemDomain(e) {
-    const t = e.detail, s = (this._config.customization ?? [])[t];
-    let o;
-    s && s.type && s.type.includes(".") ? o = "Entity" : o = "Domain", this._editItem(e, o);
+    const t = e.detail, o = (this._config.customization ?? [])[t];
+    let s;
+    o && o.type && o.type.includes(".") ? s = "Entity" : s = "Domain", this._editItem(e, s);
   }
   _itemChangedDomain(e) {
     this._itemChanged(e, this._subElementEditorDomain, "customization");
@@ -4371,7 +4399,7 @@ let et = class extends V {
   }
   _renderSubElementEditor(e, t, i) {
     var l, r, c, d, h;
-    const s = `_subElementEditor${e.charAt(0).toUpperCase() + e.slice(1)}`, o = this[s], n = ((c = (r = (l = this._config) == null ? void 0 : l.customization) == null ? void 0 : r[(o == null ? void 0 : o.index) ?? 0]) == null ? void 0 : c.type) ?? "unknown", a = this._labelForTypePair(n);
+    const o = `_subElementEditor${e.charAt(0).toUpperCase() + e.slice(1)}`, s = this[o], n = ((c = (r = (l = this._config) == null ? void 0 : l.customization) == null ? void 0 : r[(s == null ? void 0 : s.index) ?? 0]) == null ? void 0 : c.type) ?? "unknown", a = this._labelForTypePair(n);
     return $`
       <div class="header">
         <div class="back-title">
@@ -4387,9 +4415,9 @@ let et = class extends V {
       <status-item-editor
         .hass=${this.hass}
         .lovelace=${this.lovelace}
-        .config=${((h = (d = this._config) == null ? void 0 : d.customization) == null ? void 0 : h[(o == null ? void 0 : o.index) ?? 0]) ?? {}}
+        .config=${((h = (d = this._config) == null ? void 0 : d.customization) == null ? void 0 : h[(s == null ? void 0 : s.index) ?? 0]) ?? {}}
         .getSchema=${e}
-        .index=${(o == null ? void 0 : o.index) ?? 0}
+        .index=${(s == null ? void 0 : s.index) ?? 0}
         @config-changed=${i}
       >
       </status-item-editor>
@@ -4410,10 +4438,10 @@ let et = class extends V {
     this.rulesets = (this._config.rulesets ?? []).map((e) => {
       var i;
       const t = Object.keys(e).filter(
-        (s) => s !== "group_id" && s !== "group_icon" && s !== "group_status" && e[s] !== void 0
-      ).map((s) => ({
-        key: s,
-        value: e[s] ?? ""
+        (o) => o !== "group_id" && o !== "group_icon" && o !== "group_status" && e[o] !== void 0
+      ).map((o) => ({
+        key: o,
+        value: e[o] ?? ""
       }));
       return (t.length === 0 || ((i = t[t.length - 1]) == null ? void 0 : i.key) !== "") && t.push({ key: "", value: "" }), {
         group_id: e.group_id ?? "",
@@ -4425,7 +4453,7 @@ let et = class extends V {
   }
   _saveRulesetsToConfig() {
     const e = this.rulesets.map((t) => {
-      const i = t.rules.reduce((s, o) => (o.key && o.key !== "" && (s[o.key] = o.value ?? ""), s), {});
+      const i = t.rules.reduce((o, s) => (s.key && s.key !== "" && (o[s.key] = s.value ?? ""), o), {});
       return {
         group_id: t.group_id ?? "",
         group_icon: t.group_icon ?? "",
@@ -4508,50 +4536,50 @@ let et = class extends V {
       group_icon: e.group_icon,
       group_status: e.group_status ?? ""
     };
-    return e.rules.forEach((i, s) => {
-      t[`key_${s}`] = i.key, t[`value_${s}`] = i.value;
+    return e.rules.forEach((i, o) => {
+      t[`key_${o}`] = i.key, t[`value_${o}`] = i.value;
     }), t;
   }
   _groupValueChanged(e, t) {
-    var o;
-    const { value: i } = e.detail, s = Object.keys(i).filter((n) => n.startsWith("key_")).map((n) => {
+    var s;
+    const { value: i } = e.detail, o = Object.keys(i).filter((n) => n.startsWith("key_")).map((n) => {
       const a = n.split("_")[1];
       return {
         key: i[`key_${a}`] ?? "",
         value: i[`value_${a}`] ?? ""
       };
     });
-    (s.length === 0 || ((o = s[s.length - 1]) == null ? void 0 : o.key) !== "") && s.push({ key: "", value: "" }), this.rulesets = this.rulesets.map(
+    (o.length === 0 || ((s = o[o.length - 1]) == null ? void 0 : s.key) !== "") && o.push({ key: "", value: "" }), this.rulesets = this.rulesets.map(
       (n, a) => a === t ? {
         group_id: i.group_id ?? "",
         group_icon: i.group_icon ?? "",
         group_status: i.group_status ?? "",
-        rules: s
+        rules: o
       } : n
     ), this._updateConfigFromRulesets();
   }
   _groupAllEntitiesByDomain() {
-    var d, h, u, f, m, b, p, _, C, v, g, y, F;
-    const e = Object.values(((d = this.hass) == null ? void 0 : d.entities) || {}), t = Object.values(((h = this.hass) == null ? void 0 : h.devices) || {}), i = (u = this.hass) != null && u.areas ? Object.values(this.hass.areas) : [], s = {
+    var d, h, u, f, m, b, p, _, C, y, g, v, R;
+    const e = Object.values(((d = this.hass) == null ? void 0 : d.entities) || {}), t = Object.values(((h = this.hass) == null ? void 0 : h.devices) || {}), i = (u = this.hass) != null && u.areas ? Object.values(this.hass.areas) : [], o = {
       area: Array.isArray((f = this._config) == null ? void 0 : f.area) ? this._config.area : (m = this._config) != null && m.area ? [this._config.area] : [],
       floor: Array.isArray((b = this._config) == null ? void 0 : b.floor) ? this._config.floor : (p = this._config) != null && p.floor ? [this._config.floor] : [],
       label: Array.isArray((_ = this._config) == null ? void 0 : _.label) ? this._config.label : [],
       hiddenAreas: ((C = this._config) == null ? void 0 : C.hidden_areas) ?? [],
-      hiddenLabels: ((v = this._config) == null ? void 0 : v.hidden_labels) ?? [],
+      hiddenLabels: ((y = this._config) == null ? void 0 : y.hidden_labels) ?? [],
       hiddenEntities: ((g = this._config) == null ? void 0 : g.hidden_entities) ?? []
-    }, o = Te(
+    }, s = Te(
       e,
       t,
       i,
-      ((y = this.hass) == null ? void 0 : y.states) || {},
-      s,
+      ((v = this.hass) == null ? void 0 : v.states) || {},
+      o,
       pt
     ), n = Object.fromEntries(
-      Object.entries(o).map(([z, D]) => [
+      Object.entries(s).map(([z, D]) => [
         z,
         D.map((M) => M.entity_id)
       ])
-    ), a = this._hiddenEntitiesByDomain(), l = ((F = this.hass) == null ? void 0 : F.states) || {}, r = Array.from(
+    ), a = this._hiddenEntitiesByDomain(), l = ((R = this.hass) == null ? void 0 : R.states) || {}, r = Array.from(
       /* @__PURE__ */ new Set([...Object.keys(n), ...Object.keys(a)])
     ).filter((z) => pt.includes(z)), c = Tt(
       l,
@@ -4582,54 +4610,54 @@ let et = class extends V {
   }
   _groupByDeviceClass(e, t) {
     var a, l, r;
-    const i = ((a = this.hass) == null ? void 0 : a.states) || {}, s = {};
+    const i = ((a = this.hass) == null ? void 0 : a.states) || {}, o = {};
     for (const c of t) {
       const d = ((r = (l = i[c]) == null ? void 0 : l.attributes) == null ? void 0 : r.device_class) || "";
-      d && (s[d] || (s[d] = []), s[d].push(c));
+      d && (o[d] || (o[d] = []), o[d].push(c));
     }
-    const o = Tt(
+    const s = Tt(
       i,
       this.hass.locale.language
     );
-    return Object.keys(s).sort((c, d) => c.localeCompare(d)).map((c) => ({
+    return Object.keys(o).sort((c, d) => c.localeCompare(d)).map((c) => ({
       deviceClass: c,
       label: this._getDeviceClassLabel(e, c),
-      entities: s[c].slice().sort(o)
+      entities: o[c].slice().sort(s)
     }));
   }
   _hiddenEntitiesByDomain() {
     var h, u, f, m, b, p, _;
     const e = {}, t = Array.isArray((h = this._config) == null ? void 0 : h.hidden_entities) ? this._config.hidden_entities : [];
     if (t.length === 0) return e;
-    const i = ((u = this.hass) == null ? void 0 : u.entities) || {}, s = ((f = this.hass) == null ? void 0 : f.devices) || {}, o = (m = this.hass) != null && m.areas ? Object.values(this.hass.areas) : [], n = (b = this._config) == null ? void 0 : b.area, a = (p = this._config) == null ? void 0 : p.floor, l = (_ = this._config) == null ? void 0 : _.label, r = n ? Array.isArray(n) ? n : [n] : [], c = a ? Array.isArray(a) ? a : [a] : [], d = l ? Array.isArray(l) ? l : [l] : [];
+    const i = ((u = this.hass) == null ? void 0 : u.entities) || {}, o = ((f = this.hass) == null ? void 0 : f.devices) || {}, s = (m = this.hass) != null && m.areas ? Object.values(this.hass.areas) : [], n = (b = this._config) == null ? void 0 : b.area, a = (p = this._config) == null ? void 0 : p.floor, l = (_ = this._config) == null ? void 0 : _.label, r = n ? Array.isArray(n) ? n : [n] : [], c = a ? Array.isArray(a) ? a : [a] : [], d = l ? Array.isArray(l) ? l : [l] : [];
     for (const C of t) {
-      const v = N(C);
-      if (!pt.includes(v)) continue;
-      const g = i[C], y = g != null && g.device_id ? s[g.device_id] : void 0;
-      if (((g == null ? void 0 : g.area_id) != null || (y == null ? void 0 : y.area_id) != null) && !(d.length && !(Array.isArray(g == null ? void 0 : g.labels) && g.labels.some((D) => d.includes(D)) || Array.isArray(y == null ? void 0 : y.labels) && y.labels.some((D) => d.includes(D)))) && !(r.length && !(g != null && g.area_id && r.includes(g.area_id) || y != null && y.area_id && r.includes(y.area_id)))) {
+      const y = N(C);
+      if (!pt.includes(y)) continue;
+      const g = i[C], v = g != null && g.device_id ? o[g.device_id] : void 0;
+      if (((g == null ? void 0 : g.area_id) != null || (v == null ? void 0 : v.area_id) != null) && !(d.length && !(Array.isArray(g == null ? void 0 : g.labels) && g.labels.some((D) => d.includes(D)) || Array.isArray(v == null ? void 0 : v.labels) && v.labels.some((D) => d.includes(D)))) && !(r.length && !(g != null && g.area_id && r.includes(g.area_id) || v != null && v.area_id && r.includes(v.area_id)))) {
         if (c.length) {
-          const z = (g == null ? void 0 : g.area_id) && o.some(
+          const z = (g == null ? void 0 : g.area_id) && s.some(
             (M) => M.area_id === g.area_id && M.floor_id && c.includes(M.floor_id)
-          ), D = (y == null ? void 0 : y.area_id) && o.some(
-            (M) => M.area_id === y.area_id && M.floor_id && c.includes(M.floor_id)
+          ), D = (v == null ? void 0 : v.area_id) && s.some(
+            (M) => M.area_id === v.area_id && M.floor_id && c.includes(M.floor_id)
           );
           if (!z && !D) continue;
         }
-        e[v] || (e[v] = []), e[v].push(C);
+        e[y] || (e[y] = []), e[y].push(C);
       }
     }
     return e;
   }
   _domainIcon(e, t = "on", i) {
-    const s = J;
-    if (e in s) {
-      const o = s[e];
-      return typeof o == "string" ? o : i && o[i] ? o[i][t === "off" ? "off" : "on"] || o[i] : o[t === "off" ? "off" : "on"] || Object.values(o)[0];
+    const o = J;
+    if (e in o) {
+      const s = o[e];
+      return typeof s == "string" ? s : i && s[i] ? s[i][t === "off" ? "off" : "on"] || s[i] : s[t === "off" ? "off" : "on"] || Object.values(s)[0];
     }
     return "mdi:help-circle";
   }
   render() {
-    var o, n;
+    var s, n;
     if (!this.hass || !this._config)
       return $`<div>Loading...</div>`;
     const e = this._toggleschema(this.toggleSelectOptions), t = this._schema(
@@ -4637,14 +4665,14 @@ let et = class extends V {
       this._config.label_filter ?? !1,
       this._config.multiple_areas ?? !1,
       this._config.multiple_floors ?? !1
-    ), s = {
+    ), o = {
       content: this.possibleToggleDomains,
       ...this._config
     };
     return this._subElementEditorDomain ? this._renderSubElementEditorDomain() : this._subElementEditorEntity ? this._renderSubElementEditorEntity() : $`
       <ha-form
         .hass=${this.hass}
-        .data=${s}
+        .data=${o}
         .schema=${t}
         .computeLabel=${this.computeLabel}
         @value-changed=${this._valueChanged}
@@ -4658,8 +4686,8 @@ let et = class extends V {
         <div class="content">
           <ha-form
             .hass=${this.hass}
-            .data=${s}
-            .schema=${this._entitiesSchema(((o = this._config) == null ? void 0 : o.hide_filter) ?? "")}
+            .data=${o}
+            .schema=${this._entitiesSchema(((s = this._config) == null ? void 0 : s.hide_filter) ?? "")}
             .computeLabel=${this.computeLabel}
             @value-changed=${this._valueChanged}
           ></ha-form>
@@ -4705,7 +4733,7 @@ let et = class extends V {
                                             ${((d = (c = this.hass.states[r]) == null ? void 0 : c.attributes) == null ? void 0 : d.friendly_name) || r}
                                           </span>
                                           <ha-icon-button
-                                            .path=${this._isHiddenEntity(r) ? ye : ve}
+                                            .path=${this._isHiddenEntity(r) ? ve : ye}
                                             .label=${this._isHiddenEntity(r) ? this.hass.localize(
               "ui.common.show"
             ) ?? "Show" : this.hass.localize(
@@ -4729,7 +4757,7 @@ let et = class extends V {
                                     ${((c = (r = this.hass.states[l]) == null ? void 0 : r.attributes) == null ? void 0 : c.friendly_name) || l}
                                   </span>
                                   <ha-icon-button
-                                    .path=${this._isHiddenEntity(l) ? ye : ve}
+                                    .path=${this._isHiddenEntity(l) ? ve : ye}
                                     .label=${this._isHiddenEntity(l) ? this.hass.localize("ui.common.show") ?? "Show" : this.hass.localize("ui.common.hide") ?? "Hide"}
                                     @click=${() => this._toggleEntityHidden(l)}
                                   ></ha-icon-button>
@@ -4798,7 +4826,7 @@ let et = class extends V {
         <div class="content">
           <ha-form
             .hass=${this.hass}
-            .data=${s}
+            .data=${o}
             .schema=${e}
             .computeLabel=${this.computeLabel}
             @value-changed=${this._valueChanged}
@@ -4903,13 +4931,13 @@ dt([
   E({ type: Object })
 ], et.prototype, "_config", 2);
 dt([
-  x()
+  S()
 ], et.prototype, "_subElementEditorDomain", 2);
 dt([
-  x()
+  S()
 ], et.prototype, "_subElementEditorEntity", 2);
 dt([
-  x()
+  S()
 ], et.prototype, "rulesets", 2);
 et = dt([
   Mt("status-card-editor")
