@@ -1390,101 +1390,142 @@ export class StatusCard extends LitElement {
     `;
   }
 
-  static get styles() {
-    return css`
-      ha-card {
-        overflow: hidden;
-        position: relative;
-        height: 100%;
-        align-content: center;
-      }
-      sl-tab-group {
-        padding: 6px 4px;
-        align-content: center;
-      }
-      .center {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .entity.horizontal,
-      .extra-entity.horizontal {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-      }
-      .entity,
-      .extra-entity {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .entity.horizontal .entity-icon,
-      .extra-entity.horizontal .entity-icon {
-        width: 45px;
-        height: 45px;
-        border-radius: 50%;
-        background-color: rgba(var(--rgb-primary-text-color), 0.15);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-      }
-      .entity-icon {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background-color: rgba(var(--rgb-primary-text-color), 0.15);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-      }
-      .entity-icon img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 50%;
-      }
-      .entity.horizontal .entity-info,
-      .extra-entity.horizontal .entity-info {
-        text-align: left;
-        margin-top: 3px;
-        padding-left: 8px;
-      }
-      .entity-info {
-        text-align: center;
-        margin-top: 7px;
-      }
-      .entity-name {
-        font-weight: bold;
-      }
-      .entity-state {
-        color: var(--secondary-text-color);
-        font-size: 0.9em;
-      }
-      sl-tab {
-        pointer-events: auto;
-      }
-      sl-tab * {
-        pointer-events: none;
-      }
-      sl-tab::part(base) {
-        padding: 0 8px !important;
-        display: flex;
-      }
-      sl-tab-group::part(tabs) {
-        border-bottom: none !important;
-      }
-      sl-tab-group.no-scroll::part(tabs) {
-        display: flex;
-        flex-wrap: wrap;
-        overflow-x: visible !important;
-        max-width: 100%;
-        border-bottom: none !important;
-      }
-    `;
-  }
+ static get styles() {
+  return css`
+    ha-card {
+      box-shadow: none !important;
+      border: none !important;
+      background: transparent !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    sl-tab-group {
+      margin: 0 !important;
+      padding: 0 !important;
+      --sl-tab-indicator-color: transparent !important;
+      --sl-tab-indicator-width: 0 !important;
+      --sl-tab-padding: 0;
+      filter: none !important;
+      opacity: 1 !important;
+    }
+    sl-tab-group::part(nav) {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      border-bottom: none !important;
+      padding: 0 0 4px 0;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      align-items: center !important;
+      overflow: visible !important;
+    }
+    sl-tab::part(base) {
+      /* CHIP SIZE, SHAPE, AND CLIPPING FIX (4px top/bottom padding) */
+      padding: 4px 10px 4px 6px !important;
+      border-radius: var(--ha-border-radius-pill) !important;
+      box-sizing: border-box !important;
+      /* COLOR AND SHADOW */
+      background-color: var(--white-color, white) !important;
+      box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1), 0px 1px 3px 0px rgba(0, 0, 0, 0.08) !important;
+      border: none !important;
+      min-width: fit-content;
+      margin: 0 !important;
+      /* OVERRIDE FILTERS */
+      filter: none !important;
+      opacity: 1 !important;
+      display: flex !important;
+      align-items: center !important;
+      overflow: visible !important;
+    }
+    sl-tab:not([selected]) {
+      /* Force all tabs to use the same look (no grayscale) */
+      filter: none !important;
+      opacity: 1 !important;
+    }
+
+    /* ENTITY ALIGNMENT AND SIZING */
+    .entity {
+      display: flex;
+      align-items: center !important;
+      line-height: 1 !important;
+      margin: 0 !important;
+      filter: none !important;
+      opacity: 1 !important;
+    }
+
+    .entity-icon {
+      /* ICON CONTAINER SIZE (Overriding 45px/50px defaults) */
+      width: 20px !important;
+      height: 20px !important;
+      min-width: 20px !important;
+      margin-right: 4px !important;
+      padding: 0 !important;
+      background-color: transparent !important;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      filter: none !important;
+      opacity: 1 !important;
+    }
+    .entity-icon ha-icon {
+      /* ICON SIZE */
+      --mdc-icon-size: 18px !important;
+      color: var(--primary-color) !important;
+    }
+    .entity-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    /* TEXT ALIGNMENT AND MARGIN/CLIPPING FIXES */
+    .entity.horizontal .entity-info,
+    .extra-entity.horizontal .entity-info {
+      text-align: left;
+      margin: 0 !important; /* Overrides margin-top: 3px */
+      padding: 0 !important;
+    }
+    .entity-info {
+      text-align: left !important; /* Overrides text-align: center */
+      margin: 0 !important; /* Overrides margin-top: 7px */
+      padding: 0 !important;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start !important;
+      justify-content: center !important;
+    }
+
+    /* TEXT STYLING AND SIZE */
+    .entity-name {
+      font-weight: 500 !important; /* Changing from bold */
+      font-size: 11px !important;
+      line-height: 1 !important;
+      color: #727272 !important;
+      padding-bottom: 2px !important;
+      margin: 0 !important;
+    }
+    .entity-state {
+      font-weight: 500 !important; /* Changing from default */
+      font-size: 13px !important;
+      line-height: 1 !important;
+      color: #000000 !important;
+      margin: 0 !important;
+    }
+    sl-tab * {
+      pointer-events: none;
+    }
+    sl-tab-group::part(tabs) {
+      border-bottom: none !important;
+    }
+    sl-tab {
+      pointer-events: auto;
+    }
+  `;
+}
 
   static getConfigElement() {
     return document.createElement("status-card-editor");
