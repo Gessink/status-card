@@ -1413,8 +1413,7 @@ static get styles() {
       flex-direction: row;
       flex-wrap: nowrap;
       border-bottom: none !important;
-      /* Ensure no space on top, small space on bottom */
-      padding: 0 0 4px 0; 
+      padding: 0 0 4px 0;
       gap: 8px;
       overflow-x: auto;
       scrollbar-width: none;
@@ -1422,9 +1421,9 @@ static get styles() {
       overflow: visible !important;
     }
     
-    /* === CHIP (sl-tab::part(base)) FIX: Reduced Padding === */
+    /* === CHIP (sl-tab::part(base)) FIX: Shadow Reduction & Padding === */
     sl-tab::part(base) {
-      /* FIX: Reduced top/bottom padding from 6px to 4px to reduce overall chip height */
+      /* Padding remains 4px top/bottom for correct height */
       padding: 4px 10px 4px 6px !important; 
       
       border-radius: var(--ha-border-radius-pill) !important;
@@ -1432,9 +1431,9 @@ static get styles() {
       
       margin: 4px !important; /* Spacing between chips */
       
-      /* COLOR AND SHADOW */
+      /* FIX: REDUCED SHADOW to match standard HA tile look */
       background-color: var(--white-color, white) !important;
-      box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1), 0px 1px 3px 0px rgba(0, 0, 0, 0.08) !important;
+      box-shadow: var(--ha-card-box-shadow, 0px 1px 3px 0px rgba(0, 0, 0, 0.1));
       border: none !important;
       min-width: fit-content;
       
@@ -1476,8 +1475,9 @@ static get styles() {
       opacity: 1 !important;
     }
     .entity-icon ha-icon {
+      /* FIX: Changed color to use the domain-specific state color */
       --mdc-icon-size: 18px !important;
-      color: var(--primary-color) !important;
+      color: var(--state-icon-color) !important;
     }
     .entity-icon img {
       width: 100%;
@@ -1495,7 +1495,6 @@ static get styles() {
     }
     .entity-info {
       text-align: left !important;
-      /* Rely on .entity's align-items: center for vertical alignment */
       margin: 0 !important; 
       padding: 0 0 0 4px !important;
       display: flex;
