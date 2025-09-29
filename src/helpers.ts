@@ -1,3 +1,19 @@
+// Domain color mapping for icon coloring
+export const DOMAIN_COLORS: Record<string, string> = {
+  light: "var(--state-light-color)",
+  switch: "var(--state-switch-color)",
+  climate: "var(--state-climate-color)",
+  lock: "var(--state-lock-color)",
+  cover: "var(--state-cover-color)",
+  fan: "var(--state-fan-color)",
+  person: "var(--state-person-color)",
+  media_player: "var(--state-media-player-color)",
+  sensor: "var(--state-sensor-color)",
+  binary_sensor: "var(--state-binary-sensor-color)",
+  vacuum: "var(--state-vacuum-color)",
+  alarm_control_panel: "var(--state-alarm-control-panel-color)",
+  // Add more as needed, following Home Assistant's CSS variable naming
+};
 import type { HassEntity } from "home-assistant-js-websocket";
 import {
   AreaRegistryEntry,

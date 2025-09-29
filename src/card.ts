@@ -17,6 +17,7 @@ import {
   typeKey,
   DOMAIN_ICONS,
   ALLOWED_DOMAINS,
+  DOMAIN_COLORS,
 } from "./helpers";
 import {
   HomeAssistant,
@@ -622,6 +623,10 @@ export class StatusCard extends LitElement {
     }
     if (this._config && this._config.color) {
       return this._config.color;
+    }
+    // Fallback: use DOMAIN_COLORS if available
+    if (domain && DOMAIN_COLORS[domain]) {
+      return DOMAIN_COLORS[domain];
     }
     return undefined;
   }
@@ -1400,7 +1405,8 @@ static get styles() {
       margin: 0 !important;
     }
     sl-tab-group {
-      margin: 0 !important;
+      /* FIX: Increased negative top margin to pull the entire group up for alignment */
+      margin: -10px 0 0 0 !important; 
       padding: 0 !important;
       --sl-tab-indicator-color: transparent !important;
       --sl-tab-indicator-width: 0 !important;
@@ -1421,7 +1427,7 @@ static get styles() {
       overflow: visible !important;
     }
     
-    /* === CHIP (sl-tab::part(base)) FIX: Shadow Reduction & Padding === */
+    /* === CHIP (sl-tab::part(base)) SHADOW & PADDING FIXES === */
     sl-tab::part(base) {
       /* Padding remains 4px top/bottom for correct height */
       padding: 4px 10px 4px 6px !important; 
@@ -1431,10 +1437,10 @@ static get styles() {
       
       margin: 4px !important; /* Spacing between chips */
       
-      /* FIX: REDUCED SHADOW to match standard HA tile look */
+      /* FIX: NEAR-ZERO SHADOW (Use a very subtle border for definition instead) */
       background-color: var(--white-color, white) !important;
-      box-shadow: var(--ha-card-box-shadow, 0px 1px 3px 0px rgba(0, 0, 0, 0.1));
-      border: none !important;
+      box-shadow: none !important; /* Completely remove the shadow */
+      border: 1px solid var(--divider-color, rgba(0, 0, 0, 0.05)) !important; 
       min-width: fit-content;
       
       /* OVERRIDE FILTERS */
@@ -1475,7 +1481,7 @@ static get styles() {
       opacity: 1 !important;
     }
     .entity-icon ha-icon {
-      /* FIX: Changed color to use the domain-specific state color */
+      /* Icon color uses domain color when ON, muted color when OFF (HA standard) */
       --mdc-icon-size: 18px !important;
       color: var(--state-icon-color) !important;
     }
