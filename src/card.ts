@@ -1413,26 +1413,26 @@ static get styles() {
       flex-direction: row;
       flex-wrap: nowrap;
       border-bottom: none !important;
-      padding: 0 0 4px 0;
-      gap: 8px; /* This sets the gap between tabs, but margin below takes precedence */
+      /* Ensure no space on top, small space on bottom */
+      padding: 0 0 4px 0; 
+      gap: 8px;
       overflow-x: auto;
       scrollbar-width: none;
       align-items: center !important;
       overflow: visible !important;
     }
     
-    /* === CHIP (sl-tab::part(base)) FIXES === */
+    /* === CHIP (sl-tab::part(base)) FIX: Reduced Padding === */
     sl-tab::part(base) {
-      /* FIX: INCREASED TOP/BOTTOM PADDING to prevent clipping. Was 4px. */
-      padding: 6px 10px 6px 6px !important; 
+      /* FIX: Reduced top/bottom padding from 6px to 4px to reduce overall chip height */
+      padding: 4px 10px 4px 6px !important; 
       
       border-radius: var(--ha-border-radius-pill) !important;
       box-sizing: border-box !important;
       
-      /* FIX: ADDED MARGIN to space the chips (e.g., 4px on all sides) */
-      margin: 4px !important;
+      margin: 4px !important; /* Spacing between chips */
       
-      /* COLOR AND SHADOW (Kept from your current code) */
+      /* COLOR AND SHADOW */
       background-color: var(--white-color, white) !important;
       box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1), 0px 1px 3px 0px rgba(0, 0, 0, 0.08) !important;
       border: none !important;
@@ -1446,7 +1446,6 @@ static get styles() {
       overflow: visible !important;
     }
     sl-tab:not([selected]) {
-      /* Force all tabs to use the same look (no grayscale) */
       filter: none !important;
       opacity: 1 !important;
     }
@@ -1462,7 +1461,6 @@ static get styles() {
     }
 
     .entity-icon {
-      /* ICON CONTAINER SIZE (Kept from your current code, 20x20) */
       width: 20px !important;
       height: 20px !important;
       min-width: 20px !important;
@@ -1478,7 +1476,6 @@ static get styles() {
       opacity: 1 !important;
     }
     .entity-icon ha-icon {
-      /* ICON SIZE */
       --mdc-icon-size: 18px !important;
       color: var(--primary-color) !important;
     }
@@ -1493,15 +1490,14 @@ static get styles() {
     .entity.horizontal .entity-info,
     .extra-entity.horizontal .entity-info {
       text-align: left;
-      /* FIX: Removed overriding margin: 0, which was causing clipping */
       margin: 0 !important; 
-      padding: 0 !important;
+      padding: 0 0 0 4px !important; 
     }
     .entity-info {
-      text-align: left !important; /* Overrides text-align: center */
-      /* FIX: Removed overriding margin: 0, which was causing clipping */
+      text-align: left !important;
+      /* Rely on .entity's align-items: center for vertical alignment */
       margin: 0 !important; 
-      padding: 0 !important;
+      padding: 0 0 0 4px !important;
       display: flex;
       flex-direction: column;
       align-items: flex-start !important;
