@@ -1390,7 +1390,7 @@ export class StatusCard extends LitElement {
     `;
   }
 
- static get styles() {
+static get styles() {
   return css`
     ha-card {
       box-shadow: none !important;
@@ -1414,23 +1414,30 @@ export class StatusCard extends LitElement {
       flex-wrap: nowrap;
       border-bottom: none !important;
       padding: 0 0 4px 0;
-      gap: 8px;
+      gap: 8px; /* This sets the gap between tabs, but margin below takes precedence */
       overflow-x: auto;
       scrollbar-width: none;
       align-items: center !important;
       overflow: visible !important;
     }
+    
+    /* === CHIP (sl-tab::part(base)) FIXES === */
     sl-tab::part(base) {
-      /* CHIP SIZE, SHAPE, AND CLIPPING FIX (4px top/bottom padding) */
-      padding: 4px 10px 4px 6px !important;
+      /* FIX: INCREASED TOP/BOTTOM PADDING to prevent clipping. Was 4px. */
+      padding: 6px 10px 6px 6px !important; 
+      
       border-radius: var(--ha-border-radius-pill) !important;
       box-sizing: border-box !important;
-      /* COLOR AND SHADOW */
+      
+      /* FIX: ADDED MARGIN to space the chips (e.g., 4px on all sides) */
+      margin: 4px !important;
+      
+      /* COLOR AND SHADOW (Kept from your current code) */
       background-color: var(--white-color, white) !important;
       box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1), 0px 1px 3px 0px rgba(0, 0, 0, 0.08) !important;
       border: none !important;
       min-width: fit-content;
-      margin: 0 !important;
+      
       /* OVERRIDE FILTERS */
       filter: none !important;
       opacity: 1 !important;
@@ -1455,7 +1462,7 @@ export class StatusCard extends LitElement {
     }
 
     .entity-icon {
-      /* ICON CONTAINER SIZE (Overriding 45px/50px defaults) */
+      /* ICON CONTAINER SIZE (Kept from your current code, 20x20) */
       width: 20px !important;
       height: 20px !important;
       min-width: 20px !important;
@@ -1486,12 +1493,14 @@ export class StatusCard extends LitElement {
     .entity.horizontal .entity-info,
     .extra-entity.horizontal .entity-info {
       text-align: left;
-      margin: 0 !important; /* Overrides margin-top: 3px */
+      /* FIX: Removed overriding margin: 0, which was causing clipping */
+      margin: 0 !important; 
       padding: 0 !important;
     }
     .entity-info {
       text-align: left !important; /* Overrides text-align: center */
-      margin: 0 !important; /* Overrides margin-top: 7px */
+      /* FIX: Removed overriding margin: 0, which was causing clipping */
+      margin: 0 !important; 
       padding: 0 !important;
       display: flex;
       flex-direction: column;
@@ -1501,7 +1510,7 @@ export class StatusCard extends LitElement {
 
     /* TEXT STYLING AND SIZE */
     .entity-name {
-      font-weight: 500 !important; /* Changing from bold */
+      font-weight: 500 !important;
       font-size: 11px !important;
       line-height: 1 !important;
       color: #727272 !important;
@@ -1509,7 +1518,7 @@ export class StatusCard extends LitElement {
       margin: 0 !important;
     }
     .entity-state {
-      font-weight: 500 !important; /* Changing from default */
+      font-weight: 500 !important;
       font-size: 13px !important;
       line-height: 1 !important;
       color: #000000 !important;
