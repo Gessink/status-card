@@ -1400,17 +1400,17 @@ export class StatusCard extends LitElement {
 static get styles() {
   return css`
     :host {
-      /* Forward important badge variables from parent/theme to shadow DOM */
-      --ha-label-badge-border-radius: var(--ha-label-badge-border-radius, 12px);
+      /* Forward badge variables, but allow theme overrides */
+      --ha-label-badge-border-radius: var(--ha-label-badge-border-radius, var(--mdc-shape-medium, 12px));
       --ha-label-badge-background-color: var(--ha-label-badge-background-color, var(--card-background-color, white));
       --ha-label-badge-border-color: var(--ha-label-badge-border-color, var(--divider-color, rgba(0,0,0,0.12)));
       --ha-label-badge-label-color: var(--ha-label-badge-label-color, var(--primary-text-color));
-      --ha-label-badge-title-font-size: var(--ha-label-badge-title-font-size, 12px);
-      --ha-label-badge-text-color: var(--ha-label-badge-text-color, #000000);
+      --ha-label-badge-title-font-size: var(--ha-label-badge-title-font-size, var(--body-2-font-size, 12px));
+      --ha-label-badge-text-color: var(--ha-label-badge-text-color, var(--primary-text-color, #000000));
       --ha-label-badge-shadow: var(--ha-label-badge-shadow, var(--material-shadow-elevation-2dp));
       --ha-label-badge-font-family: var(--ha-label-badge-font-family, inherit);
 
-      /* Forward common domain icon color variables */
+      /* Forward domain icon color variables, but allow theme overrides */
       --state-light-color: var(--state-light-color, #f7d959);
       --state-switch-color: var(--state-switch-color, #66aaff);
       --state-media_player-color: var(--state-media_player-color, #8bc34a);
@@ -1432,87 +1432,87 @@ static get styles() {
       --state-battery-color: var(--state-battery-color, #607d8b);
     }
     ha-card {
-      box-shadow: none !important;
-      border: none !important;
-      background: transparent !important;
-      padding: 0 !important;
-      margin: 0 !important;
+      box-shadow: none;
+      border: none;
+      background: transparent;
+      padding: 0;
+      margin: 0;
     }
     sl-tab-group {
-      margin: 0 !important;
-      padding: 0 !important;
-      --sl-tab-indicator-color: transparent !important;
-      --sl-tab-indicator-width: 0 !important;
+      margin: 0;
+      padding: 0;
+      --sl-tab-indicator-color: transparent;
+      --sl-tab-indicator-width: 0;
       --sl-tab-padding: 0;
-      filter: none !important;
-      opacity: 1 !important;
+      filter: none;
+      opacity: 1;
     }
     sl-tab-group::part(nav) {
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;
-      border-bottom: none !important;
+      border-bottom: none;
       padding: 0 0 4px 0;
       gap: 8px;
       overflow-x: auto;
       scrollbar-width: none;
-      align-items: center !important;
-      overflow: visible !important;
+      align-items: center;
+      overflow: visible;
       min-height: 40px;
     }
 
     /* === CHIP (sl-tab::part(base)) SHADOW & PADDING FIXES === */
     sl-tab::part(base) {
-      padding: 0 10px 0 6px !important;
-      border-radius: var(--ha-label-badge-border-radius, 12px) !important;
-      box-sizing: border-box !important;
-      margin: 4px !important;
-      background-color: var(--ha-label-badge-background-color, var(--card-background-color, white)) !important;
-      box-shadow: none !important;
-      border: 1px solid var(--ha-label-badge-border-color, var(--divider-color, rgba(0,0,0,0.12))) !important;
+      padding: 0 10px 0 6px;
+      border-radius: var(--ha-label-badge-border-radius);
+      box-sizing: border-box;
+      margin: 4px;
+      background-color: var(--ha-label-badge-background-color);
+      box-shadow: var(--ha-label-badge-shadow);
+      border: 1px solid var(--ha-label-badge-border-color);
       min-width: fit-content;
-      filter: none !important;
-      opacity: 1 !important;
-      display: flex !important;
-      align-items: center !important;
-      overflow: visible !important;
+      filter: none;
+      opacity: 1;
+      display: flex;
+      align-items: center;
+      overflow: visible;
       min-height: 28px;
-      height: 32px !important;
+      height: 32px;
     }
     sl-tab:not([selected]) {
-      filter: none !important;
-      opacity: 1 !important;
+      filter: none;
+      opacity: 1;
     }
 
     /* ENTITY ALIGNMENT AND SIZING */
     .entity {
       display: flex;
-      align-items: center !important;
-      line-height: 1 !important;
-      margin: 0 !important;
-      filter: none !important;
-      opacity: 1 !important;
+      align-items: center;
+      line-height: 1;
+      margin: 0;
+      filter: none;
+      opacity: 1;
       min-height: 28px;
       height: 32px;
     }
 
     .entity-icon {
-      width: 20px !important;
-      height: 20px !important;
-      min-width: 20px !important;
-      margin-right: 4px !important;
-      padding: 0 !important;
-      background-color: transparent !important;
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      margin-right: 4px;
+      padding: 0;
+      background-color: transparent;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      filter: none !important;
-      opacity: 1 !important;
+      filter: none;
+      opacity: 1;
     }
     .entity-icon ha-icon {
-      --mdc-icon-size: 18px !important;
+      --mdc-icon-size: 18px;
       vertical-align: middle;
     }
     .entity-icon img {
@@ -1526,40 +1526,40 @@ static get styles() {
     .entity.horizontal .entity-info,
     .extra-entity.horizontal .entity-info {
       text-align: left;
-      margin: 0 !important;
-      padding: 0 0 0 4px !important;
+      margin: 0;
+      padding: 0 0 0 4px;
     }
     .entity-info {
-      text-align: left !important;
-      margin: 0 !important;
-      padding: 0 0 0 4px !important;
+      text-align: left;
+      margin: 0;
+      padding: 0 0 0 4px;
       display: flex;
       flex-direction: column;
-      align-items: flex-start !important;
-      justify-content: center !important;
+      align-items: flex-start;
+      justify-content: center;
     }
 
     /* TEXT STYLING AND SIZE */
     .entity-name {
-      font-weight: 500 !important;
-      font-size: var(--ha-label-badge-title-font-size, 12px) !important;
-      line-height: 1 !important;
-      color: var(--ha-label-badge-label-color, var(--primary-text-color)) !important;
-      padding-bottom: 2px !important;
-      margin: 0 !important;
+      font-weight: 500;
+      font-size: var(--ha-label-badge-title-font-size);
+      line-height: 1;
+      color: var(--ha-label-badge-label-color);
+      padding-bottom: 2px;
+      margin: 0;
     }
     .entity-state {
-      font-weight: 500 !important;
-      font-size: 13px !important;
-      line-height: 1 !important;
-      color: #000000 !important;
-      margin: 0 !important;
+      font-weight: 500;
+      font-size: 13px;
+      line-height: 1;
+      color: var(--ha-label-badge-text-color);
+      margin: 0;
     }
     sl-tab * {
       pointer-events: none;
     }
     sl-tab-group::part(tabs) {
-      border-bottom: none !important;
+      border-bottom: none;
     }
     sl-tab {
       pointer-events: auto;
