@@ -1424,7 +1424,7 @@ static get styles() {
       flex-wrap: nowrap;
       border-bottom: none;
       padding: 0 0 4px 0;
-      gap: 8px;
+      gap: 16px;
       overflow-x: auto;
       scrollbar-width: none;
       align-items: center;
@@ -1438,25 +1438,24 @@ static get styles() {
       align-items: center;
       justify-content: center;
       gap: 8px;
-      height: var(--ha-badge-size, 36px);
-      min-width: var(--ha-badge-size, 36px);
-      padding: 0px 8px;
+      height: 36px;
+      min-width: 36px;
+      padding: 0 8px;
+      margin-right: 0px;
+      margin-left: 0px;
+      margin-inline-end: 0px;
+      margin-inline-start: 0px;
       box-sizing: border-box;
       width: auto;
-      border-radius: var(--ha-badge-border-radius, calc(var(--ha-badge-size, 36px) / 2));
-      background: var(--ha-card-background, var(--card-background-color, white));
-      -webkit-backdrop-filter: var(--ha-card-backdrop-filter, none);
-      backdrop-filter: var(--ha-card-backdrop-filter, none);
-      border-width: var(--ha-card-border-width, 1px);
-      box-shadow: var(--ha-card-box-shadow, none);
+      border-radius: var(--ha-badge-border-radius, 18px);
+      background: var(--ha-card-background, var(--card-background-color, #fff));
+      border-width: 1px;
       border-style: solid;
       border-color: var(--ha-card-border-color, var(--divider-color, #e0e0e0));
-      --mdc-icon-size: 18px;
+      box-shadow: none;
       text-align: center;
       filter: none;
       opacity: 1;
-      min-height: 28px;
-      height: 36px;
       transition: box-shadow 180ms ease-in-out, border-color 180ms ease-in-out;
     }
     sl-tab:focus-visible::part(base) {
@@ -1476,13 +1475,12 @@ static get styles() {
       margin: 0;
       filter: none;
       opacity: 1;
-      min-height: 28px;
       height: 36px;
     }
     .entity-icon {
-      width: 20px;
-      height: 20px;
-      min-width: 20px;
+      width: 30px;
+      height: 30px;
+      min-width: 30px;
       margin-right: 4px;
       padding: 0;
       background-color: transparent;
@@ -1495,7 +1493,7 @@ static get styles() {
       opacity: 1;
     }
     .entity-icon ha-icon {
-      --mdc-icon-size: 18px;
+      --mdc-icon-size: 20px;
       vertical-align: middle;
     }
     .entity-icon img {
