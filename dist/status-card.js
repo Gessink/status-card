@@ -2943,7 +2943,7 @@ let T = class extends V {
     const { color: i, background_color: s, square: o, isNotHome: n } = t, a = {
       "border-radius": o ? "20%" : "50%",
       "background-color": s,
-      color: i ? `var(--${i}-color)` : void 0
+      color: i ? `var(--state-${i}-color, var(--${i}-color, #607d8b))` : void 0
     };
     return e === "person" && n && (a.filter = "grayscale(100%)"), a;
   }
@@ -3232,7 +3232,7 @@ let T = class extends V {
       flex-wrap: nowrap;
       border-bottom: none;
       padding: 0 0 4px 0;
-      gap: 16px;
+      gap: 24px;
       overflow-x: auto;
       scrollbar-width: none;
       align-items: center;
@@ -3249,14 +3249,11 @@ let T = class extends V {
       height: 36px;
       min-width: 36px;
       padding: 0 8px;
-      margin-right: 0px;
-      margin-left: 0px;
-      margin-inline-end: 0px;
-      margin-inline-start: 0px;
+      margin: 0 8px;
       box-sizing: border-box;
       width: auto;
       border-radius: var(--ha-badge-border-radius, 18px);
-      background: var(--ha-card-background, var(--card-background-color, #fff));
+      background: #fff;
       border-width: 1px;
       border-style: solid;
       border-color: var(--ha-card-border-color, var(--divider-color, #e0e0e0));

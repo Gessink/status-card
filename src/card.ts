@@ -1008,7 +1008,7 @@ export class StatusCard extends LitElement {
     const base: Record<string, string | undefined> = {
       "border-radius": square ? "20%" : "50%",
       "background-color": background_color,
-      color: color ? `var(--${color}-color)` : undefined,
+      color: color ? `var(--state-${color}-color, var(--${color}-color, #607d8b))` : undefined,
     };
 
     if (type === "person" && isNotHome) {
@@ -1424,7 +1424,7 @@ static get styles() {
       flex-wrap: nowrap;
       border-bottom: none;
       padding: 0 0 4px 0;
-      gap: 16px;
+      gap: 24px;
       overflow-x: auto;
       scrollbar-width: none;
       align-items: center;
@@ -1441,14 +1441,11 @@ static get styles() {
       height: 36px;
       min-width: 36px;
       padding: 0 8px;
-      margin-right: 0px;
-      margin-left: 0px;
-      margin-inline-end: 0px;
-      margin-inline-start: 0px;
+      margin: 0 8px;
       box-sizing: border-box;
       width: auto;
       border-radius: var(--ha-badge-border-radius, 18px);
-      background: var(--ha-card-background, var(--card-background-color, #fff));
+      background: #fff;
       border-width: 1px;
       border-style: solid;
       border-color: var(--ha-card-border-color, var(--divider-color, #e0e0e0));
