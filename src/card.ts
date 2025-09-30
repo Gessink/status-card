@@ -1400,36 +1400,7 @@ export class StatusCard extends LitElement {
 static get styles() {
   return css`
     :host {
-      /* Forward badge variables, but allow theme overrides */
-      --ha-label-badge-border-radius: var(--ha-label-badge-border-radius, var(--mdc-shape-medium, 12px));
-      --ha-label-badge-background-color: var(--ha-label-badge-background-color, var(--card-background-color, white));
-      --ha-label-badge-border-color: var(--ha-label-badge-border-color, var(--divider-color, rgba(0,0,0,0.12)));
-      --ha-label-badge-label-color: var(--ha-label-badge-label-color, var(--primary-text-color));
-      --ha-label-badge-title-font-size: var(--ha-label-badge-title-font-size, var(--body-2-font-size, 12px));
-      --ha-label-badge-text-color: var(--ha-label-badge-text-color, var(--primary-text-color, #000000));
-      --ha-label-badge-shadow: var(--ha-label-badge-shadow, var(--material-shadow-elevation-2dp));
-      --ha-label-badge-font-family: var(--ha-label-badge-font-family, inherit);
-
-      /* Forward domain icon color variables, but allow theme overrides */
-      --state-light-color: var(--state-light-color, #f7d959);
-      --state-switch-color: var(--state-switch-color, #66aaff);
-      --state-media_player-color: var(--state-media_player-color, #8bc34a);
-      --state-cover-color: var(--state-cover-color, #c7b8f0);
-      --state-fan-color: var(--state-fan-color, #00bcd4);
-      --state-climate-color: var(--state-climate-color, #ff9800);
-      --state-person-color: var(--state-person-color, #03a9f4);
-      --state-sensor-color: var(--state-sensor-color, #7b7b7b);
-      --state-binary_sensor-color: var(--state-binary_sensor-color, #f44336);
-      --state-lock-color: var(--state-lock-color, #43a047);
-      --state-vacuum-color: var(--state-vacuum-color, #009688);
-      --state-update-color: var(--state-update-color, #ffa000);
-      --state-alarm_control_panel-color: var(--state-alarm_control_panel-color, #e53935);
-      --state-water_heater-color: var(--state-water_heater-color, #ffb300);
-      --state-valve-color: var(--state-valve-color, #1976d2);
-      --state-siren-color: var(--state-siren-color, #e91e63);
-      --state-remote-color: var(--state-remote-color, #607d8b);
-      --state-lawn_mower-color: var(--state-lawn_mower-color, #4caf50);
-      --state-battery-color: var(--state-battery-color, #607d8b);
+      -webkit-tap-highlight-color: transparent;
     }
     ha-card {
       box-shadow: none;
@@ -1460,31 +1431,44 @@ static get styles() {
       overflow: visible;
       min-height: 40px;
     }
-
-    /* === CHIP (sl-tab::part(base)) SHADOW & PADDING FIXES === */
     sl-tab::part(base) {
-      padding: 0 10px 0 6px;
-      border-radius: var(--ha-label-badge-border-radius);
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      height: var(--ha-badge-size, 36px);
+      min-width: var(--ha-badge-size, 36px);
+      padding: 0px 8px;
       box-sizing: border-box;
-      margin: 4px;
-      background-color: var(--ha-label-badge-background-color);
-      box-shadow: var(--ha-label-badge-shadow);
-      border: 1px solid var(--ha-label-badge-border-color);
-      min-width: fit-content;
+      width: auto;
+      border-radius: var(--ha-badge-border-radius, calc(var(--ha-badge-size, 36px) / 2));
+      background: var(--ha-card-background, var(--card-background-color, white));
+      -webkit-backdrop-filter: var(--ha-card-backdrop-filter, none);
+      backdrop-filter: var(--ha-card-backdrop-filter, none);
+      border-width: var(--ha-card-border-width, 1px);
+      box-shadow: var(--ha-card-box-shadow, none);
+      border-style: solid;
+      border-color: var(--ha-card-border-color, var(--divider-color, #e0e0e0));
+      --mdc-icon-size: 18px;
+      text-align: center;
       filter: none;
       opacity: 1;
-      display: flex;
-      align-items: center;
-      overflow: visible;
       min-height: 28px;
-      height: 32px;
+      height: 36px;
+      transition: box-shadow 180ms ease-in-out, border-color 180ms ease-in-out;
+    }
+    sl-tab:focus-visible::part(base) {
+      --shadow-default: var(--ha-card-box-shadow, 0 0 0 0 transparent);
+      --shadow-focus: 0 0 0 1px var(--badge-color);
+      border-color: var(--badge-color);
+      box-shadow: var(--shadow-default), var(--shadow-focus);
     }
     sl-tab:not([selected]) {
       filter: none;
       opacity: 1;
     }
-
-    /* ENTITY ALIGNMENT AND SIZING */
     .entity {
       display: flex;
       align-items: center;
@@ -1493,9 +1477,8 @@ static get styles() {
       filter: none;
       opacity: 1;
       min-height: 28px;
-      height: 32px;
+      height: 36px;
     }
-
     .entity-icon {
       width: 20px;
       height: 20px;
@@ -1516,13 +1499,12 @@ static get styles() {
       vertical-align: middle;
     }
     .entity-icon img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
+      object-fit: cover;
+      overflow: hidden;
     }
-
-    /* TEXT ALIGNMENT AND MARGIN/CLIPPING FIXES */
     .entity.horizontal .entity-info,
     .extra-entity.horizontal .entity-info {
       text-align: left;
@@ -1538,21 +1520,23 @@ static get styles() {
       align-items: flex-start;
       justify-content: center;
     }
-
-    /* TEXT STYLING AND SIZE */
     .entity-name {
+      font-size: 10px;
+      font-style: normal;
       font-weight: 500;
-      font-size: var(--ha-label-badge-title-font-size);
-      line-height: 1;
-      color: var(--ha-label-badge-label-color);
-      padding-bottom: 2px;
+      line-height: 10px;
+      letter-spacing: 0.1px;
+      color: var(--secondary-text-color);
       margin: 0;
+      padding-bottom: 2px;
     }
     .entity-state {
+      font-size: 12px;
+      font-style: normal;
       font-weight: 500;
-      font-size: 13px;
-      line-height: 1;
-      color: var(--ha-label-badge-text-color);
+      line-height: 16px;
+      letter-spacing: 0.1px;
+      color: var(--primary-text-color);
       margin: 0;
     }
     sl-tab * {
