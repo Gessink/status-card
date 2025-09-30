@@ -1008,7 +1008,9 @@ export class StatusCard extends LitElement {
     const base: Record<string, string | undefined> = {
       "border-radius": square ? "20%" : "50%",
       "background-color": background_color,
-      color: color ? `var(--state-${color}-color, var(--${color}-color, #607d8b))` : undefined,
+      color: color
+        ? `var(--state-${color}-color, var(--${color}-color, var(--badge-color, var(--primary-text-color, #607d8b))))`
+        : "var(--badge-color, var(--primary-text-color, #607d8b))",
     };
 
     if (type === "person" && isNotHome) {
@@ -1251,7 +1253,7 @@ export class StatusCard extends LitElement {
         <div class="entity ${classMap(contentClasses)}">
           <div class="entity-icon">
             <ha-icon icon=${this.getCustomIcon(domain, deviceClass)}
-              style=${iconStyles.color ? `color: ${iconStyles.color}` : ""}
+              style=${'color' in iconStyles && iconStyles.color ? `color: ${iconStyles.color}` : ""}
             ></ha-icon>
           </div>
           <div class="entity-info">
@@ -1355,7 +1357,7 @@ export class StatusCard extends LitElement {
                         : html`<ha-icon
                             class="center"
                             icon=${entity.attributes.icon || "mdi:account"}
-                            style=${iconStyles.color ? `color: ${iconStyles.color}` : ""}
+                            style=${'color' in iconStyles && iconStyles.color ? `color: ${iconStyles.color}` : ""}
                           ></ha-icon>`}
                     </div>
                     <div class="entity-info">
@@ -1444,12 +1446,12 @@ static get styles() {
       margin: 0 8px;
       box-sizing: border-box;
       width: auto;
-      border-radius: var(--ha-badge-border-radius, 18px);
-      background: #fff;
-      border-width: 1px;
-      border-style: solid;
-      border-color: var(--ha-card-border-color, var(--divider-color, #e0e0e0));
-      box-shadow: none;
+  border-radius: var(--ha-badge-border-radius, 18px);
+  background: var(--ha-label-badge-background-color, var(--ha-card-background, #fff));
+  border-width: var(--ha-label-badge-border-width, 1px);
+  border-style: solid;
+  border-color: var(--ha-label-badge-border-color, var(--ha-card-border-color, var(--divider-color, #e0e0e0)));
+  box-shadow: var(--ha-label-badge-shadow, var(--ha-card-box-shadow, none));
       text-align: center;
       filter: none;
       opacity: 1;
@@ -1490,8 +1492,9 @@ static get styles() {
       opacity: 1;
     }
     .entity-icon ha-icon {
-      --mdc-icon-size: 20px;
-      vertical-align: middle;
+  --mdc-icon-size: 20px;
+  vertical-align: middle;
+  color: inherit;
     }
     .entity-icon img {
       width: 30px;
@@ -1521,7 +1524,7 @@ static get styles() {
       font-weight: 500;
       line-height: 10px;
       letter-spacing: 0.1px;
-      color: var(--secondary-text-color);
+  color: var(--ha-label-badge-label-color, var(--secondary-text-color, #6a6a6a));
       margin: 0;
       padding-bottom: 2px;
     }
@@ -1531,7 +1534,7 @@ static get styles() {
       font-weight: 500;
       line-height: 16px;
       letter-spacing: 0.1px;
-      color: var(--primary-text-color);
+  color: var(--ha-label-badge-text-color, var(--primary-text-color, #1c1c1c));
       margin: 0;
     }
     sl-tab * {
